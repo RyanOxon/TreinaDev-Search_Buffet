@@ -5,11 +5,55 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
   </head>
-
   <body>
-    <%= yield %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <p class="mr-2">
+            <%= "Usuario: #{current_buffet_owner.email}" if buffet_owner_signed_in? %>
+          </p>
+          <div class="buttons">
+            <% if buffet_owner_signed_in? %>
+              <%= button_to 'Sair', destroy_buffet_owner_session_path, method: :delete, class:"button is-warning"%>
+            <% else %>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Para empresas
+                </a>
+                <div class="navbar-dropdown" id="owners">
+                  <%= link_to 'Logar', new_buffet_owner_session_path, class:"navbar-item is-selected" %>
+                  <%= link_to 'Registrar-se', new_buffet_owner_registration_path, class:"navbar-item" %>
+                </div>
+              </div>
+              <%= link_to 'Logar', root_path, class:"button is-primary" %>
+              <%= link_to 'Registrar-se', root_path, class:"button is-light" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <% if notice %>
+    <div class="notification is-success">
+      <button class="delete" onclick="this.parentElement.style.display='none';" ></button>
+      <%= notice %>
+    </div>  
+  <% end %>
+    
+  <% if alert %>
+    <div class="notification is-danger">
+      <button class="delete" onclick="this.parentElement.style.display='none';" ></button>
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <section class="section">
+    <div class="container">
+      <%= yield %>
+    </div>
+  </section>
   </body>
 </html>
