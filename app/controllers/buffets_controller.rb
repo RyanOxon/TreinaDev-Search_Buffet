@@ -1,3 +1,5 @@
 class BuffetsController < ApplicationController
-  def new; end
+  def new
+    @buffet = Buffet.new
+  end
 end

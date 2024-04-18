@@ -1,7 +1,6 @@
 class PaymentMethod < ApplicationRecord
-  has_many :buffet
-  has_many :buffet_paymentes_method
+  has_many :buffet_payments_methods
+  has_many :buffets, through: :buffet_payments_methods
 
   enum method: [:cash, :credit_card, :debit_card]
-
 end

@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet: Buffet
+      payment_method:
+        one: Metodo de Pagamento
+        other: Metodos de Pagamento
+    attributes:
+      buffet:
+        brand_name: Nome fantasia
+        corporate_name: Razão social
+        registration: CNPJ
+        phone_number: Telefone de contato
+        email: E-mail de contato
+        full_address: Endereço completo
+        description: Descrição
+        buffet_owner_id: Dono do Buffet

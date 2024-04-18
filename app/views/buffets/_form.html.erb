@@ -1,51 +1,104 @@
 <%= form_with(model: @buffet) do |f| %>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :brand_name, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :brand_name, class:"input"  %>
+    </div>
+  </div>
+</div>
 
-<div class="field">
-  <%= f.label :brand_name, class:"label" %>
-  <div class="control">
-    <%= f.text_field :brand_name, class:"input"  %>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :corporate_name, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :corporate_name, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :corporate_name, class:"label" %>
-  <div class="control">
-    <%= f.text_field :corporate_name, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :registration, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :registration, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :registration, class:"label" %>
-  <div class="control">
-    <%= f.text_field :registration, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :phone_number, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :phone_number, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :phone_number, class:"label" %>
-  <div class="control">
-    <%= f.text_field :phone_number, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :email, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :email, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :email, class:"label" %>
-  <div class="control">
-    <%= f.email_field :email, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :full_address, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :full_address, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :full_address, class:"label" %>
-  <div class="control">
-    <%= f.text_field :full_address, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :description, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_area :description, class:"input"  %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label :description, class:"label" %>
-  <div class="control">
-    <%= f.text_area :description, class:"input"  %>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :payment_methods, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field mt-1">
+      <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :method, class:"label" do |box| %>
+      <%= box.label(class: "checkbox ml-2") {box.check_box(class: "checkbox mr-1") + box.text} %>
+    <% end %>
+    </div>
   </div>
 </div>
-<div class="field">
-  <%= f.label "Metodos de Pagamento", class:"label" %>
-  <div class="control">
-    <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name, class:"input"  %>
+<div class="field is-horizontal" >
+  <div class= "field-label"></div>
+  <div class="field-body">
+    <div class="field is-grouped">
+      <div class="control">
+        <%= f.submit class:"button is-link" %>
+      </div>
+      <div class="control">
+        <%= link_to 'Cancelar', root_path, class:"button is-link is-light" %>
+      </div>
+    </div>
   </div>
 </div>
 
