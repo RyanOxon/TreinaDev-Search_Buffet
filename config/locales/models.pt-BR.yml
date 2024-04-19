@@ -12,6 +12,17 @@ pt-BR:
         registration: CNPJ
         phone_number: Telefone de contato
         email: E-mail de contato
-        full_address: Endereço completo
+        address: Endereço
+        district: Bairro
+        city: Cidade
+        state_code: Codigo do estado
+        zip_code: CEP
         description: Descrição
         buffet_owner_id: Dono do Buffet
+        payment_method_ids: Metodos de Pagamento
+        payment_methods: Metodos de Pagamento
+      payment_method:
+        method:
+          cash: Dinheiro
+          credit_card: Cartão de Credito
+          debit_card: Cartão de Debito

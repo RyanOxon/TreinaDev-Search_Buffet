@@ -23,13 +23,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_044343) do
     t.index ["reset_password_token"], name: "index_buffet_owners_on_reset_password_token", unique: true
   end
 
-  create_table "buffet_payments_methods", force: :cascade do |t|
+  create_table "buffet_payment_methods", force: :cascade do |t|
     t.integer "buffet_id", null: false
     t.integer "payment_method_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buffet_id"], name: "index_buffet_payments_methods_on_buffet_id"
-    t.index ["payment_method_id"], name: "index_buffet_payments_methods_on_payment_method_id"
+    t.index ["buffet_id"], name: "index_buffet_payment_methods_on_buffet_id"
+    t.index ["payment_method_id"], name: "index_buffet_payment_methods_on_payment_method_id"
   end
 
   create_table "buffets", force: :cascade do |t|
@@ -38,7 +38,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_044343) do
     t.string "registration"
     t.string "phone_number"
     t.string "email"
-    t.string "full_address"
+    t.string "address"
+    t.string "district"
+    t.string "city"
+    t.string "state_code"
+    t.string "zip_code"
     t.string "description"
     t.integer "buffet_owner_id", null: false
     t.datetime "created_at", null: false
@@ -52,7 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_044343) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "buffet_payments_methods", "buffets"
-  add_foreign_key "buffet_payments_methods", "payment_methods"
+  add_foreign_key "buffet_payment_methods", "buffets"
+  add_foreign_key "buffet_payment_methods", "payment_methods"
   add_foreign_key "buffets", "buffet_owners"
 end

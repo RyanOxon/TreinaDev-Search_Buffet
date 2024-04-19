@@ -1,3 +1,12 @@
+<% if @buffet.errors.any?%>
+  <p>Verifique os erros abaixo</p>
+  <ul>
+  <% @buffet.errors.full_messages.each do |msg|%>
+    <li><%= msg%></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <%= form_with(model: @buffet) do |f| %>
 <div class="field is-horizontal">
   <div class="field-label is-normal">
@@ -56,11 +65,51 @@
 
 <div class="field is-horizontal">
   <div class="field-label is-normal">
-    <%= f.label :full_address, class:"label" %>
+    <%= f.label :address, class:"label" %>
   </div>
   <div class="field-body">
     <div class="field">
-      <%= f.text_field :full_address, class:"input"  %>
+      <%= f.text_field :address, class:"input"  %>
+    </div>
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :district, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :district, class:"input"  %>
+    </div>
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :city, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :city, class:"input"  %>
+    </div>
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :state_code, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :state_code, class:"input"  %>
+    </div>
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label :zip_code, class:"label" %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <%= f.text_field :zip_code, class:"input"  %>
     </div>
   </div>
 </div>
@@ -82,7 +131,7 @@
   </div>
   <div class="field-body">
     <div class="field mt-1">
-      <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :method, class:"label" do |box| %>
+      <%= f.collection_check_boxes :payment_method_ids, @payment_methods, :id, :humanized_method_name, class:"label" do |box| %>
       <%= box.label(class: "checkbox ml-2") {box.check_box(class: "checkbox mr-1") + box.text} %>
     <% end %>
     </div>

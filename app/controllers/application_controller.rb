@@ -2,12 +2,16 @@ class ApplicationController < ActionController::Base
 before_action :buffet_created?, if: :check_redirect
 
   def check_redirect
-    buffet_owner_signed_in? && action_name != 'new' && action_name != 'destroy'
+    buffet_owner_signed_in? && ![['buffets', 'new'], ['buffets', 'create'], 
+                                ['sessions', 'destroy']]
+                                .include?([controller_name, action_name])  
   end
 
   def buffet_created?
-    flash[:alert] = "É necessario ter um buffet cadastrado para continuar"
-    redirect_to new_buffet_path unless current_buffet_owner.buffet
+    unless current_buffet_owner.buffet
+      flash[:alert] = "É necessario ter um buffet cadastrado para continuar"
+      redirect_to new_buffet_path 
+    end
   end
   
   def after_sign_in_path_for(resource)

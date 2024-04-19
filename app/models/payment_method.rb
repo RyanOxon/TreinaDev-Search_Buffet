@@ -1,6 +1,10 @@
 class PaymentMethod < ApplicationRecord
-  has_many :buffet_payments_methods
-  has_many :buffets, through: :buffet_payments_methods
+  has_many :buffet_payment_methods
+  has_many :buffets, through: :buffet_payment_methods
 
   enum method: [:cash, :credit_card, :debit_card]
+
+  def humanized_method_name
+    I18n.t("activerecord.attributes.payment_method.method.#{self.method}")
+  end
 end

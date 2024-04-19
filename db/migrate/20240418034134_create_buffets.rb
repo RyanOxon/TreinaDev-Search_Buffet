@@ -6,7 +6,11 @@ class CreateBuffets < ActiveRecord::Migration[7.1]
       t.string :registration
       t.string :phone_number
       t.string :email
-      t.string :full_address
+      t.string :address
+      t.string :district
+      t.string :city
+      t.string :state_code
+      t.string :zip_code
       t.string :description
       t.references :buffet_owner, null: false, foreign_key: true
 

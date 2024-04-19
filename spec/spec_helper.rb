@@ -17,6 +17,7 @@ RSpec.configure do |config|
   config.before(type: :system) do
     driven_by(:rack_test)
   end
+  config.backtrace_exclusion_patterns = [/gems/]
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
