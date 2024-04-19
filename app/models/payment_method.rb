@@ -2,6 +2,8 @@ class PaymentMethod < ApplicationRecord
   has_many :buffet_payment_methods
   has_many :buffets, through: :buffet_payment_methods
 
+  validates :method, presence: true
+
   enum method: [:cash, :credit_card, :debit_card]
 
   def humanized_method_name
