@@ -1,5 +1,11 @@
 def load_payments
-  PaymentMethod.create!(method: 0)
-  PaymentMethod.create!(method: 1)
-  PaymentMethod.create!(method: 2)
+  PaymentMethod.methods.keys.each do |method|
+    PaymentMethod.create!(method: method)
+  end
+end
+
+def load_features
+  Feature.features.keys.each do |feature|
+    Feature.create!(feature: feature)
+  end
 end
