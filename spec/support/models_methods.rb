@@ -9,3 +9,9 @@ def load_features
     Feature.create!(feature: feature)
   end
 end
+
+def load_categories
+  EventCategory.categories.keys.each do |category|
+    EventCategory.create!(category: category)
+  end
+end

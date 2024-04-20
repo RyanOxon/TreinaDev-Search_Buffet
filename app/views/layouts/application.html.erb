@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
   </head>
   <body>
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation" id="navbar">
       <div class="navbar-start">
         <div class="navbar-item is-size-3">
-          <%= link_to 'Cade Buffet?', root_path %>
+          <%= link_to 'Cade Buffet?', root_path, style:"color: white" %>
         </div>
         <% if buffet_owner_signed_in? %>
           <div class="navbar-item" >
-            <%= link_to 'Meu Buffet', new_buffet_path, class:"button is-ghost" %>
+            <%= link_to 'Meu Buffet', new_buffet_path, class:"button is-ghost is-white", style:"color: lightsteelblue" %>
+            <%= link_to 'Anunciar Evento', new_event_path, class:"button is-ghost", style:"color: lightsteelblue" %>
+            <%= link_to 'Lista de Eventos', events_path, class:"button is-ghost", style:"color: lightsteelblue" %>
           </div>
+          
         <% end %>
       </div>
       <div class="navbar-end">
@@ -29,9 +32,7 @@
               <%= button_to 'Sair', destroy_buffet_owner_session_path, method: :delete, class:"button is-warning"%>
             <% else %>
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                  Para empresas
-                </a>
+                <a class="navbar-link">Para empresas</a>
                 <div class="navbar-dropdown" id="owners">
                   <%= link_to 'Logar', new_buffet_owner_session_path, class:"navbar-item is-selected" %>
                   <%= link_to 'Registrar-se', new_buffet_owner_registration_path, class:"navbar-item" %>
@@ -43,7 +44,6 @@
           </div>
         </div>
       </div>
-    </div>
   </nav>
 
   <% if notice %>

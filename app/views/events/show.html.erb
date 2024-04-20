@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="title is-1"><%= @event.name %></h1>
+  <p class="subtitle is-4"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
+  <p class="subtitle is-4"><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %></p>
+  <p class="subtitle is-4"><%= "#{@event.default_duration/60} horas"%></p>
+  <p class="subtitle is-4"><%= @event.description %></p>
+  <p class="subtitle is-4"><%= @event.menu%></p>
+  <p class="subtitle is-4"><%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></p>
+  <ul>
+    <% @event.features.each do |f| %>
+      <li class="subtitle is-4"><%= f.humanized_feature_name %></li>
+    <% end %>
+  </ul>
+</div>

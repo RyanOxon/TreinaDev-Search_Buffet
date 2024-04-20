@@ -1,17 +1,30 @@
-<h1><%= @buffet.brand_name %></h1>
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= @buffet.brand_name %></h1>
 
-<%= @buffet.corporate_name %>
-<%= @buffet.registration %>
-<%= @buffet.phone_number  %>
-<%= @buffet.email %>
-<%= @buffet.address %>
-<%= @buffet.district  %>
-<%= @buffet.city %>
-<%= @buffet.state_code %>
-<%= @buffet.zip_code %>
-<%= @buffet.description %>
-<% @buffet.payment_methods.each do |payment_method| %>
-  <%= payment_method.humanized_method_name %>
-<% end %>
+    <div class="box">
+      <div class="content">
+        <p><strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %></p>
+        <p><strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %></p>
+        <p><strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %></p>
+        <p><strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %></p>
+        <p><strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %></p>
+        <p><strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %></p>
+        <p><strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %></p>
+        <p><strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %></p>
+        <p><strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %></p>
+        <p><strong><%= Buffet.human_attribute_name(:description) %> :</strong> <%= @buffet.description %></p>
+        <p><strong>Métodos de Pagamento:</strong></p>
+        <ul>
+          <% @buffet.payment_methods.each do |payment_method| %>
+            <li><%= payment_method.humanized_method_name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
-<%= link_to 'Editar', edit_buffet_path(@buffet.id) %>
+    <div>
+      <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link" %>
+    </div>
+  </div>
+</section>

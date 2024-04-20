@@ -7,8 +7,9 @@ class CreateEvents < ActiveRecord::Migration[7.1]
       t.integer :max_capacity
       t.integer :default_duration
       t.text :menu
-      t.references :buffet
-
+      t.boolean :exclusive_address
+      t.references :buffet, null: false, foreign_key: true
+      t.references :event_category, null: false, foreign_key: true
       t.timestamps
     end
   end

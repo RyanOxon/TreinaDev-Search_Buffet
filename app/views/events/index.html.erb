@@ -1,0 +1,13 @@
+
+
+<% if @events.empty? %>
+  <p>Sem eventos cadastrados ainda</p>
+  <%= link_to 'Criar novo evento', new_event_path %>
+
+<% else %>
+  <% @events.each do |event| %>
+    <div>
+      <h3><%= link_to event.name, event_path(event) %></h3>
+    </div>
+  <% end %>
+<% end %>

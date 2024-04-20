@@ -1,0 +1,157 @@
+<% if @event.errors.any? %>
+  <article class="message">
+    <div class="message-header">
+      <p>Verifique os erros abaixo</p>
+    </div>
+    <div class="message-body">
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>
+
+<%= form_with(model: @event) do |f| %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :event_category_id, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.collection_select :event_category_id, @event_categories, :id, :humanized_category_name, { prompt: "Selecione o tipo de evento" }, { class: "input" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :name, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :name, class: "input" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :min_capacity, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.number_field :min_capacity, class: "input" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field is-horizontal ">
+          <div class="field-label ">
+            <%= f.label :max_capacity, class: "label" %>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <%= f.number_field :max_capacity, class: "input" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <%= f.label :default_duration, class: "label" %>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <%= f.number_field :default_duration, class: "input" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :description, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_area :description, class: "textarea" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :menu, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_area :menu, class: "textarea" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <%= f.label :exclusive_address, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.label :exclusive_address, "Sim", value: "true", class:"radio" %>
+          <%= f.radio_button :exclusive_address, true %>
+          <%= f.label :exclusive_address, "Não", value: "false", class:"radio" %>
+          <%= f.radio_button :exclusive_address, false, checked: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :features, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field mt-1">
+        <div class="control">
+          <%= f.collection_check_boxes :feature_ids, @features, :id, :humanized_feature_name do |box| %>
+            <label class="checkbox ml-2">
+              <%= box.check_box %>
+              <%= box.text %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="field-label" >
+    </div>
+    <div class="field-body" >
+      <div class="control mr-2">
+        <%= f.submit class: "button is-link" %>
+      </div>
+      <div class="control">
+        <%= link_to 'Cancelar', root_path, class: "button is-link is-light" %>
+      </div>
+    </div>
+  </div>
+<% end %>
