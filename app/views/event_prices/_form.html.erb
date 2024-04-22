@@ -1,0 +1,22 @@
+<%= form_with(model: @event_price) do |form| %>
+  <div class="field">
+    <%= form.label :base_value %>
+    <%= form.number_field :base_value, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_per_person %>
+    <%= form.number_field :extra_per_person, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_per_hour %>
+    <%= form.number_field :extra_per_hour, step: 0.01 %>
+  </div>
+  <%= form.hidden_field :price_type %>
+  <%= form.hidden_field :event_id %>
+
+  <div class="actions">
+    <%= form.submit  "Definir Valor" %>
+  </div>
+<% end %>

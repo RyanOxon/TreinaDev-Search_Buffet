@@ -11,4 +11,25 @@
       <li class="subtitle is-4"><%= f.humanized_feature_name %></li>
     <% end %>
   </ul>
+  <% if @event.event_prices.any? %>
+    <% @event.event_prices.each do |price| %>
+      <p><%= price.humanized_price_name %>:</p>
+      <%= "Valor base: #{price.base_value}" %> | 
+      <%= "Adicional por pessoa: #{price.extra_per_person}" %> |
+      <%= "Adicional por hora: #{price.extra_per_hour}" %>
+    <% end %>
+  <% end %>
+  <div class="field is-horizontal" >
+    <div class= "field-label"></div>
+    <div class="field-body">
+      <div class="field is-grouped">
+        <div class="control">
+          <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id), class:"button is-link"  %>
+        </div>
+        <div class="control">
+          <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), class:"button is-info is-light" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
