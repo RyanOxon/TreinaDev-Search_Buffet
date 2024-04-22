@@ -1,6 +1,7 @@
 class BuffetsController < ApplicationController
   before_action :set_buffet, only: [:show, :edit, :update]
   before_action :payment_methods, only: [:edit, :update, :new, :create]
+  before_action :authenticate_buffet_owner!,  only: [:edit, :update, :new, :create, :show]
 
   def show; end
 

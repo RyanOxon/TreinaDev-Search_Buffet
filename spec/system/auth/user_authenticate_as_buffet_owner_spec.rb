@@ -69,9 +69,15 @@ describe "user authenticate" do
   context "Login as buffet owner " do
     it "Sucessfully" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-      login_as user
-      
       visit root_path
+
+      within 'div#owners' do
+        click_on "Logar"
+      end
+
+      fill_in "E-mail",	with: "rafa@el.com"
+      fill_in "Senha",	with: "password"
+      click_on "Log in"
 
       expect(page).to have_content "Usuario: rafa@el.com"
       expect(page).to have_content "Sair"

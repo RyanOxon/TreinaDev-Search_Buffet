@@ -99,6 +99,13 @@ describe "buffet Owner register buffet" do
     expect(page).to have_content "Erro ao cadastrar Buffet"
     expect(page).to have_content "Metodos de Pagamento não pode ficar em branco"
   end
+
+  it "and is not sign in" do
+
+    visit new_buffet_path
+    
+    expect(page).to have_content "Para continuar, faça login ou registre-se."
+  end
   
 
 end

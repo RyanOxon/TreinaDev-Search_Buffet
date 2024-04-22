@@ -1,5 +1,6 @@
 class EventPricesController < ApplicationController
-
+  before_action :authenticate_buffet_owner!, only: [:new, :create]
+  
   def new
     @event_price = EventPrice.new()
     @event_price.price_type = params[:price_type]

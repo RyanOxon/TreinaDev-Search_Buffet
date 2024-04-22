@@ -1,16 +1,22 @@
+<div>
+  <%= link_to 'Editar evento', edit_event_path(@event.id) %>
+</div>
+
 <div class="container">
   <h1 class="title is-1"><%= @event.name %></h1>
-  <p class="subtitle is-4"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
-  <p class="subtitle is-4"><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %></p>
-  <p class="subtitle is-4"><%= "#{@event.default_duration/60} horas"%></p>
-  <p class="subtitle is-4"><%= @event.description %></p>
-  <p class="subtitle is-4"><%= @event.menu%></p>
-  <p class="subtitle is-4"><%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></p>
-  <ul>
-    <% @event.features.each do |f| %>
-      <li class="subtitle is-4"><%= f.humanized_feature_name %></li>
-    <% end %>
-  </ul>
+  <p class="subtitle "><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
+  <p class="subtitle "><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %></p>
+  <p class="subtitle "><%= "#{@event.default_duration/60} horas"%></p>
+  <p class="subtitle "><%= @event.description %></p>
+  <p class="subtitle "><%= @event.menu%></p>
+  <p class="subtitle"><%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></p>
+  <div class="content">
+    <ul>
+      <% @event.features.each do |f| %>
+        <li class="subtitle is-6"><%= f.humanized_feature_name %></li>
+      <% end %>
+    </ul>
+  </div>
   <% if @event.event_prices.any? %>
     <% @event.event_prices.each do |price| %>
       <p><%= price.humanized_price_name %>:</p>
@@ -19,17 +25,21 @@
       <%= "Adicional por hora: #{price.extra_per_hour}" %>
     <% end %>
   <% end %>
-  <div class="field is-horizontal" >
-    <div class= "field-label"></div>
-    <div class="field-body">
-      <div class="field is-grouped">
-        <div class="control">
-          <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id), class:"button is-link"  %>
-        </div>
-        <div class="control">
-          <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), class:"button is-info is-light" %>
+  
+  <% if buffet_owner_signed_in? %>  
+    <div class="field is-horizontal" >
+      <div class= "field-label"></div>
+      <div class="field-body">
+        <div class="field is-grouped">
+          <div class="control">
+            <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id), class:"button is-link"  %>
+          </div>
+          <div class="control">
+            <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), class:"button is-info is-light" %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
+
 </div>

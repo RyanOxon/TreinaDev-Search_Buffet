@@ -6,8 +6,9 @@
 
 <% else %>
   <% @events.each do |event| %>
-    <div>
-      <h3><%= link_to event.name, event_path(event) %></h3>
+    <div class='content'>
+      <%= link_to event.name, event_path(event), class:'title is-4' %>
+      <p class="subtitle is-6"><%= event.event_category.humanized_category_name %></p>
     </div>
   <% end %>
 <% end %>
