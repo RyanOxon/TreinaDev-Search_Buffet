@@ -1,5 +1,5 @@
 class EventCategory < ApplicationRecord
-  has_many :event
+  has_many :events
 
   enum category: {debutante_ball: 0, wedding: 1, conferences: 2, congresses: 3,
                   corporate: 4, birthday: 5, baby_shower: 6, gaduations: 7, 
@@ -8,4 +8,5 @@ class EventCategory < ApplicationRecord
   def humanized_category_name
     I18n.t("activerecord.attributes.event_category.category.#{self.category}")
   end
+  
 end

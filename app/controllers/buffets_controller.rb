@@ -10,15 +10,10 @@ class BuffetsController < ApplicationController
 
   def search
     @search = params[:query]
-    @buffets = Buffet.where("brand_name LIKE ? OR city LIKE ?", "%#{@search}%", "%#{@search}%")
-    events_category = EventCategory.find_by(category: @search)
-    if events_category.present?
-      events_category.events.each do |event|
-        @buffets << event.buffet unless @buffets.include?(event.buffet)
-      end
-    end
-    @buffets = @buffets.sort_by { |buffet| buffet.brand_name }
-
+    category_value = revert_i18n(@search)
+    @buffets = Buffet.joins(events: :event_category )
+              .where("buffets.brand_name LIKE ? OR buffets.city = ? OR event_categories.category = ?", 
+              "%#{@search}%", @search, category_value).order('buffets.brand_name ASC')
   end
 
   def show; end
@@ -83,5 +78,11 @@ class BuffetsController < ApplicationController
 
   def payment_methods
     @payment_methods = PaymentMethod.all
+  end
+
+  def revert_i18n(translated_category)
+    categories_i18n = EventCategory.categories.keys.map {|key| [
+                      I18n.t("activerecord.attributes.event_category.category.#{key}"), key]}.to_h
+    category_value = EventCategory.categories[categories_i18n[translated_category]]
   end
 end
