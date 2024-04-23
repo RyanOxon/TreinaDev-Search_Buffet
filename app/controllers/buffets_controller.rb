@@ -11,7 +11,7 @@ class BuffetsController < ApplicationController
   def search
     @search = params[:query]
     category_value = revert_i18n(@search)
-    @buffets = Buffet.joins(events: :event_category )
+    @buffets = Buffet.left_outer_joins(events: :event_category )
               .where("buffets.brand_name LIKE ? OR buffets.city = ? OR event_categories.category = ?", 
               "%#{@search}%", @search, category_value).order('buffets.brand_name ASC')
   end
