@@ -4,7 +4,10 @@
 
     <div class="box">
       <div class="content">
-        <p><strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %></p>
+        
+        <% if @buffet.buffet_owner == current_buffet_owner %>
+        <p><strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %> </p> 
+        <% end %>
         <p><strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %></p>
         <p><strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %></p>
         <p><strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %></p>
@@ -23,8 +26,10 @@
       </div>
     </div>
 
+    <% if @buffet.buffet_owner == current_buffet_owner %>
     <div>
       <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link" %>
     </div>
+    <% end %>
   </div>
 </section>

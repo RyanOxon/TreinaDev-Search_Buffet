@@ -1,7 +1,25 @@
 class BuffetsController < ApplicationController
   before_action :set_buffet, only: [:show, :edit, :update]
   before_action :payment_methods, only: [:edit, :update, :new, :create]
-  before_action :authenticate_buffet_owner!,  only: [:edit, :update, :new, :create, :show]
+  before_action :authenticate_buffet_owner!,  only: [:edit, :update, :new, :create]
+
+  def index
+    redirect_to current_buffet_owner.buffet if buffet_owner_signed_in?
+    @buffets = Buffet.all
+  end
+
+  def search
+    @search = params[:query]
+    @buffets = Buffet.where("brand_name LIKE ? OR city LIKE ?", "%#{@search}%", "%#{@search}%")
+    events_category = EventCategory.find_by(category: @search)
+    if events_category.present?
+      events_category.events.each do |event|
+        @buffets << event.buffet unless @buffets.include?(event.buffet)
+      end
+    end
+    @buffets = @buffets.sort_by { |buffet| buffet.brand_name }
+
+  end
 
   def show; end
 
@@ -58,6 +76,9 @@ class BuffetsController < ApplicationController
 
   def set_buffet
     @buffet = Buffet.find(params[:id])
+    if buffet_owner_signed_in? && current_buffet_owner != @buffet.buffet_owner
+      redirect_to current_buffet_owner.buffet, alert: 'Acesso não autorizado'
+    end
   end
 
   def payment_methods

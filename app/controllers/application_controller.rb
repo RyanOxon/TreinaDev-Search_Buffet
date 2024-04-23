@@ -15,6 +15,6 @@ before_action :buffet_created?, if: :check_redirect
   end
   
   def after_sign_in_path_for(resource)
-    new_buffet_path # replace this with your desired path
+    new_buffet_path 
   end
 end

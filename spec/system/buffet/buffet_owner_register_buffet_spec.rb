@@ -107,5 +107,9 @@ describe "buffet Owner register buffet" do
     expect(page).to have_content "Para continuar, faça login ou registre-se."
   end
   
+  it "state code has to be 2 digits" do
+    
+  end
+  
 
 end
