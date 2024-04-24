@@ -33,7 +33,6 @@ describe "User view buffets" do
   end
   
   context "#visitor" do
-
     it "from root page" do
       load_payments
       load_features
@@ -64,8 +63,5 @@ describe "User view buffets" do
       
     end
   end
-
-  context "#client" do
-
-  end
+  
 end

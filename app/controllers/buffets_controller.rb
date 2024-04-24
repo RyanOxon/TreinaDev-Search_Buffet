@@ -16,7 +16,9 @@ class BuffetsController < ApplicationController
               "%#{@search}%", @search, category_value).order('buffets.brand_name ASC')
   end
 
-  def show; end
+  def show
+    @events = @buffet.events
+  end
 
   def edit; end
 

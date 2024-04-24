@@ -25,7 +25,6 @@ describe 'buffet owner set prices to his event' do
   end
 
   context '#standard price' do
-  
     it 'from the event details' do
       load_payments
       load_features
@@ -96,8 +95,7 @@ describe 'buffet owner set prices to his event' do
       expect(page).to have_content 'Adicional por hora: 1000'
     end
 
-    it 'with incomplete data' do
-      
+    xit 'with incomplete data' do
     end
     
     
@@ -173,7 +171,7 @@ describe 'buffet owner set prices to his event' do
       expect(page).to have_content 'Adicional por hora: 1500'
     end
     
-    it 'with incomplete data' do
+    xit 'with incomplete data' do
       
     end
   end

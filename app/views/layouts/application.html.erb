@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
   </head>
   <body>
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation" id="navbar">
+    <nav class="navbar is-dark has-shadow	" role="navigation" aria-label="main navigation" id="navbar">
       <div class="navbar-start">
 
         <div class="navbar-item is-size-3">
@@ -43,10 +43,10 @@
               <%= button_to 'Sair', destroy_buffet_owner_session_path, method: :delete, class:"button is-warning"%>
             <% else %>
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Para empresas</a>
-                <div class="navbar-dropdown" id="owners">
-                  <%= link_to 'Logar', new_buffet_owner_session_path, class:"navbar-item is-selected" %>
-                  <%= link_to 'Registrar-se', new_buffet_owner_registration_path, class:"navbar-item" %>
+                <a class="navbar-link is-arrowless">Para empresas</a>
+                <div class="navbar-dropdown is-boxed " id="owners">
+                  <%= link_to 'Logar', new_buffet_owner_session_path, class:"navbar-item " %>
+                  <%= link_to 'Registrar-se', new_buffet_owner_registration_path, class:"navbar-item " %>
                 </div>
               </div>
               <%= link_to 'Logar', root_path, class:"button is-primary" %>

@@ -1,28 +1,70 @@
 <section class="section">
   <div class="container">
     <h1 class="title"><%= @buffet.brand_name %></h1>
-
     <div class="box">
-      <div class="content">
-        
-        <% if @buffet.buffet_owner == current_buffet_owner %>
-        <p><strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %> </p> 
-        <% end %>
-        <p><strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %></p>
-        <p><strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %></p>
-        <p><strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %></p>
-        <p><strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %></p>
-        <p><strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %></p>
-        <p><strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %></p>
-        <p><strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %></p>
-        <p><strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %></p>
-        <p><strong><%= Buffet.human_attribute_name(:description) %> :</strong> <%= @buffet.description %></p>
-        <p><strong>Métodos de Pagamento:</strong></p>
-        <ul>
-          <% @buffet.payment_methods.each do |payment_method| %>
-            <li><%= payment_method.humanized_method_name %></li>
-          <% end %>
-        </ul>
+      <div class='columns' >
+        <div class='column is-two-fifths' >
+          <div class="ml-5 content">
+            <h4>Detalhes do buffet</h4>
+            <div class="block ml-5 mt-5">
+              <p>
+                <% if @buffet.buffet_owner == current_buffet_owner %>
+                  <strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %> <br>
+                <% end %>
+                <strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %><br>
+                <strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %><br>
+                <strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %><br>
+                <strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %><br>
+                <strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %><br>
+                <strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %><br>
+                <strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %><br>
+                <strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %><br>
+                <strong><%= Buffet.human_attribute_name(:description) %> :</strong> <%= @buffet.description %><br>
+                <strong>Métodos de Pagamento:</strong>
+              </p>
+              <ul>
+                <% @buffet.payment_methods.each do |payment_method| %>
+                  <li><%= payment_method.humanized_method_name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class='column'>
+          <div class="content">
+            <h4>Eventos disponiveis</h4>
+            <% if @events.empty? %>
+              Sem eventos cadastrados ainda <br>
+              <%= link_to 'Criar novo evento', new_event_path if @buffet.buffet_owner == current_buffet_owner %>
+            <% else %>
+              <div class="grid" >
+                <% @events.each do |event| %>
+                  <div class="cell">
+                    <%= link_to event_path(event) do %>
+                      <article class="media is-centered">  
+                        <figure class="media-left">
+                          <p class="image is-64x64">
+                            <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                          </p>
+                        </figure>  
+                        <div class="media-content">                  
+                          <div class='content'>
+                            <span class="has-text-white"><%= event.name %></span> <br>
+                            <p class='ml-3 has-text-grey is-italic is-size-7'>
+                              <%= event.event_category.humanized_category_name %>
+                              para <%= event.min_capacity %> pessoas <br>
+                              Duração: <%= event.default_duration/60 %> horas <br>
+                            </p>
+                          </div>
+                        </div>
+                      </article>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 

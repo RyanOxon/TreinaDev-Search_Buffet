@@ -25,7 +25,7 @@ describe 'user view buffet details' do
       
     end
 
-    it "after log in" do
+    it "after log in and have buffet registered" do
       load_payments
       user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
       buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", 
@@ -85,7 +85,6 @@ describe 'user view buffet details' do
   end
   
   context "#visitor" do
-
     it "from root and cannot see corporate name" do
       load_payments
       load_features
@@ -123,7 +122,8 @@ describe 'user view buffet details' do
       expect(page).to have_content "Dinheiro"
     end
     
-    
-  end
-  
+    xit "from search" do
+      
+    end
+  end 
 end
