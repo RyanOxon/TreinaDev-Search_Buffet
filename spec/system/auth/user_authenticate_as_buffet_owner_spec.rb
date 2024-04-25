@@ -68,7 +68,7 @@ describe "user authenticate" do
      
   context "Login as buffet owner " do
     it "Sucessfully" do
-      user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
+      BuffetOwner.create!(email: 'rafa@el.com', password: "password")
       visit root_path
 
       within 'div#owners' do

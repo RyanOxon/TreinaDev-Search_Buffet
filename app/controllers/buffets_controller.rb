@@ -64,7 +64,7 @@ class BuffetsController < ApplicationController
 
   private
   def buffet_params
-    buffet_params = params.require(:buffet).permit(:brand_name, :corporate_name,
+    params.require(:buffet).permit(:brand_name, :corporate_name,
                                                   :registration, :phone_number,
                                                   :email, :address, :district, 
                                                   :city, :state_code, :zip_code,
@@ -85,6 +85,6 @@ class BuffetsController < ApplicationController
   def revert_i18n(translated_category)
     categories_i18n = EventCategory.categories.keys.map {|key| [
                       I18n.t("activerecord.attributes.event_category.category.#{key}"), key]}.to_h
-    category_value = EventCategory.categories[categories_i18n[translated_category]]
+    EventCategory.categories[categories_i18n[translated_category]]
   end
 end

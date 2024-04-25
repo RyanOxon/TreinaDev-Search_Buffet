@@ -18,12 +18,16 @@
           <% end %>
         </ul>
       </div>
+      <hr>
       <% if @event.event_prices.any? %>
         <% @event.event_prices.each do |price| %>
-          <p><%= price.humanized_price_name %>:</p>
-          <%= "Valor base: #{price.base_value}" %> | 
-          <%= "Adicional por pessoa: #{price.extra_per_person}" %> |
-          <%= "Adicional por hora: #{price.extra_per_hour}" %>
+          <p>
+            <%= price.humanized_price_name %>: <br>
+            <%= "Valor base: #{price.base_value}" %> | <br>
+            <%= "Adicional por pessoa: #{price.extra_per_person}" %> |<br>
+            <%= "Adicional por hora: #{price.extra_per_hour}" %> <br>
+            <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price) %> <br>
+          </p>
         <% end %>
       <% end %>
       
@@ -36,11 +40,11 @@
             <div class="field is-grouped">
               <div class="control">
                 <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
-                                  class:"button is-rounded is-info is-outlined"  %>
+                                  class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
               </div>
               <div class="control">
                 <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
-                                  class:"button is-rounded is-primary is-outlined" %>
+                                  class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
               </div>
             </div>
           </div>

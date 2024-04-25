@@ -1,0 +1,4 @@
+<%= 'Atualizar preço padrão' if @event_price.price_type == 'business' %>
+<%= 'Atualizar preço especial' if @event_price.price_type == 'weekend' %>
+
+<%= render 'form' %>

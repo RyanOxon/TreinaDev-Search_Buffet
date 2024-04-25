@@ -1,5 +1,22 @@
 class EventPricesController < ApplicationController
-  before_action :authenticate_buffet_owner!, only: [:new, :create]
+  before_action :authenticate_buffet_owner!, only: [:new, :create, :edit, :update]
+  before_action :set_price, only: [:edit, :update]
+  
+  def edit; end
+
+  def update 
+    if @event_price.update(event_price_params)
+      if @event_price.price_type == 'standard'
+        flash[:notice] = 'Preço padrão ajustado'
+      else
+        flash[:notice] = 'Preço especial ajustado'
+      end
+      redirect_to @event_price.event
+    else
+      flash.now[:alert] = "Erro ao ajustar valor"
+      render 'new'
+    end
+  end
   
   def new
     @event_price = EventPrice.new()
@@ -24,9 +41,12 @@ class EventPricesController < ApplicationController
 
   private
   def event_price_params 
-    event_price_params = params.require(:event_price).permit(:base_value, :extra_per_hour,
+    params.require(:event_price).permit(:base_value, :extra_per_hour,
                                         :extra_per_person, :price_type, :event_id)
-    
+  end
+
+  def set_price
+    @event_price = EventPrice.find(params[:id])
   end
 
 end

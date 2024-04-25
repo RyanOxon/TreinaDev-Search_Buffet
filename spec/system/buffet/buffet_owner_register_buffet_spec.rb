@@ -1,11 +1,53 @@
 require 'rails_helper'
 
 describe "buffet Owner register buffet" do
-  xit "after sign up" do
+  it "after sign up" do
+    visit root_path
+      within 'div#owners' do
+        click_on 'Registrar-se'
+      end
+      fill_in "E-mail",	with: "rafa@el.com"
+      fill_in "Senha",	with: "password"
+      fill_in "Confirme sua senha",	with: "password" 
+      click_on "Criar conta"
+
+      expect(page).to have_field 'Nome fantasia'
+      expect(page).to have_field 'Razão social'
+      expect(page).to have_field 'CNPJ'
+      expect(page).to have_field 'Telefone de contato'
+      expect(page).to have_field 'E-mail de contato'
+      expect(page).to have_field 'Endereço'
+      expect(page).to have_field 'Bairro'
+      expect(page).to have_field 'Cidade'
+      expect(page).to have_field 'Codigo do estado'
+      expect(page).to have_field 'CEP'
+      expect(page).to have_content 'Metodos de Pagamento'
     
   end
 
-  xit "after log in while still dont have one" do
+  it "after log in while still dont have one" do
+    BuffetOwner.create!(email: 'rafa@el.com', password: "password")
+
+    visit root_path
+    within 'div#owners' do
+      click_on 'Logar'
+    end
+    fill_in "E-mail",	with: "rafa@el.com"
+    fill_in "Senha",	with: "password"
+    click_on 'Log in'
+
+
+    expect(page).to have_field 'Nome fantasia'
+    expect(page).to have_field 'Razão social'
+    expect(page).to have_field 'CNPJ'
+    expect(page).to have_field 'Telefone de contato'
+    expect(page).to have_field 'E-mail de contato'
+    expect(page).to have_field 'Endereço'
+    expect(page).to have_field 'Bairro'
+    expect(page).to have_field 'Cidade'
+    expect(page).to have_field 'Codigo do estado'
+    expect(page).to have_field 'CEP'
+    expect(page).to have_content 'Metodos de Pagamento'
 
   end
 
@@ -115,7 +157,30 @@ describe "buffet Owner register buffet" do
     expect(page).to have_content "Para continuar, faça login ou registre-se."
   end
   
-  xit "state code has to be 2 digits" do
+  it "state code has to be 2 digits" do
+    user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
+    load_payments()
+    login_as user
+
+    visit root_path
+    click_on "Meu Buffet"
+    fill_in "Nome fantasia",	with: "Buffet Galatico"
+    fill_in "Razão social",	with: "Buffetys LTDA"
+    fill_in "CNPJ",	with: "321.543.12/0001-33" 
+    fill_in "Telefone de contato",	with: "99123456789"
+    fill_in "E-mail de contato",	with: "atendimento@buffyts.com"
+    fill_in "Endereço",	with: "Rua Estrelas, 123"
+    fill_in "Bairro",	with: "Sistema Solar" 
+    fill_in "Cidade",	with: "Via lactea" 
+    fill_in "Codigo do estado",	with: "AAAA"
+    fill_in "CEP",	with: "99999-999" 
+    fill_in "Descrição",	with: "Um buffet de outro mundo"
+    check 'Dinheiro'
+    click_on "Criar Buffet"
+
+    expect(page).not_to have_content "Buffet cadastrado com sucesso" 
+    expect(page).to have_content "Erro ao cadastrar Buffet"
+    expect(page).to have_content "Codigo do estado não possui o tamanho esperado"
     
   end
   
