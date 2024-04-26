@@ -29,7 +29,7 @@ describe 'user view event details' do
                           menu: 'um monte de comida', event_category: EventCategory.find(2),
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       within 'nav' do
@@ -75,7 +75,7 @@ describe 'user view event details' do
                           menu: 'um monte de comida', event_category: EventCategory.find(2),
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       click_on 'Casamento Galaxy Buffet'

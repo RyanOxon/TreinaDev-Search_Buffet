@@ -10,7 +10,7 @@ describe "Buffet owner edit his buffet" do
     description: "Um buffet de outro mundo", buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
     
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar"
@@ -40,7 +40,7 @@ describe "Buffet owner edit his buffet" do
     description: "Um buffet de outro mundo", buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
     
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar"
@@ -84,7 +84,7 @@ describe "Buffet owner edit his buffet" do
     description: "Um buffet de outro mundo", buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
     
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar"
@@ -118,7 +118,7 @@ describe "Buffet owner edit his buffet" do
     description: "Um buffet de outro mundo", buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
     
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
     click_on "Meu Buffet"
     click_on "Editar"

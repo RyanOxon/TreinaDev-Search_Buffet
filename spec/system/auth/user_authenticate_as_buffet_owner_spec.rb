@@ -1,7 +1,19 @@
 require 'rails_helper'
 
-describe "user authenticate" do
-  context "register as buffet owner" do
+describe "user authenticate as buffet owner" do
+  context "Sign up" do
+    it "from root path" do
+      visit root_path
+      within 'div#owners' do
+        click_on 'Registrar-se'
+      end
+
+      expect(page).to have_field 'E-mail'
+      expect(page).to have_field 'Senha'
+      expect(page).to have_field 'Confirme sua senha'
+      
+    end
+    
     it "sucessfully" do
       visit root_path
       within 'div#owners' do
@@ -66,7 +78,17 @@ describe "user authenticate" do
     end
   end
      
-  context "Login as buffet owner " do
+  context "Sign in" do
+    it "from root path" do
+      visit root_path
+      within 'div#owners' do
+        click_on 'Logar'
+      end
+
+      expect(page).to have_field 'E-mail'
+      expect(page).to have_field 'Senha'
+    end
+    
     it "Sucessfully" do
       BuffetOwner.create!(email: 'rafa@el.com', password: "password")
       visit root_path

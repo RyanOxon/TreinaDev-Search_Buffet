@@ -30,7 +30,7 @@ describe "Buffet owner edit event prices" do
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
       EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event_3)
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       click_on 'Casamento Galaxy Buffet'
@@ -70,7 +70,7 @@ describe "Buffet owner edit event prices" do
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
       EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event_3)
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       click_on 'Casamento Galaxy Buffet'
@@ -123,7 +123,7 @@ describe "Buffet owner edit event prices" do
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
       EventPrice.create!(price_type: 1, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event_3)
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       click_on 'Casamento Galaxy Buffet'
@@ -163,7 +163,7 @@ describe "Buffet owner edit event prices" do
                           exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event_3, feature: Feature.find(1))
       EventPrice.create!(price_type: 1, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event_3)
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       click_on 'Casamento Galaxy Buffet'

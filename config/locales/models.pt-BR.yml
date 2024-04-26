@@ -1,6 +1,7 @@
 pt-BR:
   activerecord:
     models:
+      customer: Cliente
       event_price: Preço do evento
       buffet: Buffet
       payment_method:

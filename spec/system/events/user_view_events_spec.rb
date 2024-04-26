@@ -19,7 +19,7 @@ describe 'user view events' do
                             menu: 'um monte de comida', event_category: EventCategory.find(2),
                             exclusive_address: true, buffet: buffet)
       EventFeature.create!(event: event, feature: Feature.find(1))
-      login_as user
+      login_as user, scope: :buffet_owner
       
       visit root_path
       within 'nav' do
@@ -61,7 +61,7 @@ describe 'user view events' do
                             menu: 'um monte de comida', event_category: EventCategory.find(5),
                             exclusive_address: true, buffet: buffet_2)
       EventFeature.create!(event: event_2, feature: Feature.find(2))
-      login_as user
+      login_as user, scope: :buffet_owner
 
       visit root_path
       within 'nav' do

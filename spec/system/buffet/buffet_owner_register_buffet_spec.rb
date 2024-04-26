@@ -54,7 +54,7 @@ describe "buffet Owner register buffet" do
   it "sucessfully" do
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
     load_payments()
-    login_as user
+    login_as user, scope: :buffet_owner
 
     visit root_path
     click_on "Meu Buffet"
@@ -90,7 +90,7 @@ describe "buffet Owner register buffet" do
 
   it "and is forced to create" do
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    login_as user
+    login_as user, scope: :buffet_owner
 
     visit root_path
     click_on "Cade Buffet?"
@@ -102,7 +102,7 @@ describe "buffet Owner register buffet" do
   it "with incomplete informations" do
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
     load_payments()
-    login_as user
+    login_as user, scope: :buffet_owner
 
     visit root_path
     click_on "Meu Buffet"
@@ -128,7 +128,7 @@ describe "buffet Owner register buffet" do
   it "without payment methods" do
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
     load_payments()
-    login_as user
+    login_as user, scope: :buffet_owner
 
     visit root_path
     click_on "Meu Buffet"
@@ -160,7 +160,7 @@ describe "buffet Owner register buffet" do
   it "state code has to be 2 digits" do
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
     load_payments()
-    login_as user
+    login_as user, scope: :buffet_owner
 
     visit root_path
     click_on "Meu Buffet"

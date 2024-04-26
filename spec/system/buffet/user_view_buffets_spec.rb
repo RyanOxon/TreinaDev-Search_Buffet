@@ -23,7 +23,7 @@ describe "User view buffets" do
                               buffet_owner: user_2)
       BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(2))
       
-      login_as user
+      login_as user, scope: :buffet_owner
       visit root_path
 
       expect(current_path).to eq buffet_path(user.buffet.id)

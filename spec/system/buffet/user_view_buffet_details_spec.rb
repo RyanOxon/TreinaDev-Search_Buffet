@@ -12,7 +12,7 @@ describe 'user view buffet details' do
                               zip_code: "99999-999", description: "Um buffet de outro mundo", 
                               buffet_owner: user)
       BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
-      login_as user
+      login_as user, scope: :buffet_owner
 
       visit root_path
       within 'nav' do
@@ -74,7 +74,7 @@ describe 'user view buffet details' do
                               buffet_owner: user_2)
       BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(2))
       
-      login_as user
+      login_as user, scope: :buffet_owner
       visit buffet_path(buffet_2.id)
 
       expect(current_path).not_to eq buffet_path(buffet_2.id)

@@ -13,7 +13,7 @@ describe "buffet owner register event" do
                             zip_code: "99999-999", description: "Um buffet de outro mundo", 
                             buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
 
     within 'nav' do
@@ -48,7 +48,7 @@ describe "buffet owner register event" do
                             zip_code: "99999-999", description: "Um buffet de outro mundo", 
                             buffet_owner: user)
     BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
-    login_as user
+    login_as user, scope: :buffet_owner
     visit root_path
 
     within 'nav' do

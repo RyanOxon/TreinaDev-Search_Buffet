@@ -15,6 +15,7 @@ before_action :buffet_created?, if: :check_redirect
   end
   
   def after_sign_in_path_for(resource)
-    new_buffet_path 
+    return new_buffet_path if buffet_owner_signed_in?
+    root_path
   end
 end
