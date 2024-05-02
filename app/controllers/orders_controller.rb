@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+
+  def index
+    @orders = Order.all
+  end
   def show
     @order = Order.find(params[:id])
   end
@@ -12,7 +16,6 @@ class OrdersController < ApplicationController
     @event = Event.find(params[:event_id])
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.status = 0
     @order.event = @event
     if @order.save!
       redirect_to @order, notice: 'Pedido enviado com sucesso'

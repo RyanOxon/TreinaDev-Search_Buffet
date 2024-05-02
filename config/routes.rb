@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create]
   end
 
-  resources :orders, only: [:show]
+  resources :orders, only: [:show, :index]
 
   resources :event_prices, only: [:edit, :update, :new, :create]
 end
