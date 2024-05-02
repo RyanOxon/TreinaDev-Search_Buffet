@@ -1,14 +1,11 @@
 <h1> Seus pedidos </h1>
-
-
-
 <% if @orders.any? %>
   <% @orders.each do |order| %>
     <div>
       <p>
         <%= "Pedido #{order.code}" %> <br>
         <%= "Status: #{order.humanized_status_name}" %>
-
+        <%= "Data: #{order.date}" %>
       </p>
     </div>
   <% end %>
