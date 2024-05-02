@@ -29,6 +29,9 @@
                 <%= f.submit 'Buscar', class: 'button is-white is-outlined' %>
               </div>
             <% end %>
+            <div class="control"> 
+              <%= link_to 'Meus pedidos', orders_path %>
+            </div>
           <% end %>
         </div>
 
@@ -53,7 +56,7 @@
                 </div>
               </div>
               <div class="field is-grouped" id="customers">
-                <%= link_to 'Logar', root_path, class:"button is-primary" %>
+                <%= link_to 'Logar', new_customer_session_path, class:"button is-primary" %>
                 <%= link_to 'Registrar-se', new_customer_registration_path, class:"button is-light" %>
               </div>
             <% end %>

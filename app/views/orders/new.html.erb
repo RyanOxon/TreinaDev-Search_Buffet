@@ -1,0 +1,86 @@
+<% if @event.errors.any? %>
+  <article class="message">
+    <div class="message-header">
+      <p>Verifique os erros abaixo</p>
+    </div>
+    <div class="message-body">
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>
+
+<h1>Fazer um pedido para o evento: <%= @event.name %></h1>
+
+
+<%= form_with(model: [@event, @order]) do |f| %>
+
+  <div class='field is-horizontal'>
+    <div class='field-label is-normal'>
+      <%= f.label :people_count, class: 'label' %>
+    </div>
+    <div class='field-body'>
+      <div class='field'>
+        <div class='control'>
+          <%= f.text_field :people_count, class: 'input' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='field is-horizontal'>
+    <div class='field-label is-normal'>
+      <%= f.label :date, class: 'label' %>
+    </div>
+    <div class='field-body'>
+      <div class='field'>
+        <div class='control'>
+          <%= f.date_field :date, class: 'input' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='field is-horizontal'>
+    <div class='field-label is-normal'>
+      <%= f.label :details, class: 'label' %>
+    </div>
+    <div class='field-body'>
+      <div class='field'>
+        <div class='control'>
+          <%= f.text_area :details, class: 'input' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% unless @event.exclusive_address %>
+  <div class='field is-horizontal'>
+    <div class='field-label is-normal'>
+      <%= f.label :address, class: 'label' %>
+    </div>
+    <div class='field-body'>
+      <div class='field'>
+        <div class='control'>
+          <%= f.text_field :address, class: 'input' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <div class='field is-grouped'>
+    <div class='field-label' >
+    </div>
+    <div class='field-body' >
+      <div class='control mr-2'>
+        <%= f.submit 'Enviar Pedido', class: 'button is-link' %>
+      </div>
+      <div class='control'>
+        <%= link_to 'Cancelar', root_path, class: 'button is-link is-light' %>
+      </div>
+    </div>
+  </div>
+<% end %>

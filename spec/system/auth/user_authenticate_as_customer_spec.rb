@@ -27,8 +27,7 @@ describe 'user authenticate as customer' do
       click_on 'Criar conta'
 
       expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
-      user = Customer.last
-      expect(user.cpf).to eq '33216336557' 
+      expect(Customer.last.cpf).to eq '33216336557' 
       expect(page).to have_content 'Usuario: rafa@el.com'
       expect(page).to have_content 'Sair'
     end
@@ -54,6 +53,32 @@ describe 'user authenticate as customer' do
   end
 
   context 'Sign in' do
-    
+     it 'from root path' do
+      visit root_path
+      within 'div#customers' do
+        click_on 'Logar'
+      end
+
+      expect(page).to have_field 'E-mail'
+      expect(page).to have_field 'Senha'
+     end
+
+     it "sucessfully" do
+      Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+
+      visit root_path
+      within 'div#customers' do
+        click_on 'Logar'
+      end
+
+      fill_in "E-mail",	with: "r@fael.com" 
+      fill_in "Senha", with: "password"
+      click_on 'Log in'
+
+      expect(page).to have_content "Usuario: r@fael.com"
+      expect(page).to have_content "Sair"
+      
+     end
+     
   end
 end

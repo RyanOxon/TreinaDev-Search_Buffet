@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_224344) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_183907) do
   create_table "buffet_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -111,6 +111,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224344) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "customer_id", null: false
+    t.string "date"
+    t.integer "people_count"
+    t.string "code"
+    t.string "details"
+    t.string "address"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
   create_table "payment_methods", force: :cascade do |t|
     t.integer "method"
     t.datetime "created_at", null: false
@@ -125,4 +140,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224344) do
   add_foreign_key "event_prices", "events"
   add_foreign_key "events", "buffets"
   add_foreign_key "events", "event_categories"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "events"
 end
