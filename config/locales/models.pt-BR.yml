@@ -1,6 +1,7 @@
 pt-BR:
   activerecord:
     models:
+      order: Pedido
       customer: Cliente
       event_price: Preço do evento
       buffet: Buffet
@@ -10,6 +11,13 @@ pt-BR:
       event: Evento
       event_category: Tipo de evento
     attributes:
+      order:
+        people_count: Numero de pessoas
+        date: Data
+        details: Detalhes
+        address: Endereço
+        status:
+          waiting: Aguardando avaliação do buffet
       event_price: 
         base_value: Valor base
         extra_per_person: Adicional por pessoa
