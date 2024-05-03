@@ -11,7 +11,7 @@ describe 'user view buffet details' do
                               district: "Sistema Solar", city: "Via lactea", state_code: "AA", 
                               zip_code: "99999-999", description: "Um buffet de outro mundo", 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       login_as user, scope: :buffet_owner
 
       visit root_path
@@ -34,7 +34,7 @@ describe 'user view buffet details' do
                               district: "Sistema Solar", city: "Via lactea", state_code: "AA", 
                               zip_code: "99999-999", description: "Um buffet de outro mundo", 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
 
       visit root_path
 
@@ -65,14 +65,14 @@ describe 'user view buffet details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(2))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Vtectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
                               buffet_owner: user_2)
-      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(2))
+      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find_by(method: "cash"))
       
       login_as user, scope: :buffet_owner
       visit buffet_path(buffet_2.id)
@@ -97,14 +97,14 @@ describe 'user view buffet details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
                               buffet_owner: user_2)
-      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find_by(method: "cash"))
 
       visit root_path
       click_on 'Galaxy Buffet'
@@ -134,14 +134,14 @@ describe 'user view buffet details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
                               buffet_owner: user_2)
-      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find_by(method: "cash"))
 
       visit root_path
       fill_in "query",	with: "Galaxy Buffet"
@@ -172,14 +172,14 @@ describe 'user view buffet details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
                               buffet_owner: user_2)
-      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find_by(method: "cash"))
 
       visit root_path
       fill_in "query",	with: "Via lactea"
@@ -210,24 +210,24 @@ describe 'user view buffet details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
                               buffet_owner: user_2)
-      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet_2, payment_method: PaymentMethod.find_by(method: "cash"))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(2),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_2 = Event.create!(name: 'Eventão', description: 'um evento muito quente',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(5),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "birthday"),
                             exclusive_address: true, buffet: buffet_2)
-      EventFeature.create!(event: event_2, feature: Feature.find(2))
+      EventFeature.create!(event: event_2, feature: Feature.find_by(feature: "decoration"))
 
       visit root_path
       fill_in "query",	with: "Casamento"

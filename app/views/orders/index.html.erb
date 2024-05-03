@@ -5,7 +5,7 @@
       <p>
         <%= "Pedido #{order.code}" %> <br>
         <%= "Status: #{order.humanized_status_name}" %>
-        <%= "Data: #{order.date}" %>
+        <%= "Data: #{I18n.localize(order.date)}" %>
       </p>
     </div>
   <% end %>

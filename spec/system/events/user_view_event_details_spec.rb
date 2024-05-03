@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'user view event details' do
   context '#buffet owner' do
     it 'from navbar events list' do
-      load_payments
       load_features
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
@@ -13,22 +12,21 @@ describe 'user view event details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(2))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(2),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_2 = Event.create!(name: 'Eventão', description: 'um evento muito quente',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(5),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "corporate"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_2, feature: Feature.find(2))
+      EventFeature.create!(event: event_2, feature: Feature.find_by(feature: "alcohol"))
       event_3 = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
-                          menu: 'um monte de comida', event_category: EventCategory.find(2),
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_3, feature: Feature.find(1))
+      EventFeature.create!(event: event_3, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -49,7 +47,6 @@ describe 'user view event details' do
     end
 
     it 'from buffet details' do
-      load_payments
       load_features
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
@@ -59,22 +56,21 @@ describe 'user view event details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(2))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(2),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_2 = Event.create!(name: 'Eventão', description: 'um evento muito quente',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(5),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "corporate"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_2, feature: Feature.find(2))
+      EventFeature.create!(event: event_2, feature: Feature.find_by(feature: "alcohol"))
       event_3 = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
-                          menu: 'um monte de comida', event_category: EventCategory.find(2),
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_3, feature: Feature.find(1))
+      EventFeature.create!(event: event_3, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -94,7 +90,6 @@ describe 'user view event details' do
 
   context '#visitor' do
     it 'from buffet details' do
-      load_payments
       load_features
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
@@ -104,17 +99,16 @@ describe 'user view event details' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(2))
       event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
-                          menu: 'um monte de comida', event_category: EventCategory.find(2),
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_3 = Event.create!(name: 'Corporativo Galaxy Buffet', description: 'Buffet para eventos corporativo',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
-                          menu: 'Comida, comida, comida, comida, bebida, bebida', event_category: EventCategory.find(5),
+                          menu: 'Comida, comida, comida, comida, bebida, bebida', event_category: EventCategory.find_by(category: "corporate"),
                           exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_3, feature: Feature.find(3))
+      EventFeature.create!(event: event_3, feature: Feature.find_by(feature: "valet"))
       EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
       visit root_path
       click_on 'Galaxy Buffet'

@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_customer!
   before_action :set_event, only: [:new, :create]
 
   def index

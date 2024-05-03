@@ -8,7 +8,8 @@ class Event < ApplicationRecord
   has_many :orders
 
   validates :name, :description, :min_capacity, :max_capacity, :default_duration,
-            :menu, :buffet_id, :event_category_id, presence: true
+            :menu, presence: true
   
+  validates :name, uniqueness: true
 
 end

@@ -9,7 +9,7 @@ class Buffet < ApplicationRecord
   validates :brand_name, :corporate_name, :phone_number, :registration,
             :email, :address, :district, :city, :state_code, :zip_code,
             :description, presence: true
-            
+  validates :brand_name, :corporate_name, :registration, uniqueness: true
   validates :state_code, length: {is: 2}
   
 end

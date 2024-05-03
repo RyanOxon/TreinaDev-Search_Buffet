@@ -12,12 +12,12 @@ describe 'buffet owner set prices to his event' do
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                             buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
     event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
-                          menu: 'um monte de comida', event_category: EventCategory.find(1),
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: true, buffet: buffet)
-    EventFeature.create!(event: event, feature: Feature.find(1))
+    EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
 
     visit new_event_price_path
 
@@ -36,12 +36,12 @@ describe 'buffet owner set prices to his event' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(1),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -68,12 +68,12 @@ describe 'buffet owner set prices to his event' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(1),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -112,12 +112,12 @@ describe 'buffet owner set prices to his event' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(1),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -144,12 +144,12 @@ describe 'buffet owner set prices to his event' do
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
-      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
                             min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find(1),
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                             exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find(1))
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       login_as user, scope: :buffet_owner
       
       visit root_path

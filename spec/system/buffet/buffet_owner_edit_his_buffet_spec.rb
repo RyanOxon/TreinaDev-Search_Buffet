@@ -8,7 +8,7 @@ describe "Buffet owner edit his buffet" do
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
     
     login_as user, scope: :buffet_owner
     visit root_path
@@ -38,7 +38,7 @@ describe "Buffet owner edit his buffet" do
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
     
     login_as user, scope: :buffet_owner
     visit root_path
@@ -82,7 +82,7 @@ describe "Buffet owner edit his buffet" do
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
     
     login_as user, scope: :buffet_owner
     visit root_path
@@ -116,7 +116,7 @@ describe "Buffet owner edit his buffet" do
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
     
     login_as user, scope: :buffet_owner
     visit root_path

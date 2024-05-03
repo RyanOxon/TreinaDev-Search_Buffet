@@ -12,7 +12,7 @@ describe "buffet owner register event" do
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", 
                             zip_code: "99999-999", description: "Um buffet de outro mundo", 
                             buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
     login_as user, scope: :buffet_owner
     visit root_path
 
@@ -47,7 +47,7 @@ describe "buffet owner register event" do
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", 
                             zip_code: "99999-999", description: "Um buffet de outro mundo", 
                             buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
     login_as user, scope: :buffet_owner
     visit root_path
 
@@ -88,7 +88,7 @@ describe "buffet owner register event" do
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                             buffet_owner: user)
-    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find(1))
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
 
     visit new_event_path
 

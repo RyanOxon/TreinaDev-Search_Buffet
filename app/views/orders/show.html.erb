@@ -1,7 +1,7 @@
 <p>Pedido: <%= @order.code %></p>
 <p>Status do pedido: <%= @order.humanized_status_name %></p>
 <p>Evento para <%= @order.people_count %> pessoas</p>
-<p>Na data: <%= @order.date %></p>
+<p>Na data: <%= I18n.localize(@order.date) %></p>
 <p>Endereço: <%= @order.address.nil? ? @order.event.buffet.address : @order.address %></p>
 <p><%= @order.details %></p>
 

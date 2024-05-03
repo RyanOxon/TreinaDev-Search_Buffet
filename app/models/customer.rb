@@ -6,8 +6,10 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  validates :cpf, uniqueness: true
   validate :check_cpf
 
+  private
   def check_cpf
     value = cpf.scan(/[0-9]/).map(&:to_i)
     if value.length == 11 && !DENY_LIST.include?(cpf)
@@ -22,8 +24,6 @@ class Customer < ApplicationRecord
       errors.add(:cpf, 'não é valido')
     end
   end
-
-  private
 
   DENY_LIST = %w[
     00000000000

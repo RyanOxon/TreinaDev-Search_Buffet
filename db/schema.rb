@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_183907) do
   create_table "orders", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "customer_id", null: false
-    t.string "date"
+    t.date "date"
     t.integer "people_count"
     t.string "code"
     t.string "details"
