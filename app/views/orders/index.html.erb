@@ -1,17 +1,42 @@
-<h1> <%= customer_signed_in? ? "Seus pedidos" : "Pedidos em aberto" %> </h1>
-<% if @orders.any? %>
-  <% @orders.each do |order| %>
-    <div>
-      <p>
-        <%= "Pedido #{order.code}" %> <br>
-        <%= "Evento: #{order.event.name}" %>
-        <%= "Status: #{order.humanized_status_name}" %> <br>
-        <%= "Data: #{I18n.localize(order.date)}" %>
-      </p>
+<div class="content" >
+  <h1> Pedidos </h1>
+  <div class="box" >
+    <% if @open_orders.any? %>
+      <p> Pedidos em aberto</p>
+      
+      <% @open_orders.each do |order| %>
+        <div>
+          <%= link_to order_path(order.id) do %>
+            <p>
+              <%= "Pedido #{order.code}" %> <br>
+              <%= "Evento: #{order.event.name}" %> <br>
+              <%= "Status: #{order.humanized_status_name}" %> <br>
+              <%= "Data: #{I18n.localize(order.date)}" %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+    <% else %>
+      <p>Nenhum pedido em aberto <br></p>
+    <% end %>
+  </div>
+    
+  <% if @closed_orders.any? %>
+    <div class="box" >
+      <p> Pedidos fechados</p>
+      <% @closed_orders.each do |order| %>
+        <div>
+          <%= link_to order_path(order.id) do %>
+            <p>
+              <%= "Pedido #{order.code}" %> <br>
+              <%= "Status: #{order.humanized_status_name}" %> <br>
+              <%= "Data: #{I18n.localize(order.date)}" %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
-<% else %>
-<p>
-  Nenhum pedido realizado
-</p>
-<% end %>
+  
+</div>

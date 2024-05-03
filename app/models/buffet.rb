@@ -11,5 +11,10 @@ class Buffet < ApplicationRecord
             :description, presence: true
   validates :brand_name, :corporate_name, :registration, uniqueness: true
   validates :state_code, length: {is: 2}
+
+
+  def check_same_date_orders(order)
+    self.orders.where(date: order.date).where.not(id: order.id).exists?
+  end
   
 end

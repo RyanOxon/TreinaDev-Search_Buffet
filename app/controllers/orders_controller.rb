@@ -4,13 +4,16 @@ class OrdersController < ApplicationController
 
   def index
     if customer_signed_in?
-      @orders = current_customer.orders
+      orders = current_customer.orders
     elsif buffet_owner_signed_in?
-      @orders = current_buffet_owner.buffet.orders
+      orders = current_buffet_owner.buffet.orders
     else
       redirect_to root_path
     end
+    @open_orders = orders.where(status: 0)
+    @closed_orders = orders.where.not(status: 0)
   end
+
   def show
     @order = Order.find(params[:id])
   end

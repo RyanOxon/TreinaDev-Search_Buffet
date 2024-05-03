@@ -1,9 +1,20 @@
-<p>Pedido: <%= @order.code %></p>
-<p>Status do pedido: <%= @order.humanized_status_name %></p>
-<p>Evento para <%= @order.people_count %> pessoas</p>
-<p>Na data: <%= I18n.localize(@order.date) %></p>
-<p>Endereço: <%= @order.address.nil? ? @order.event.buffet.address : @order.address %></p>
-<p><%= @order.details %></p>
+<div class="box" >
+  <% if buffet_owner_signed_in? && current_buffet_owner.buffet.check_same_date_orders(@order) %>
+    <div class="notification is-warning">
+    <button class="delete"></button>
+      Existem outros pedidos na mesma data! Verifique
+    </div>
+  <% end %>
+</div>
 
-<%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light' %>
-<%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light' %>
+<div class="content" >
+  <p>Pedido: <%= @order.code %></p>
+  <p>Status do pedido: <%= @order.humanized_status_name %></p>
+  <p>Evento para <%= @order.people_count %> pessoas</p>
+  <p>Na data: <%= I18n.localize(@order.date) %></p>
+  <p>Endereço: <%= @order.address.nil? ? @order.event.buffet.address : @order.address %></p>
+  <p><%= @order.details %></p>
+
+  <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light' %>
+  <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light' %>
+</div>
