@@ -1,9 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!, only: [:new, :create]
   before_action :set_event, only: [:new, :create]
 
   def index
-    @orders = current_customer.orders
+    if customer_signed_in?
+      @orders = current_customer.orders
+    elsif buffet_owner_signed_in?
+      @orders = current_buffet_owner.buffet.orders
+    else
+      redirect_to root_path
+    end
   end
   def show
     @order = Order.find(params[:id])

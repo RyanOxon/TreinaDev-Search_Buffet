@@ -1,10 +1,11 @@
-<h1> Seus pedidos </h1>
+<h1> <%= customer_signed_in? ? "Seus pedidos" : "Pedidos em aberto" %> </h1>
 <% if @orders.any? %>
   <% @orders.each do |order| %>
     <div>
       <p>
         <%= "Pedido #{order.code}" %> <br>
-        <%= "Status: #{order.humanized_status_name}" %>
+        <%= "Evento: #{order.event.name}" %>
+        <%= "Status: #{order.humanized_status_name}" %> <br>
         <%= "Data: #{I18n.localize(order.date)}" %>
       </p>
     </div>
