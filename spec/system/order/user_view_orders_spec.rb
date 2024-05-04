@@ -99,7 +99,7 @@ describe "User view orders" do
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: false, buffet: buffet)
       customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
-      order = Order.create!(date: "10/10/2024", people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
+      order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
       login_as user, scope: :buffet_owner
 
       visit root_path
@@ -113,7 +113,7 @@ describe "User view orders" do
       expect(page).to have_content "Evento: Casamento Galaxy Buffet"
       expect(page).to have_content "Evento: Casamento Galaxy Buffet"
       expect(page).to have_content 'Status: Aguardando avaliação do buffet'
-      expect(page).to have_content 'Data: 10/10/2024'
+      expect(page).to have_content "Data: #{I18n.localize(Order.last.date)}"
 
     end
 
@@ -157,8 +157,8 @@ describe "User view orders" do
                           exclusive_address: false, buffet: buffet)
       customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
       customer_1 = Customer.create!(cpf: 52727228090, email: 'ra@fael.com', password: 'password' )
-      order = Order.create!(date: "10/10/2024", people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
-      order_1 = Order.create!(date: "12/12/2024", people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1, status: 2)
+      order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
+      order_1 = Order.create!(date: 6.months.from_now, people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1, status: 2)
       login_as user, scope: :buffet_owner
 
       visit root_path

@@ -16,7 +16,7 @@ describe "user view order details" do
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: false, buffet: buffet)
       customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
-      order = Order.create!(date: "10/10/2024", people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
+      order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
       login_as user, scope: :buffet_owner
 
       visit root_path
@@ -29,7 +29,7 @@ describe "user view order details" do
       expect(page).to have_content "Pedido: #{order.code}"
       expect(page).to have_content 'Status do pedido: Aguardando avaliação do buffet'
       expect(page).to have_content 'Evento para 20 pessoas'
-      expect(page).to have_content 'Na data: 10/10/2024'
+      expect(page).to have_content "Na data: #{I18n.localize(Order.last.date)}"
       expect(page).to have_content 'Endereço: Rua Estrelas, 123'
       expect(page).to have_content 'Insira detalhes aqui...'
       expect(page).to have_link "Voltar para Casamento Galaxy Buffet"
@@ -52,8 +52,8 @@ describe "user view order details" do
                           exclusive_address: false, buffet: buffet)
       customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
       customer_1 = Customer.create!(cpf: 72646805098, email: 'raf@el.com', password: 'password' )
-      order = Order.create!(date: "10/10/2024", people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
-      Order.create!(date: "10/10/2024", people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1)
+      order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
+      Order.create!(date: 1.year.from_now, people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1)
       
       login_as user, scope: :buffet_owner
 

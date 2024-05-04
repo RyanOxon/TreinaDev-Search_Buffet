@@ -1,20 +1,97 @@
-<div class="box" >
+
   <% if buffet_owner_signed_in? && current_buffet_owner.buffet.check_same_date_orders(@order) %>
     <div class="notification is-warning">
     <button class="delete"></button>
       Existem outros pedidos na mesma data! Verifique
     </div>
   <% end %>
-</div>
 
-<div class="content" >
-  <p>Pedido: <%= @order.code %></p>
-  <p>Status do pedido: <%= @order.humanized_status_name %></p>
-  <p>Evento para <%= @order.people_count %> pessoas</p>
-  <p>Na data: <%= I18n.localize(@order.date) %></p>
-  <p>Endereço: <%= @order.address.nil? ? @order.event.buffet.address : @order.address %></p>
-  <p><%= @order.details %></p>
+<div class="box" >
+  <div class="content" >
+    <div class="columns">
+      <div class="column" >
+        <p>
+          Pedido: <%= @order.code %><br>
+          Status do pedido: <%= @order.humanized_status_name %><br>
+          Evento para <%= @order.people_count %> pessoas<br>
+          Na data: <%= I18n.localize(@order.date) %> <br>
+          Endereço: <%= @order.address.nil? ? @order.event.buffet.address : @order.address %><br>
+          <%= @order.details %>
+        </p>
+        
+        <% if @order.service_proposal.present? %>
+        <hr>
+          <p>
+            Proposta atual <br>
+            Valor: <%= @order.service_proposal.get_real_value %> <br>
+            Taxa extra: <%= @order.service_proposal.extra_fee %> <br>
+            Desconto: <%= @order.service_proposal.discount %> <br>
+            Motivo: <%= @order.service_proposal.description %> <br>
+            Proposta valida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
+            Status: <%= @order.service_proposal.humanized_status_name %>
 
-  <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light' %>
-  <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light' %>
+          </p>
+        <% end %>
+      </div>
+      
+      <% if buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
+        <div class="column">
+          <%= form_with(model: [@order, service_proposal = @order.service_proposal.present? ? @order.service_proposal : ServiceProposal.new ], html: { class: 'box' }) do |form| %>
+            <div class="field">
+              <%= form.label :value, class: 'label' %>
+              <div class="control">
+                <%= form.label :value, "Valor padrão:  #{@order.calculate_value("standard").zero? ? 'não registrado' : @order.calculate_value("standard")}", 
+                                value: @order.calculate_value("standard"), class: 'radio' %>
+                <%= form.radio_button :value, @order.calculate_value("standard"), class: 'radio', 
+                                      disabled: @order.calculate_value("standard").zero? %>
+                <%= form.label :value, "Valor especial: #{@order.calculate_value("special").zero? ? 'não registrado' : @order.calculate_value("special")}", 
+                                value: @order.calculate_value("special"), class: 'radio' %>
+                <%= form.radio_button :value,  @order.calculate_value("special"), class: 'radio', 
+                                      disabled: @order.calculate_value("special").zero? %>
+                
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :payment_method_id, class: 'label' %>
+              <div class="control">
+                <%= form.select :payment_method_id, @order.event.buffet.payment_methods.map { |pm| [pm.humanized_method_name, pm.id] }, 
+                              { prompt: 'Selecione um metodo de pagamento' }, class: 'select' %>
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :extra_fee, class: 'label' %>
+              <div class="control">
+                <%= form.number_field :extra_fee, class: 'input' %>
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :discount, class: 'label' %>
+              <div class="control">
+                <%= form.number_field :discount, class: 'input' %>
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :description, class: 'label' %>
+              <div class="control">
+                <%= form.text_area :description, class: 'textarea' %>
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :expiration_date, class: 'label' %>
+              <div class="control">
+                <%= form.date_field :expiration_date, class: 'input' %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= form.submit class: 'button is-primary' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light is-small' %>
+    <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light is-small' %>
+  </div>
 </div>

@@ -14,10 +14,8 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
-    @event = Event.new(event_params)
-    @event.buffet = current_buffet_owner.buffet
     feature_ids = params[:event][:feature_ids].reject(&:blank?)
-    if @event.save
+    if @event.update(event_params)
       @event.features.destroy_all
       if feature_ids.any?
         feature_ids.each do |id|

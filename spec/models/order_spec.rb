@@ -17,7 +17,7 @@ RSpec.describe Order, type: :model do
     end
 
     it 'false when date is expired' do
-      order = Order.new(date: 1.day.ago)
+      order = Order.new(date: 2.day.ago)
       order.valid?
 
       expect(order.errors.include?(:date)).to be true

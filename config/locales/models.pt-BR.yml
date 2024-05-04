@@ -1,6 +1,7 @@
 pt-BR:
   activerecord:
     models:
+      service_proposal: Proposta de serviço
       order: Pedido
       customer: Cliente
       event_price: Preço do evento
@@ -11,6 +12,18 @@ pt-BR:
       event: Evento
       event_category: Tipo de evento
     attributes:
+      service_proposal:
+        value: Valor estimado
+        payment_method_id: Metodo de pagamento
+        extra_fee: Taxa extra
+        discount: Desconto
+        description: Descrição
+        expiration_date: Valido até
+        status:
+          waiting: Aguardando confirmação do cliente
+          rejected: Rejeitado, Aguardando nova proposta
+          confirmed: Proposta aceita
+          canceled: Proposta cancelada
       order:
         people_count: Numero de pessoas
         date: Data
@@ -18,6 +31,9 @@ pt-BR:
         address: Endereço
         status:
           waiting: Aguardando avaliação do buffet
+          negotiating: Proposta em negociação
+          confirmed: Pedido confirmado
+          canceled: Pedido cancelado
       event_price: 
         base_value: Valor base
         extra_per_person: Adicional por pessoa

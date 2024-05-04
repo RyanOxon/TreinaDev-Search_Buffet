@@ -21,7 +21,6 @@ describe "User orders a event" do
       expect(current_path).to eq new_customer_session_path 
       
     end
-    
 
     it "from event details" do
       load_categories
@@ -82,7 +81,7 @@ describe "User orders a event" do
       click_on 'Casamento Galaxy Buffet'
       click_on 'Criar um pedido'
       fill_in "Numero de pessoas",	with: "20"
-      fill_in "Data",	with: "09/09/2024"
+      fill_in "Data",	with: "#{1.year.from_now}"
       fill_in "Detalhes",	with: "Insira detalhes aqui..." 
       click_on "Enviar Pedido"
 
@@ -90,7 +89,7 @@ describe "User orders a event" do
       expect(page).to have_content "Pedido: ABC12345"
       expect(page).to have_content 'Status do pedido: Aguardando avaliação do buffet'
       expect(page).to have_content 'Evento para 20 pessoas'
-      expect(page).to have_content 'Na data: 09/09/2024'
+      expect(page).to have_content "Na data: #{I18n.localize(Order.last.date)}"
       expect(page).to have_content 'Endereço: Rua Estrelas, 123'
       expect(page).to have_content 'Insira detalhes aqui...'
       expect(page).to have_link "Voltar para Casamento Galaxy Buffet"
@@ -123,7 +122,7 @@ describe "User orders a event" do
       click_on 'Casamento Galaxy Buffet'
       click_on 'Criar um pedido'
       fill_in "Numero de pessoas",	with: "20"
-      fill_in "Data",	with: "09/09/2024"
+      fill_in "Data",	with: "#{1.year.from_now}"
       fill_in "Detalhes",	with: "Insira detalhes aqui..."
       fill_in "Endereço", with: "Rua das bolinhas, 123"
       click_on "Enviar Pedido"
@@ -132,7 +131,7 @@ describe "User orders a event" do
       expect(page).to have_content "Pedido: ABC12345"
       expect(page).to have_content 'Status do pedido: Aguardando avaliação do buffet'
       expect(page).to have_content 'Evento para 20 pessoas'
-      expect(page).to have_content 'Na data: 09/09/2024'
+      expect(page).to have_content "Na data: #{I18n.localize(Order.last.date)}"
       expect(page).to have_content 'Endereço: Rua das bolinhas, 123'
       expect(page).to have_content 'Insira detalhes aqui...'
       expect(page).to have_link "Voltar para Casamento Galaxy Buffet"
