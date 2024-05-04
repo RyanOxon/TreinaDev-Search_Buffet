@@ -142,7 +142,7 @@ describe "User view orders" do
       expect(page).to have_content 'Nenhum pedido em aberto'
     end
 
-    it "show waiting orders separated" do
+    it "show waiting orders as open orders" do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
@@ -159,6 +159,38 @@ describe "User view orders" do
       customer_1 = Customer.create!(cpf: 52727228090, email: 'ra@fael.com', password: 'password' )
       order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer)
       order_1 = Order.create!(date: 6.months.from_now, people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1, status: 2)
+      login_as user, scope: :buffet_owner
+
+      visit root_path
+      within 'nav' do
+        click_on 'Pedidos'
+      end
+
+      expect(page).not_to have_content 'Nenhum pedido em aberto'
+      expect(page).to have_content 'Pedidos em aberto'
+      expect(page).to have_content "Pedido #{order.code}"
+      expect(page).to have_content 'Pedidos fechados'
+      expect(page).to have_content "Pedido #{order_1.code}"
+      
+    end
+
+    it "show negotiating orders as open orders" do
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: false, buffet: buffet)
+      customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+      customer_1 = Customer.create!(cpf: 52727228090, email: 'ra@fael.com', password: 'password' )
+      order = Order.create!(date: 1.year.from_now, people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer, status: 1)
+      order_1 = Order.create!(date: 6.months.from_now, people_count: 40, details: "Insira detalhes aqui...", event: event, customer: customer_1, status: 3)
       login_as user, scope: :buffet_owner
 
       visit root_path

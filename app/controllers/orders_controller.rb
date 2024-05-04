@@ -2,6 +2,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create]
   before_action :set_event, only: [:new, :create]
 
+  def accept_proposal
+    @order = Order.find(params[:id])
+    @order.update!(status: "confirmed")
+    @order.service_proposal.update!(status: "confirmed")
+    flash[:notice] = "Proposta aceita, o evento será realizado"
+    redirect_to request.referrer || root_url
+  end
+
   def index
     if customer_signed_in?
       orders = current_customer.orders
@@ -10,8 +18,8 @@ class OrdersController < ApplicationController
     else
       redirect_to root_path
     end
-    @open_orders = orders.where(status: 0)
-    @closed_orders = orders.where.not(status: 0)
+    @open_orders = orders.where(status: [0, 1] )
+    @closed_orders = orders.where.not(status: [0, 1])
   end
 
   def show

@@ -9,6 +9,7 @@
 <div class="box" >
   <div class="content" >
     <div class="columns">
+
       <div class="column" >
         <p>
           Pedido: <%= @order.code %><br>
@@ -31,10 +32,22 @@
             Status: <%= @order.service_proposal.humanized_status_name %>
 
           </p>
+
+          
+          <% if customer_signed_in? && current_customer == @order.customer %>
+            <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small' %> |
+            <%= link_to "Recusar proposta", @order, class: 'button is-warning is-light is-small' %>
+          <% end %>
+          
         <% end %>
+        <% if customer_signed_in? && current_customer == @order.customer %>
+          <%= link_to "Cancelar pedido", @order, class: 'button is-danger is-small' %> |
+
+        <% end %>
+
       </div>
       
-      <% if buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
+      <% if (@order.waiting? || @order.negotiating? ) && buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
         <div class="column">
           <%= form_with(model: [@order, service_proposal = @order.service_proposal.present? ? @order.service_proposal : ServiceProposal.new ], html: { class: 'box' }) do |form| %>
             <div class="field">
