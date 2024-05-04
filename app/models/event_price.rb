@@ -1,7 +1,7 @@
 class EventPrice < ApplicationRecord
   belongs_to :event
 
-  validates :price_type, presence: true
+  validates :price_type, :base_value, :extra_per_person, :extra_per_hour, presence: true
 
   enum price_type: {standard: 0, special: 1}
 

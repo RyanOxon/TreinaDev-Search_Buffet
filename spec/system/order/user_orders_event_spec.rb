@@ -138,15 +138,111 @@ describe "User orders a event" do
       expect(page).to have_link "Voltar para Galaxy Buffet"
     end
 
-    xit "with incomplete data" do
+    it "with incomplete data" do
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      Event.create!(name: 'Corporativo Galaxy Buffet', description: 'Buffet para eventos corporativo',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'Comida, comida, comida, comida, bebida, bebida', event_category: EventCategory.find_by(category: "corporate"),
+                          exclusive_address: true, buffet: buffet)
+      customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+      allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
+      login_as customer, scope: :customer
+
+      visit root_path
+      click_on 'Galaxy Buffet'
+      click_on 'Casamento Galaxy Buffet'
+      click_on 'Criar um pedido'
+      fill_in "Numero de pessoas",	with: ""
+      fill_in "Data",	with: ""
+      fill_in "Detalhes",	with: "Insira detalhes aqui..."
+      click_on "Enviar Pedido"
+
+      expect(page).to have_content 'Erro ao criar pedido'
+      expect(page).to have_content 'Numero de pessoas não pode ficar em branco'
+      expect(page).to have_content 'Data não pode ficar em branco'
+
       
     end
 
-    xit "with more people than max capacity" do
+    it "with more people than max capacity" do
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      Event.create!(name: 'Corporativo Galaxy Buffet', description: 'Buffet para eventos corporativo',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'Comida, comida, comida, comida, bebida, bebida', event_category: EventCategory.find_by(category: "corporate"),
+                          exclusive_address: true, buffet: buffet)
+      customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+      allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
+      login_as customer, scope: :customer
+
+      visit root_path
+      click_on 'Galaxy Buffet'
+      click_on 'Casamento Galaxy Buffet'
+      click_on 'Criar um pedido'
+      fill_in "Numero de pessoas",	with: "45"
+      fill_in "Data",	with: "#{1.year.from_now}"
+      fill_in "Detalhes",	with: "Insira detalhes aqui..."
+      click_on "Enviar Pedido"
+
+      expect(page).to have_content 'Erro ao criar pedido'
+      expect(page).to have_content 'Numero de pessoas não pode exceder capacidade do evento'
       
     end
     
-    xit "with expired date" do
+    it "with expired date" do
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: false, buffet: buffet)
+      Event.create!(name: 'Corporativo Galaxy Buffet', description: 'Buffet para eventos corporativo',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'Comida, comida, comida, comida, bebida, bebida', event_category: EventCategory.find_by(category: "corporate"),
+                          exclusive_address: true, buffet: buffet)
+      customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+      allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
+      login_as customer, scope: :customer
+
+      visit root_path
+      click_on 'Galaxy Buffet'
+      click_on 'Casamento Galaxy Buffet'
+      click_on 'Criar um pedido'
+      fill_in "Numero de pessoas",	with: "20"
+      fill_in "Data",	with: "#{1.year.ago}"
+      fill_in "Detalhes",	with: "Insira detalhes aqui..."
+      fill_in "Endereço", with: "Rua das bolinhas, 123"
+      click_on "Enviar Pedido"
+
+      expect(page).to have_content "Erro ao criar pedido"
+      expect(page).to have_content "Data deve ser futura"
       
     end
     

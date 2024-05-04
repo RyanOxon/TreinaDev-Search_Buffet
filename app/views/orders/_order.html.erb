@@ -1,0 +1,10 @@
+<div>
+  <%= link_to order_path(order.id) do %>
+    <p>
+      <%= "Pedido #{order.code}" %> <br>
+      <%= "Evento: #{order.event.name}" %> <br>
+      <%= "Status: #{order.humanized_status_name}" %> <br>
+      <%= "Data: #{I18n.localize(order.date)}" %>
+    </p>
+  <% end %>
+</div>

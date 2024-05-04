@@ -95,7 +95,38 @@ describe 'buffet owner set prices to his event' do
       expect(page).to have_content 'Adicional por hora: 1000'
     end
 
-    xit 'with incomplete data' do
+    it 'with incomplete data' do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
+                            min_capacity: 20, max_capacity: 40, default_duration: 240,
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                            exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      login_as user, scope: :buffet_owner
+      
+      visit root_path
+      within 'nav' do
+        click_on 'Lista de Eventos'
+      end
+      click_on 'Eventinho'
+      click_on 'Definir preço padrão'
+      fill_in 'Valor base',	with: '' 
+      fill_in 'Adicional por pessoa',	with: '100' 
+      fill_in 'Adicional por hora', with: '1000'
+      click_on 'Definir Valor'
+
+      expect(page).to have_content 'Erro ao ajustar valor'
+      expect(page).to have_content 'Valor base não pode ficar em branco'
     end
     
     
@@ -171,8 +202,38 @@ describe 'buffet owner set prices to his event' do
       expect(page).to have_content 'Adicional por hora: 1500'
     end
     
-    xit 'with incomplete data' do
+    it 'with incomplete data' do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
+                            min_capacity: 20, max_capacity: 40, default_duration: 240,
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                            exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      login_as user, scope: :buffet_owner
       
+      visit root_path
+      within 'nav' do
+        click_on 'Lista de Eventos'
+      end
+      click_on 'Eventinho'
+      click_on 'Definir preço especial'
+      fill_in 'Valor base',	with: '' 
+      fill_in 'Adicional por pessoa',	with: '100' 
+      fill_in 'Adicional por hora', with: '1000'
+      click_on 'Definir Valor'
+
+      expect(page).to have_content 'Erro ao ajustar valor'
+      expect(page).to have_content 'Valor base não pode ficar em branco'
     end
   end
 

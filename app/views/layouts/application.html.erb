@@ -22,17 +22,17 @@
             <%= link_to 'Lista de Eventos', events_path, class:"button is-ghost", style:"color: lightsteelblue" %>
             <%= link_to 'Pedidos', orders_path, class:"button is-ghost", style:"color: lightsteelblue" %>
           <% else %>
-            <%= form_with(url: search_buffets_path, method: :get, class: "field has-addons") do |f| %>
-              <div class="control is-expanded">
-                <%= f.text_field :query, placeholder: 'Buscar Buffet', class: 'input' %>
-              </div>
-              <div class="control">
-                <%= f.submit 'Buscar', class: 'button is-white is-outlined' %>
+            <%= form_with(url: search_buffets_path, method: :get) do |f| %>
+              <div class="field has-addons">
+                <div class="control is-expanded">
+                  <%= f.text_field :query, placeholder: 'Buscar Buffet', class: 'input' %>
+                </div>
+                <div class="control">
+                  <%= f.submit 'Buscar', class: 'button is-white is-outlined' %>
+                </div>
               </div>
             <% end %>
-            <div class="control"> 
-              <%= link_to 'Meus pedidos', orders_path %>
-            </div>
+              <%= link_to 'Meus pedidos', orders_path, class:"button is-ghost is-white", style:"color: lightsteelblue" if customer_signed_in? %>
           <% end %>
         </div>
 

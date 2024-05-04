@@ -5,16 +5,7 @@
       <p> Pedidos em aberto</p>
       
       <% @open_orders.each do |order| %>
-        <div>
-          <%= link_to order_path(order.id) do %>
-            <p>
-              <%= "Pedido #{order.code}" %> <br>
-              <%= "Evento: #{order.event.name}" %> <br>
-              <%= "Status: #{order.humanized_status_name}" %> <br>
-              <%= "Data: #{I18n.localize(order.date)}" %>
-            </p>
-          <% end %>
-        </div>
+        <%= render order  %>
       <% end %>
 
     <% else %>
@@ -26,15 +17,7 @@
     <div class="box" >
       <p> Pedidos fechados</p>
       <% @closed_orders.each do |order| %>
-        <div>
-          <%= link_to order_path(order.id) do %>
-            <p>
-              <%= "Pedido #{order.code}" %> <br>
-              <%= "Status: #{order.humanized_status_name}" %> <br>
-              <%= "Data: #{I18n.localize(order.date)}" %>
-            </p>
-          <% end %>
-        </div>
+        <%= render order  %>
       <% end %>
     </div>
   <% end %>

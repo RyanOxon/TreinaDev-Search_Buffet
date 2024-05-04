@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
     elsif buffet_owner_signed_in?
       orders = current_buffet_owner.buffet.orders
     else
-      redirect_to root_path
+      return redirect_to root_path
     end
     @open_orders = orders.where(status: [0, 1] )
     @closed_orders = orders.where.not(status: [0, 1])
@@ -34,10 +34,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.event = @event
-    if @order.save!
+    if @order.save()
       redirect_to @order, notice: 'Pedido enviado com sucesso'
     else
-      flash.now[:alert] = 'Erro ao enviar Pedido'
+      flash.now[:alert] = 'Erro ao criar pedido'
       render :new
     end
   end

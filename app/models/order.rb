@@ -6,6 +6,7 @@ class Order < ApplicationRecord
 
   validates :date, :people_count, presence: true
   validate :date_is_future
+  validate :people_count_within_limit
 
   enum status: { waiting: 0, negotiating: 1, confirmed: 2, canceled: 3 }
 
@@ -24,6 +25,13 @@ class Order < ApplicationRecord
   end
 
   private 
+
+  def people_count_within_limit
+    if self.people_count.present? && self.people_count > self.event.max_capacity
+      self.errors.add(:people_count, "não pode exceder capacidade do evento")
+    end
+    
+  end
 
   def date_is_future
     if self.date.present? && self.date < Date.today

@@ -1,11 +1,11 @@
-<% if @event.errors.any? %>
+<% if @order.errors.any? %>
   <article class="message">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
     <div class="message-body">
       <ul>
-        <% @event.errors.full_messages.each do |msg| %>
+        <% @order.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>

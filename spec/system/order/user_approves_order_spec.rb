@@ -88,7 +88,7 @@ describe "User approves order" do
       expect(page).to have_content "Status do pedido: Proposta em negociação"
       expect(page).not_to have_content "Status do pedido: Aguardando avaliação do buffet"
       expect(page).to have_content "Proposta atual"
-      expect(page).to have_content "Valor: #{ServiceProposal.last.get_real_value}"
+      expect(page).to have_content "Valor da proposta: #{ServiceProposal.last.get_real_value}"
       expect(page).to have_content "Taxa extra: 0"
       expect(page).to have_content "Desconto: 250"
       expect(page).to have_content "Motivo: 10% de desconto a vista"
@@ -231,6 +231,9 @@ describe "User approves order" do
       expect(page).to have_content "Proposta aceita, o evento será realizado"
       expect(page).to have_content "Status do pedido: Pedido confirmado"
       expect(page).to have_content "Status: Proposta aceita"
+      expect(page).not_to have_link "Aceitar proposta"
+      expect(page).not_to have_link "Recusar proposta"
+      expect(page).not_to have_link "Cancelar pedido" 
       
     end 
   end

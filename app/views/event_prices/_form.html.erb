@@ -1,3 +1,18 @@
+<% if @event_price.errors.any? %>
+  <article class="message">
+    <div class="message-header">
+      <p>Verifique os erros abaixo</p>
+    </div>
+    <div class="message-body">
+      <ul>
+        <% @event_price.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>
+
 <%= form_with(model: @event_price) do |form| %>
   <div class="field">
     <%= form.label :base_value %>

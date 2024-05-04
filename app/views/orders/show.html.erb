@@ -10,7 +10,7 @@
   <div class="content" >
     <div class="columns">
 
-      <div class="column" >
+      <div class="column is-one-third" >
         <p>
           Pedido: <%= @order.code %><br>
           Status do pedido: <%= @order.humanized_status_name %><br>
@@ -21,87 +21,35 @@
         </p>
         
         <% if @order.service_proposal.present? %>
-        <hr>
-          <p>
-            Proposta atual <br>
-            Valor: <%= @order.service_proposal.get_real_value %> <br>
-            Taxa extra: <%= @order.service_proposal.extra_fee %> <br>
-            Desconto: <%= @order.service_proposal.discount %> <br>
-            Motivo: <%= @order.service_proposal.description %> <br>
-            Proposta valida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
-            Status: <%= @order.service_proposal.humanized_status_name %>
+          <div class="box" >
+            <p>
+              <strong>Proposta atual</strong> <br>
+              <strong>Valor da proposta:</strong> <%= @order.service_proposal.get_real_value %> <br>
+              Taxa extra: <%= @order.service_proposal.extra_fee %> <br>
+              Desconto: <%= @order.service_proposal.discount %> <br>
+              Motivo: <%= @order.service_proposal.description %> <br>
+              Proposta valida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
+              Status: <%= @order.service_proposal.humanized_status_name %>
 
-          </p>
+            </p>
 
-          
-          <% if customer_signed_in? && current_customer == @order.customer %>
-            <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small' %> |
-            <%= link_to "Recusar proposta", @order, class: 'button is-warning is-light is-small' %>
-          <% end %>
+            <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
+              <div class="buttons is-grouped">
+              <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small' %>
+              <%= link_to "Recusar proposta", @order, class: 'button is-warning is-light is-small' %>
+              </div>
+            <% end %>
+          </div>
           
         <% end %>
-        <% if customer_signed_in? && current_customer == @order.customer %>
-          <%= link_to "Cancelar pedido", @order, class: 'button is-danger is-small' %> |
-
+        <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
+            <%= link_to "Cancelar pedido", @order, class: 'button is-danger is-small' %> 
         <% end %>
 
       </div>
       
       <% if (@order.waiting? || @order.negotiating? ) && buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
-        <div class="column">
-          <%= form_with(model: [@order, service_proposal = @order.service_proposal.present? ? @order.service_proposal : ServiceProposal.new ], html: { class: 'box' }) do |form| %>
-            <div class="field">
-              <%= form.label :value, class: 'label' %>
-              <div class="control">
-                <%= form.label :value, "Valor padrão:  #{@order.calculate_value("standard").zero? ? 'não registrado' : @order.calculate_value("standard")}", 
-                                value: @order.calculate_value("standard"), class: 'radio' %>
-                <%= form.radio_button :value, @order.calculate_value("standard"), class: 'radio', 
-                                      disabled: @order.calculate_value("standard").zero? %>
-                <%= form.label :value, "Valor especial: #{@order.calculate_value("special").zero? ? 'não registrado' : @order.calculate_value("special")}", 
-                                value: @order.calculate_value("special"), class: 'radio' %>
-                <%= form.radio_button :value,  @order.calculate_value("special"), class: 'radio', 
-                                      disabled: @order.calculate_value("special").zero? %>
-                
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :payment_method_id, class: 'label' %>
-              <div class="control">
-                <%= form.select :payment_method_id, @order.event.buffet.payment_methods.map { |pm| [pm.humanized_method_name, pm.id] }, 
-                              { prompt: 'Selecione um metodo de pagamento' }, class: 'select' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :extra_fee, class: 'label' %>
-              <div class="control">
-                <%= form.number_field :extra_fee, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :discount, class: 'label' %>
-              <div class="control">
-                <%= form.number_field :discount, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :description, class: 'label' %>
-              <div class="control">
-                <%= form.text_area :description, class: 'textarea' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :expiration_date, class: 'label' %>
-              <div class="control">
-                <%= form.date_field :expiration_date, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <div class="control">
-                <%= form.submit class: 'button is-primary' %>
-              </div>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'proposal_form' %>
       <% end %>
     </div>
     <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light is-small' %>
