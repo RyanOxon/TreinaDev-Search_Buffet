@@ -49,7 +49,6 @@ describe 'user authenticate as customer' do
       
     end
     
-
   end
 
   context 'Sign in' do

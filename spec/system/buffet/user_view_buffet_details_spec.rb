@@ -53,7 +53,7 @@ describe 'user view buffet details' do
       
     end
 
-    it "and cannot force view others buffet" do
+    it "only if authorized" do
       load_payments
       load_features
       load_categories
@@ -160,6 +160,7 @@ describe 'user view buffet details' do
       expect(page).to have_content "Dinheiro"
       
     end
+
     it "from searching city" do
       load_payments
       load_features
@@ -198,6 +199,7 @@ describe 'user view buffet details' do
       expect(page).to have_content "Dinheiro"
       
     end
+    
     it "from searching event category" do
       load_payments
       load_features

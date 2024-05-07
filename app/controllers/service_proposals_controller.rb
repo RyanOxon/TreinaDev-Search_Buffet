@@ -5,7 +5,7 @@ class ServiceProposalsController < ApplicationController
     @service_proposal = ServiceProposal.new(proposal_params)
     @service_proposal.order = @order
     if @service_proposal.save
-      @order.update!(status: 1)
+      @order.negotiating!
       redirect_to @service_proposal.order, notice: "Proposta enviada, aguardando confirmação do cliente"
     else
       render "orders/show"
@@ -14,7 +14,7 @@ class ServiceProposalsController < ApplicationController
 
   def update
     @order = Order.find(params[:order_id])
-    if @service_proposal.update(proposal_params, status: 0)
+    if @service_proposal.update(proposal_params, status:'waiting')
       redirect_to @service_proposal.order, notice: "Proposta atualizada, aguardando confirmação do cliente"
     else
       render "orders/show"

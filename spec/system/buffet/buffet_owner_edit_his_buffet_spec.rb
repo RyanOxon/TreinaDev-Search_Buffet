@@ -140,5 +140,14 @@ describe "Buffet owner edit his buffet" do
     expect(page).to have_content "Erro ao atualizar Buffet"
     expect(page).to have_content  "Metodos de Pagamento não pode ficar em branco"
     
-  end 
+  end
+
+  xit "only if authenticated" do
+
+  end
+
+  xit "only if authorized" do
+
+  end
+
 end

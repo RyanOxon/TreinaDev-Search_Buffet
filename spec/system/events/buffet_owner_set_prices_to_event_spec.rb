@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'buffet owner set prices to his event' do
-  it 'and is not sign in' do
+  it 'only if authenticated' do
     load_payments
     load_features
     load_categories

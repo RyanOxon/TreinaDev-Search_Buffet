@@ -126,4 +126,8 @@ describe "buffet owner edit one of his events" do
     
   end
 
+  xit "only if authorized" do
+      
+  end
+
 end

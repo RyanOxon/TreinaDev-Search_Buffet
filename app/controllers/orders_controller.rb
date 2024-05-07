@@ -1,13 +1,28 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: [:new, :create]
+  before_action :authenticate_customer!, only: [:new, :create, :accept_proposal]
   before_action :set_event, only: [:new, :create]
 
   def accept_proposal
     @order = Order.find(params[:id])
-    @order.update!(status: "confirmed")
-    @order.service_proposal.update!(status: "confirmed")
+    @order.confirmed!
+    @order.service_proposal.confirmed!
     flash[:notice] = "Proposta aceita, o evento será realizado"
-    redirect_to request.referrer || root_url
+    redirect_to request.referrer
+  end
+
+  def reject_proposal
+    @order = Order.find(params[:id])
+    @order.service_proposal.rejected!
+    flash[:notice] = "Proposta recusada, aguardando nova proposta"
+    redirect_to request.referrer
+  end
+
+  def cancel
+    @order = Order.find(params[:id])
+    @order.canceled!
+    @order.service_proposal.canceled!
+    flash[:alert] = "Proposta cancelada, negociação encerrada"
+    redirect_to request.referrer
   end
 
   def index
@@ -18,8 +33,8 @@ class OrdersController < ApplicationController
     else
       return redirect_to root_path
     end
-    @open_orders = orders.where(status: [0, 1] )
-    @closed_orders = orders.where.not(status: [0, 1])
+    @open_orders = orders.where(status: ['waiting', 'negotiating'] )
+    @closed_orders = orders.where.not(status: ['waiting', 'negotiating'] )
   end
 
   def show

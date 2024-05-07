@@ -183,6 +183,9 @@ describe "buffet Owner register buffet" do
     expect(page).to have_content "Codigo do estado não possui o tamanho esperado"
     
   end
-  
+
+  xit "only if authenticated" do
+
+  end
 
 end

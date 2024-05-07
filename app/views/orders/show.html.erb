@@ -34,16 +34,18 @@
             </p>
 
             <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
-              <div class="buttons is-grouped">
-              <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small' %>
-              <%= link_to "Recusar proposta", @order, class: 'button is-warning is-light is-small' %>
-              </div>
+              <% if @order.service_proposal.waiting? %>
+                <div class="buttons is-grouped">
+                  <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small', method: :post %>
+                  <%= link_to "Recusar proposta", reject_proposal_order_path(@order), class: 'button is-warning is-light is-small', method: :post %>
+                </div>
+              <% end %>
             <% end %>
           </div>
           
         <% end %>
         <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
-            <%= link_to "Cancelar pedido", @order, class: 'button is-danger is-small' %> 
+            <%= link_to "Cancelar pedido", cancel_order_path(@order), class: 'button is-danger is-small', method: :post , data: { confirm: 'Você tem certeza?' } %> 
         <% end %>
 
       </div>

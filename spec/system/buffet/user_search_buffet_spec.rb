@@ -10,7 +10,7 @@ describe 'User search buffet' do
       
     end
 
-    it 'and found a buffet' do
+    it 'and found buffets by name' do
       load_payments
       load_features
       load_categories
@@ -50,7 +50,7 @@ describe 'User search buffet' do
       expect(page).not_to have_content  'Comida a kilo'  
     end
 
-    it "and found a buffet by event type" do
+    it "and found buffets by event type" do
       load_payments
       load_features
       load_categories
@@ -104,6 +104,10 @@ describe 'User search buffet' do
       expect(page).to have_content 'Volcano Buffets'
       expect(page).not_to have_content  'Comida a kilo'  
       
+    end
+
+    xit "and found buffets by city" do
+
     end
 
     it 'go directly to buffet if brand name matches exactly' do

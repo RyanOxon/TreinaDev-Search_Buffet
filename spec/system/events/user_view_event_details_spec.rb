@@ -86,6 +86,7 @@ describe 'user view event details' do
       expect(page).to have_content 'Endereço Exclusivo: Sim'
 
     end
+
   end
 
   context '#visitor' do

@@ -133,6 +133,10 @@ describe "Buffet owner edit event prices" do
 
       
     end
+
+    xit "only if authorized" do
+
+    end
   end
   
   context "#special price" do
@@ -263,6 +267,10 @@ describe "Buffet owner edit event prices" do
 
       expect(page).to have_content "Erro ao ajustar valor"
       expect(page).to have_content "Valor base não pode ficar em branco"
+      
+    end
+
+    xit "only if authorized" do
       
     end
   end

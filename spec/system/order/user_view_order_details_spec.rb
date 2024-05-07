@@ -66,6 +66,10 @@ describe "user view order details" do
       expect(page).to have_content "Existem outros pedidos na mesma data! Verifique"
       
     end
+
+    xit "only if authorized" do
+
+    end
     
   end
 end

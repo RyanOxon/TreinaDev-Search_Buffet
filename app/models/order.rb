@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
-  before_create :generate_code
+  before_validation :generate_code, on: :create
   belongs_to :event
   belongs_to :customer
   has_one :service_proposal
 
-  validates :date, :people_count, presence: true
+  validates :code, :date, :people_count, presence: true
   validate :date_is_future
   validate :people_count_within_limit
 

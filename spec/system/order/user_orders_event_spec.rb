@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "User orders a event" do
   context "#customer" do
-    it "must be authenticated" do
+    it "only if authenticated" do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 

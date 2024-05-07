@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :index] do
     resources :service_proposals, only: [:create, :update]
     member do
-      get :accept_proposal
+      post :accept_proposal
+      post :reject_proposal
+      post :cancel
     end
   end
 
