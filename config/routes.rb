@@ -26,4 +26,14 @@ Rails.application.routes.draw do
 
   resources :event_prices, only: [:edit, :update, :new, :create]
 
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:show, :index] do
+        resources :events, only: [:index] do
+          get 'availability', on: :member
+        end
+      end
+    end
+  end
 end

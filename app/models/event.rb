@@ -12,4 +12,14 @@ class Event < ApplicationRecord
   
   validates :name, uniqueness: true
 
+  def date_available?(date)
+    proposals = buffet.orders.where(date: date).where(status: ['negotiating', 'confirmed'])
+    return false if proposals.any?
+    true
+  end
+
+  def capacity_available?(num_people)
+    return num_people.to_i <= max_capacity
+  end
+
 end

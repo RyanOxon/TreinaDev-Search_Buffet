@@ -10,4 +10,5 @@ class PaymentMethod < ApplicationRecord
   def humanized_method_name
     I18n.t("activerecord.attributes.payment_method.method.#{self.method}")
   end
+
 end

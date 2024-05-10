@@ -1,24 +1,24 @@
-# README
+# Cade Buffet? App and API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- Ruby version: 3.2.0
+- Database initialization: Run `rails db:seed` to populate the database with the necessary categories, payment methods, and event features.
 
-* Ruby version
+## API Endpoints
 
-* System dependencies
+### Buffets
 
-* Configuration
+- `GET /api/v1/buffets`: Returns a list of all registered buffets with their ID, name, city, state_code, and current accepted payment methods. You can pass a `search` parameter to search buffets by name, like so: `/api/v1/buffets/?search=<search_term>`.
 
-* Database creation
+### Buffet Details
 
-* Database initialization
+- `GET /api/v1/buffets/:buffet_id`: Returns all available information about a specific buffet, including its accepted payment methods.
 
-* How to run the test suite
+### Buffet Events
 
-* Services (job queues, cache servers, search engines, etc.)
+- `GET /api/v1/buffets/:buffet_id/events`: Returns a detailed list of all events that a specific buffet is offering.
 
-* Deployment instructions
+### Buffet Availability
 
-* ...
+- `GET /api/v1/buffets/:buffet_id/events/:event_id/availability?date=<DATE>&num_people=<INT>`: Checks if a specific buffet is available on a given date to hold an event and can support a certain number of people. Both `date` and `num_people` parameters are required.
