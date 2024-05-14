@@ -14,11 +14,13 @@
                 <strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %><br>
                 <strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %><br>
                 <strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %><br>
-                <strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %><br>
-                <strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %><br>
-                <strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %><br>
-                <strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %><br>
-                <strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %><br>
+                <address>
+                  <strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %><br>
+                  <strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %><br>
+                  <strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %><br>
+                  <strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %><br>
+                  <strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %><br>
+                </address> <br>
                 <strong><%= Buffet.human_attribute_name(:description) %> :</strong> <%= @buffet.description %><br>
                 <strong>Métodos de Pagamento:</strong>
               </p>
@@ -43,8 +45,13 @@
                     <%= link_to event_path(event) do %>
                       <article class="media is-centered">  
                         <figure class="media-left">
-                          <p class="image is-64x64">
+                          <p class="image is-128x128">
+                            
+                            <% if event.cover_photo %>
+                              <%= image_tag event.cover_photo.image, class: 'image' %>
+                            <% else %>
                             <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                            <% end %>
                           </p>
                         </figure>  
                         <div class="media-content">                  

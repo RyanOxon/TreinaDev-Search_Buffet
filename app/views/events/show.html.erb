@@ -5,7 +5,7 @@
 <div class="box">
   <div class='columns'>
     <div class='column is-two-thirds'>
-      <h1 class="title is-1"><%= @event.name %></h1>
+      <h1 class="title"><%= @event.name %></h1>
       <p class="subtitle"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
       <address>
         <p>Capacidade: mínimo <%= @event.min_capacity %> e máximo <%= @event.max_capacity %></p>
@@ -68,33 +68,75 @@
 <div class="box">
   <h2 class="title is-3">Galeria de Imagens</h2>
   <% if buffet_owner_signed_in? && current_buffet_owner.buffet == @event.buffet %>
-    <%= form_with(model: [@event, HolderImage.new()], html: { class: 'field is-horizontal' }) do |form| %>
-      <div class="field-label is-normal">
-        <%= form.label :image, class: "label" %>
-      </div>
-
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <%= form.file_field :image, accept: 'image/png,image/gif,image/jpeg', class: "file-input" %>
+    <%= form_with(model: [@event, HolderImage.new], html: { class: 'field is-horizontal' }) do |form| %>
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <div class="file has-name">
+                <label class="file-label">
+                  <%= form.file_field :image, class: 'file-input', id: 'file-input' %>
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Escolha um arquivo…
+                    </span>
+                  </span>
+                  <span class="file-name" id="file-name">
+                    Nenhum arquivo selecionado
+                  </span>
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="field-label">
-      </div>
-
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <%= form.submit class: "button is-link" %>
+          <div class="field">
+            <div class="control">
+              <%= form.submit class: 'button is-primary' %>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
   <% end %>
   <div class="columns is-multiline">
-
+    <% @event.holder_images.each do |image| %>
+      <div class="column is-one-quarter" style="<%= "border: 1px solid white; border-radius: 10px " if @event.cover_photo == image %>">
+        <div class="box-<%=image.id%>">
+          <figure class="image is-4by4">
+            <%= image_tag image.image, class: 'image' %>
+          </figure>
+          <% if buffet_owner_signed_in? && current_buffet_owner.buffet == @event.buffet %>
+            <div class="has-text-centered">
+              <div class="buttons mt-2" >
+                <%= button_to 'Remover', event_holder_image_path(@event, image), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small is-outlined' %>
+                <% if @event.cover_photo != image %>
+                  <%= button_to 'Definir como capa', cover_event_path(cover: image.id), method: :post, class: 'button is-info is-small is-outlined' %>
+                <% else %>
+                  <p class= 'button is-info is-small is-outlined'>Capa atual</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('file-input');
+    const fileName = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) {
+        fileName.textContent = file.name;
+      } else {
+        fileName.textContent = 'Nenhum arquivo selecionado';
+      }
+    });
+  });
+</script>

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :events, only: [:edit, :update, :show, :create, :new, :index] do
     resources :orders, only: [:new, :create]
     resources :holder_images, only: [:create, :destroy]
+    member do
+      post :cover
+    end
   end
 
   resources :orders, only: [:show, :index] do

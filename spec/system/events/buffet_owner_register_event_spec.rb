@@ -69,7 +69,7 @@ describe "buffet owner register event" do
     expect(page).not_to have_content "Erro ao cadastrar evento"
     expect(page).to have_content "Tipo de evento: Aniversario"
     expect(page).to have_content "Aniversario para 40 pessoas no precin"
-    expect(page).to have_content "Capacidade: minimo 40 e maximo 80"
+    expect(page).to have_content "Capacidade: mínimo 40 e máximo"
     expect(page).to have_content "4 horas"
     expect(page).to have_content "Melhor pacote para evento de aniversarios..."
     expect(page).to have_content "Comida, comida, comida, comida, bebida, bebida"

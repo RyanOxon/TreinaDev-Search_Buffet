@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :buffet
   belongs_to :event_category
+  belongs_to :cover_photo, class_name: 'HolderImage', optional: true, foreign_key: 'photo_id'
 
   has_many :holder_images, as: :holder, dependent: :destroy
   has_many :event_prices

@@ -83,9 +83,9 @@ describe "Buffet owner edit event prices" do
 
       expect(page).to have_content 'Preço padrão ajustado'
       expect(page).to have_content 'Preço dias de semana'
-      expect(page).to have_content 'Valor base: 15000'
-      expect(page).to have_content 'Adicional por pessoa: 150'
-      expect(page).to have_content 'Adicional por hora: 2500'
+      expect(page).to have_content 'Valor base: R$ 15.000,00'
+      expect(page).to have_content 'Adicional por pessoa: R$ 150,00'
+      expect(page).to have_content 'Adicional por hora: R$ 2.500,00'
       
     end
 
@@ -268,9 +268,9 @@ describe "Buffet owner edit event prices" do
 
       expect(page).to have_content 'Preço especial ajustado'
       expect(page).to have_content 'Preço final de semana e feriados'
-      expect(page).to have_content 'Valor base: 15000'
-      expect(page).to have_content 'Adicional por pessoa: 150'
-      expect(page).to have_content 'Adicional por hora: 2500'
+      expect(page).to have_content 'Valor base: R$ 15.000,00'
+      expect(page).to have_content 'Adicional por pessoa: R$ 150,00'
+      expect(page).to have_content 'Adicional por hora: R$ 2.500,00'
     end
 
     it 'with incomplete data' do

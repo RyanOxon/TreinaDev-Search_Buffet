@@ -90,9 +90,9 @@ describe 'buffet owner set prices to his event' do
       expect(current_path).to eq  event_path(event.id)
       expect(page).to have_content 'Preço padrão ajustado'
       expect(page).to have_content 'Preço dias de semana'
-      expect(page).to have_content 'Valor base: 3000'
-      expect(page).to have_content 'Adicional por pessoa: 100'
-      expect(page).to have_content 'Adicional por hora: 1000'
+      expect(page).to have_content 'Valor base: R$ 3.000,00'
+      expect(page).to have_content 'Adicional por pessoa: R$ 100,00'
+      expect(page).to have_content 'Adicional por hora: R$ 1.000,00'
     end
 
     it 'with incomplete data' do
@@ -197,9 +197,9 @@ describe 'buffet owner set prices to his event' do
       expect(current_path).to eq  event_path(event.id)
       expect(page).to have_content 'Preço especial ajustado'
       expect(page).to have_content 'Preço final de semana e feriados'
-      expect(page).to have_content 'Valor base: 5000'
-      expect(page).to have_content 'Adicional por pessoa: 130'
-      expect(page).to have_content 'Adicional por hora: 1500'
+      expect(page).to have_content 'Valor base: R$ 5.000,00'
+      expect(page).to have_content 'Adicional por pessoa: R$ 130,00'
+      expect(page).to have_content 'Adicional por hora: R$ 1.500,00'
     end
     
     it 'with incomplete data' do

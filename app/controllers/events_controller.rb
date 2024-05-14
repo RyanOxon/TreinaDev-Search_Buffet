@@ -1,7 +1,19 @@
 class EventsController < ApplicationController
   before_action :authenticate_buffet_owner!, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :show]
+  before_action :set_event, only: [:edit, :update, :show, :cover]
   before_action :set_lists, only: [:edit, :update, :new, :create]
+
+  def cover
+    unless params[:cover] && @event.holder_images.exists?(params[:cover])
+      return redirect_to @event, alert: 'Imagem não encontrada' 
+    end
+    cover_photo = @event.holder_images.find(params[:cover])
+    if @event.update(cover_photo: cover_photo)
+      redirect_to @event, notice: 'Capa atualizada com sucesso'
+    else
+      render @event, alert: 'Erro ao atualizar capa'
+    end
+  end
 
   def index
     if buffet_owner_signed_in?
