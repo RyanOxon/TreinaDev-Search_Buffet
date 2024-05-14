@@ -55,8 +55,9 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event).permit(:name, :description, :min_capacity,
-                                                :max_capacity, :default_duration,
-                                                :menu, :event_category_id, :exclusive_address)
+                                  :max_capacity, :default_duration,
+                                  :menu, :event_category_id, :exclusive_address,
+                                  imageable_images_attributes: [:image, :user_id])
   end
 
   def set_event

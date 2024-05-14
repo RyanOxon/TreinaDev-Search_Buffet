@@ -1,16 +1,19 @@
 <div class="content">
   <%= link_to "Retornar para #{@event.buffet.brand_name}", @event.buffet, class:"button is-rounded is-small is-outlined is-danger is-light" %>
 </div>
+
 <div class="box">
   <div class='columns'>
-    <div class='column'>
+    <div class='column is-two-thirds'>
       <h1 class="title is-1"><%= @event.name %></h1>
-      <p class="subtitle "><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
-      <address><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %> <br>
-      <%= "#{@event.default_duration/60} horas"%> <br>
-      <%= @event.description %> <br>
-      <%= @event.menu%> <br>
-      <%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></address>
+      <p class="subtitle"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
+      <address>
+        <p>Capacidade: mínimo <%= @event.min_capacity %> e máximo <%= @event.max_capacity %></p>
+        <p>Duração: <%= @event.default_duration / 60 %> horas</p>
+        <p><%= @event.description %></p>
+        <p><%= @event.menu %></p>
+        <p>Endereço Exclusivo: <%= @event.exclusive_address ? "Sim" : "Não" %></p>
+      </address>
       <div class="content">
         <ul>
           <% @event.features.each do |f| %>
@@ -20,43 +23,78 @@
       </div>
       <hr>
 
-      <div class= 'buttons'>
-        <% if buffet_owner_signed_in? && @event.buffet.buffet_owner == current_buffet_owner %>  
+      <div class='buttons'>
+        <% if buffet_owner_signed_in? && @event.buffet.buffet_owner == current_buffet_owner %>
           <%= link_to 'Editar evento', edit_event_path(@event.id), class:"button is-rounded" %>
-        </div>
-        <div class="field is-horizontal" >
-          <div class="field-body">
-            <div class="field is-grouped">
-              <div class="control">
-                <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
-                                  class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
-              </div>
-              <div class="control">
-                <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
-                                  class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
+      
+
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field is-grouped">
+                <div class="control">
+                  <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
+                                class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
+                </div>
+                <div class="control">
+                  <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
+                                class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <% elsif customer_signed_in? %>
-        <div class='control'>
-          <%= link_to 'Criar um pedido', new_event_order_path(@event.id) %>
-        </div>
-      <% end %>
+          <div class='control'>
+            <%= link_to 'Criar um pedido', new_event_order_path(@event.id), class: "button is-rounded is-link" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="column" >
+    <div class='column is-one-third'>
       <% if @event.event_prices.any? %>
         <% @event.event_prices.each do |price| %>
           <p>
             <%= price.humanized_price_name %>: <br>
-            <%= "Valor base: #{price.base_value}" %> | <br>
-            <%= "Adicional por pessoa: #{price.extra_per_person}" %> |<br>
-            <%= "Adicional por hora: #{price.extra_per_hour}" %> <br> <br>
-            <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class:"button is-rounded" %> <br>
-          
+            <span>Valor base: <%= number_to_currency(price.base_value) %></span> | 
+            <span>Adicional por pessoa: <%= number_to_currency(price.extra_per_person) %></span> | 
+            <span>Adicional por hora: <%= number_to_currency(price.extra_per_hour) %></span> <br><br>
+            <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class:"button is-rounded is-info" %> 
+          </p>
         <% end %>
       <% end %>
     </div>
+  </div>
+</div>
+
+<div class="box">
+  <h2 class="title is-3">Galeria de Imagens</h2>
+  <% if buffet_owner_signed_in? && current_buffet_owner.buffet == @event.buffet %>
+    <%= form_with(model: [@event, HolderImage.new()], html: { class: 'field is-horizontal' }) do |form| %>
+      <div class="field-label is-normal">
+        <%= form.label :image, class: "label" %>
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <%= form.file_field :image, accept: 'image/png,image/gif,image/jpeg', class: "file-input" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-label">
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <%= form.submit class: "button is-link" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="columns is-multiline">
+
   </div>
 </div>
 

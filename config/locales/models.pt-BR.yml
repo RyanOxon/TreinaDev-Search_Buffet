@@ -1,6 +1,7 @@
 pt-BR:
   activerecord:
     models:
+      holder_image: Imagem
       service_proposal: Proposta de serviço
       order: Pedido
       customer: Cliente
@@ -12,6 +13,8 @@ pt-BR:
       event: Evento
       event_category: Tipo de evento
     attributes:
+      holder_image:
+        image: Imagem
       service_proposal:
         value: Valor estimado
         payment_method_id: Metodo de pagamento
