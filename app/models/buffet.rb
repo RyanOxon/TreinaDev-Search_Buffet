@@ -14,7 +14,8 @@ class Buffet < ApplicationRecord
 
 
   def check_same_date_orders(order)
-    self.orders.where(date: order.date).where.not(id: order.id).exists?
+    self.orders.where(date: order.date).where(status: ["waiting", "negotiating"])
+                                      .where.not(id: order.id).exists?
   end
   
 end

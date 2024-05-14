@@ -47,6 +47,9 @@ class EventPricesController < ApplicationController
 
   def set_price
     @event_price = EventPrice.find(params[:id])
+    if buffet_owner_signed_in? && current_buffet_owner.buffet != @event_price.event.buffet
+      redirect_to current_buffet_owner.buffet, alert: 'Acesso não autorizado'
+    end
   end
 
 end

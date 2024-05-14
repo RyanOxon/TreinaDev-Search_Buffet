@@ -137,8 +137,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_214751) do
     t.integer "payment_method_id", null: false
     t.integer "status", default: 0
     t.integer "value"
-    t.integer "extra_fee"
-    t.integer "discount"
+    t.integer "extra_fee", default: 0
+    t.integer "discount", default: 0
     t.string "description"
     t.date "expiration_date"
     t.datetime "created_at", null: false

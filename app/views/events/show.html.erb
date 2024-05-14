@@ -1,4 +1,3 @@
-
 <div class="content">
   <%= link_to "Retornar para #{@event.buffet.brand_name}", @event.buffet, class:"button is-rounded is-small is-outlined is-danger is-light" %>
 </div>
@@ -7,11 +6,11 @@
     <div class='column'>
       <h1 class="title is-1"><%= @event.name %></h1>
       <p class="subtitle "><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
-      <p class="subtitle "><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %></p>
-      <p class="subtitle "><%= "#{@event.default_duration/60} horas"%></p>
-      <p class="subtitle "><%= @event.description %></p>
-      <p class="subtitle "><%= @event.menu%></p>
-      <p class="subtitle"><%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></p>
+      <address><%= "Capacidade: minimo #{@event.min_capacity} e maximo #{@event.max_capacity}" %> <br>
+      <%= "#{@event.default_duration/60} horas"%> <br>
+      <%= @event.description %> <br>
+      <%= @event.menu%> <br>
+      <%= "Endereço Exclusivo: " + (@event.exclusive_address ? "Sim" : "Não") %></address>
       <div class="content">
         <ul>
           <% @event.features.each do |f| %>
@@ -54,7 +53,7 @@
             <%= "Adicional por pessoa: #{price.extra_per_person}" %> |<br>
             <%= "Adicional por hora: #{price.extra_per_hour}" %> <br> <br>
             <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class:"button is-rounded" %> <br>
-          </p>
+          
         <% end %>
       <% end %>
     </div>

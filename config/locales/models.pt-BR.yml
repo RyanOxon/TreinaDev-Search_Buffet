@@ -75,6 +75,8 @@ pt-BR:
           cash: Dinheiro
           credit_card: Cartão de Credito
           debit_card: Cartão de Debito
+          pix: Pix
+          paypal: Paypal
       feature:
         feature:
           alcohol: Bebidas alcoolicas 

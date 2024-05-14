@@ -8,7 +8,7 @@ class Api::V1::BuffetsController < ActionController::API
 
     render json: @buffets.as_json(
                         only: [ :id, :brand_name, :city, :state_code, :description],
-                        include: {payment_methods: {only: [:id, :method]}})
+                        include: {payment_methods: {only: [:id], methods: :humanized_method_name }})
   end
 
   def show
@@ -19,6 +19,6 @@ class Api::V1::BuffetsController < ActionController::API
     render json: @buffet.as_json(
                         only: [ :id, :brand_name, :phone_number, :email, :address,
                          :district, :city, :state_code, :zip_code, :description],
-                        include: {payment_methods: {only: [:id, :method]}})
+                         include: {payment_methods: {only: [:id], methods: :humanized_method_name }})
   end
 end

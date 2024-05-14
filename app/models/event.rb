@@ -12,7 +12,9 @@ class Event < ApplicationRecord
   
   validates :name, uniqueness: true
 
-  def date_available?(date)
+  def date_available?(date_string)
+    date = Date.parse(date_string)
+    return false if date <= Date.today
     proposals = buffet.orders.where(date: date).where(status: ['negotiating', 'confirmed'])
     return false if proposals.any?
     true

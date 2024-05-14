@@ -95,7 +95,12 @@ describe "buffet owner register event" do
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
   
-  xit "only if authenticated" do
+  it "only if authenticated" do
+
+    visit "/events/new"
+
+    expect(current_path).not_to eq "/events/new"
+    expect(page).to have_content "Para continuar, faça login ou registre-se."
 
   end
 end

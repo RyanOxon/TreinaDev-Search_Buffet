@@ -1,23 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe ServiceProposal, type: :model do
-  xit "false when value empty" do
+  it "false when value empty" do
+    proposal = ServiceProposal.new(value: '')
+    proposal.valid?
 
+    expect(proposal.errors.include?(:value)).to be true
   end
 
-  xit "false when extra_fee empty" do
-    
+  it "false when expiration_date empty" do
+    proposal = ServiceProposal.new(expiration_date: '')
+    proposal.valid?
+
+    expect(proposal.errors.include?(:expiration_date)).to be true
   end
 
-  xit "false when discount empty" do
-    
-  end
+  it "false when expiration_date is expired" do
+    proposal = ServiceProposal.new(expiration_date: Date.yesterday)
+    proposal.valid?
 
-  xit "false when expiration_date empty" do
-    
-  end
-
-  xit "false when expiration_date is expired" do
-    
+    expect(proposal.errors.include?(:expiration_date)).to be true
   end
 end

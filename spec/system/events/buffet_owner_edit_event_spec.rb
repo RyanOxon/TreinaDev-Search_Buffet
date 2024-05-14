@@ -126,7 +126,60 @@ describe "buffet owner edit one of his events" do
     
   end
 
-  xit "only if authorized" do
+  it "only if authenticated" do
+    load_features
+    load_categories
+    user = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
+    buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                            district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                            zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                            buffet_owner: user)
+    event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                            min_capacity: 20, max_capacity: 40, default_duration: 240,
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                            exclusive_address: true, buffet: buffet)
+    EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+    
+    visit "/events/#{event.id}/edit"
+
+    expect(current_path).not_to eq "/events/#{event.id}/edit"
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+    
+  end
+  
+  it "only if authorized" do
+    load_payments
+    load_features
+    load_categories
+    user = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
+    user_2 = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
+    buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                            district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                            zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                            buffet_owner: user)
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+    Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
+                            registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                            email: 'atendimento@lava.com', address: 'Rua explosion, 123',
+                            district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
+                            zip_code: '99999-999', description: 'A blast of buffet', 
+                            buffet_owner: user_2)
+    event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                        min_capacity: 20, max_capacity: 40, default_duration: 240,
+                        menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                        exclusive_address: true, buffet: buffet)
+    EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+
+    login_as user_2, scope: :buffet_owner
+
+    visit "/events/#{event.id}/edit"
+
+    expect(current_path).not_to eq "/events/#{event.id}/edit"
+    expect(page).to have_content 'Acesso não autorizado'
       
   end
 

@@ -1,10 +1,9 @@
-
-  <% if buffet_owner_signed_in? && current_buffet_owner.buffet.check_same_date_orders(@order) %>
-    <div class="notification is-warning">
-    <button class="delete"></button>
-      Existem outros pedidos na mesma data! Verifique
-    </div>
-  <% end %>
+<% if buffet_owner_signed_in? && current_buffet_owner.buffet.check_same_date_orders(@order) %>
+  <div class="notification is-warning">
+  <button class="delete"></button>
+    Existem outros pedidos na mesma data! Verifique
+  </div>
+<% end %>
 
 <div class="box" >
   <div class="content" >
@@ -33,11 +32,11 @@
 
             </p>
 
-            <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
+            <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating?) %>
               <% if @order.service_proposal.waiting? %>
                 <div class="buttons is-grouped">
-                  <%= link_to "Aceitar proposta", accept_proposal_order_path(@order), class: 'button is-sucess is-light is-small', method: :post %>
-                  <%= link_to "Recusar proposta", reject_proposal_order_path(@order), class: 'button is-warning is-light is-small', method: :post %>
+                  <%= button_to "Aceitar proposta", accept_proposal_order_path(@order), method: :post, class: 'button is-sucess is-light is-small' %>
+                  <%= button_to "Recusar proposta", reject_proposal_order_path(@order), method: :post, class: 'button is-warning is-light is-small'%>
                 </div>
               <% end %>
             <% end %>
@@ -45,7 +44,7 @@
           
         <% end %>
         <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
-            <%= link_to "Cancelar pedido", cancel_order_path(@order), class: 'button is-danger is-small', method: :post , data: { confirm: 'Você tem certeza?' } %> 
+            <%= button_to "Cancelar pedido", cancel_order_path(@order), method: :post, class: 'button is-danger is-small' , data: { confirm: 'Você tem certeza?' } %> 
         <% end %>
 
       </div>

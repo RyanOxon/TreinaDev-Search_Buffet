@@ -38,7 +38,7 @@ describe "Buffet API" do
       expect(json_response[0]["brand_name"]).to eq  "Galaxy Buffet"
       expect(json_response[0]["city"]).to eq  "Via lactea"
       expect(json_response[0]["state_code"]).to eq  "AA"
-      expect(json_response[0]["payment_methods"][0]["method"]).to eq  "credit_card"
+      expect(json_response[0]["payment_methods"][0]["humanized_method_name"]).to eq  "Cartão de Credito"
       expect(json_response[0].keys).not_to include 'corporate_name'
       expect(json_response[0].keys).not_to include 'registration'
       expect(json_response[0].keys).not_to include 'created_at'
@@ -125,7 +125,7 @@ describe "Buffet API" do
       expect(json_response["state_code"]).to eq 'AA'
       expect(json_response["zip_code"]).to eq '99999-999'
       expect(json_response["description"]).to eq 'Um buffet de outro mundo'
-      expect(json_response["payment_methods"][0]["method"]).to eq  "credit_card"
+      expect(json_response["payment_methods"][0]["humanized_method_name"]).to eq "Cartão de Credito"
       expect(json_response.keys).not_to include 'corporate_name'
       expect(json_response.keys).not_to include 'registration'
       expect(json_response.keys).not_to include 'created_at'
@@ -180,13 +180,13 @@ describe "Buffet API" do
       expect(json_response[0]["menu"]).to eq "um monte de comida"
       expect(json_response[0]["exclusive_address"]).to eq true
       expect(json_response[0]["event_category"]["category"]).to eq "wedding"
-      expect(json_response[0]["features"][0]["feature"]).to eq "alcohol"
-      expect(json_response[0]["features"][1]["feature"]).to eq "decoration"
-      expect(json_response[0]["event_prices"][0]["price_type"]).to eq "standard"
+      expect(json_response[0]["features"][0]["humanized_feature_name"]).to eq "Bebidas alcoolicas"
+      expect(json_response[0]["features"][1]["humanized_feature_name"]).to eq "Decoração"
+      expect(json_response[0]["event_prices"][0]["humanized_price_name"]).to eq "Preço dias de semana"
       expect(json_response[0]["event_prices"][0]["base_value"]).to eq 100000
       expect(json_response[0]["event_prices"][0]["extra_per_person"]).to eq 1000
       expect(json_response[0]["event_prices"][0]["extra_per_hour"]).to eq 20000
-      expect(json_response[0]["event_prices"][1]["price_type"]).to eq "special"
+      expect(json_response[0]["event_prices"][1]["humanized_price_name"]).to eq "Preço final de semana e feriados"
       expect(json_response[0].keys).not_to include 'created_at'
       expect(json_response[0].keys).not_to include 'updated_at'
       expect(json_response[0].keys).not_to include 'buffet_id'

@@ -41,7 +41,10 @@ class BuffetsController < ApplicationController
   end
 
   def new
-    redirect_to current_buffet_owner.buffet if current_buffet_owner.buffet
+    if current_buffet_owner.buffet
+      
+      redirect_to current_buffet_owner.buffet, notice: 'Voce ja possui um buffet'
+    end
     @buffet = Buffet.new
   end
 

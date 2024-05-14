@@ -77,11 +77,6 @@ describe "User rejects order proposal" do
       expect(page).to have_content "Status do pedido: Pedido cancelado"
       expect(page).to have_content "Status: Proposta cancelada"
 
-
-    end
-    
-    xit "only if authorized" do
-      
     end
 
   end

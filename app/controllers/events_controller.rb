@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_buffet_owner!, only: [:new, :create]
+  before_action :authenticate_buffet_owner!, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:edit, :update, :show]
   before_action :set_lists, only: [:edit, :update, :new, :create]
 
@@ -61,6 +61,9 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:id])
+    if buffet_owner_signed_in? && current_buffet_owner != @event.buffet.buffet_owner
+      redirect_to current_buffet_owner.buffet, alert: 'Acesso não autorizado'
+    end
   end
 
   def set_lists

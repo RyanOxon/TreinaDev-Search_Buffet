@@ -94,10 +94,6 @@ describe "User approves order" do
       expect(page).to have_content "Status: Aguardando confirmação do cliente"
       
     end
-
-    xit "only if authorized" do
-
-    end
     
   end
   
@@ -139,9 +135,9 @@ describe "User approves order" do
 
       expect(page).to have_content "Status do pedido: Proposta em negociação"
       expect(page).to have_content  "Status: Aguardando confirmação do cliente"
-      expect(page).to have_link "Aceitar proposta"
-      expect(page).to have_link "Recusar proposta"
-      expect(page).to have_link "Cancelar pedido"
+      expect(page).to have_button "Aceitar proposta"
+      expect(page).to have_button "Recusar proposta"
+      expect(page).to have_button "Cancelar pedido"
       
     end
 
@@ -190,8 +186,5 @@ describe "User approves order" do
       
     end 
 
-    xit "only if authorized" do
-
-    end
   end
 end

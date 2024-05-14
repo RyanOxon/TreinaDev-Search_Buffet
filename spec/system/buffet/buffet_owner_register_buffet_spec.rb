@@ -184,8 +184,28 @@ describe "buffet Owner register buffet" do
     
   end
 
-  xit "only if authenticated" do
+  it "only if authenticated" do
 
+    visit '/buffets/new'
+
+    expect(current_path).not_to eq '/buffets/new'
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
+  it "and already have a buffet registered" do
+    user = BuffetOwner.create!(email: 'r@fael.com', password: "password")
+    Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+                            phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
+                            district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
+                            description: "Um buffet de outro mundo", buffet_owner: user)
+    
+    login_as user, scope: :buffet_owner
+
+    visit '/buffets/new'
+
+    expect(current_path).not_to eq '/buffets/new'
+    expect(page).to have_content 'Voce ja possui um buffet'
+
+  end
+  
 end

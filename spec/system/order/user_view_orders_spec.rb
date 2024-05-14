@@ -142,7 +142,7 @@ describe "User view orders" do
       expect(page).to have_content 'Nenhum pedido em aberto'
     end
 
-    it "show waiting orders as open orders" do
+    it "show waiting orders as open orders and comfirmed as closed" do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
@@ -174,7 +174,7 @@ describe "User view orders" do
       
     end
 
-    it "show negotiating orders as open orders" do
+    it "show negotiating orders as open orders and canceled as close" do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
@@ -205,15 +205,6 @@ describe "User view orders" do
       expect(page).to have_content "Pedido #{order_1.code}"
       
     end
-
-    xit "show confirmed orders as closed orders" do
-
-    end
-    
-    xit "show cancelled orders as closed orders" do
-
-    end
-
     
   end
 end

@@ -101,22 +101,12 @@ describe "Buffet owner edit event prices" do
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
       BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
-      event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
-                            min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
-                            exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
-      event_2 = Event.create!(name: 'Eventão', description: 'um evento muito quente',
-                            min_capacity: 20, max_capacity: 40, default_duration: 240,
-                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "corporate"),
-                            exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_2, feature: Feature.find_by(feature: "decoration"))
-      event_3 = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
                           exclusive_address: true, buffet: buffet)
-      EventFeature.create!(event: event_3, feature: Feature.find_by(feature: "alcohol"))
-      EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event_3)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
       login_as user, scope: :buffet_owner
       
       visit root_path
@@ -134,7 +124,64 @@ describe "Buffet owner edit event prices" do
       
     end
 
-    xit "only if authorized" do
+    it "only if authenticathed" do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
+
+      visit "/event_prices/#{event.id}/edit"
+
+      expect(current_path).not_to eq "/event_prices/#{event.id}/edit"
+      expect(page).to have_content "Para continuar, faça login ou registre-se."
+      
+    end
+
+    it "only if authorized" do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
+      user_2 = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                              email: 'atendimento@lava.com', address: 'Rua explosion, 123',
+                              district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
+                              zip_code: '99999-999', description: 'A blast of buffet', 
+                              buffet_owner: user_2)
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
+
+      login_as user_2, scope: :buffet_owner
+
+      visit "/event_prices/#{event.id}/edit"
+
+      expect(current_path).not_to eq "/event_prices/#{event.id}/edit"
+      expect(page).to have_content "Acesso não autorizado"
 
     end
   end
@@ -270,8 +317,65 @@ describe "Buffet owner edit event prices" do
       
     end
 
-    xit "only if authorized" do
+    it "only if authenticathed" do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      EventPrice.create!(price_type: 1, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
+
+      visit "/event_prices/#{event.id}/edit"
+
+      expect(current_path).not_to eq "/event_prices/#{event.id}/edit"
+      expect(page).to have_content "Para continuar, faça login ou registre-se."
       
+    end
+
+    it "only if authorized" do
+      load_payments
+      load_features
+      load_categories
+      user = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
+      user_2 = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+      Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
+                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                              email: 'atendimento@lava.com', address: 'Rua explosion, 123',
+                              district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
+                              zip_code: '99999-999', description: 'A blast of buffet', 
+                              buffet_owner: user_2)
+      event = Event.create!(name: 'Casamento Galaxy Buffet', description: 'um casamento muito louco',
+                          min_capacity: 20, max_capacity: 40, default_duration: 240,
+                          menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                          exclusive_address: true, buffet: buffet)
+      EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
+      EventPrice.create!(price_type: 1, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
+
+      login_as user_2, scope: :buffet_owner
+
+      visit "/event_prices/#{event.id}/edit"
+
+      expect(current_path).not_to eq "/event_prices/#{event.id}/edit"
+      expect(page).to have_content "Acesso não autorizado"
+
     end
   end
 end
