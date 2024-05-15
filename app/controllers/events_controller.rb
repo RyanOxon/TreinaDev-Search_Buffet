@@ -29,11 +29,7 @@ class EventsController < ApplicationController
     feature_ids = params[:event][:feature_ids].reject(&:blank?)
     if @event.update(event_params)
       @event.features.destroy_all
-      if feature_ids.any?
-        feature_ids.each do |id|
-          EventFeature.create!(event: @event, feature: Feature.find(id))
-        end
-      end
+      set_features(feature_ids)
       redirect_to @event, notice: "Evento atualizado com sucesso"
     else
       flash.now[:alert] = "Erro ao atualizar evento"
@@ -52,11 +48,7 @@ class EventsController < ApplicationController
     @event.buffet = current_buffet_owner.buffet
     feature_ids = params[:event][:feature_ids].reject(&:blank?)
     if @event.save
-      if feature_ids.any?
-        feature_ids.each do |id|
-          EventFeature.create!(event: @event, feature: Feature.find(id))
-        end
-      end
+      set_features(feature_ids)
       redirect_to @event, notice: "Evento cadastrado com sucesso"
     else
       flash.now[:alert] = "Erro ao cadastrar evento"
@@ -82,5 +74,13 @@ class EventsController < ApplicationController
   def set_lists
     @features = Feature.all
     @event_categories = EventCategory.all
+  end
+
+  def set_features(ids)
+    if ids.any?
+      ids.each do |id|
+        EventFeature.create!(event: @event, feature: Feature.find(id))
+      end
+    end
   end
 end

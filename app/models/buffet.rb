@@ -1,6 +1,7 @@
 class Buffet < ApplicationRecord
   belongs_to :buffet_owner
   has_many :events
+  has_many :holder_images, through: :events
   has_many :orders, through: :events
   has_many :messages, as: :user
   

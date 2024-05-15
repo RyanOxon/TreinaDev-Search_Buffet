@@ -1,30 +1,32 @@
-<div class="content">
-  
-  <div class="box">
-    <% if @open_orders.any? %>
-      <p class="title is-4">Pedidos em aberto</p>
-      <div class="columns is-multiline">
-        <% @open_orders.each do |order| %>
-          <div class="column is-one-third">
-            <%= render order %>
-          </div>
-        <% end %>
+  <section class="section">
+  <div class="content">
+    
+    <div class="box">
+      <% if @open_orders.any? %>
+        <p class="title is-4">Pedidos em aberto</p>
+        <div class="columns is-multiline">
+          <% @open_orders.each do |order| %>
+            <div class="column is-one-third">
+              <%= render order %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Nenhum pedido em aberto</p>
+      <% end %>
+    </div>
+
+    <% if @closed_orders.any? %>
+      <div class="box mt-5">
+        <p class="title is-4">Pedidos fechados</p>
+        <div class="columns is-multiline">
+          <% @closed_orders.each do |order| %>
+            <div class="column is-one-third">
+              <%= render order %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% else %>
-      <p>Nenhum pedido em aberto</p>
     <% end %>
   </div>
-
-  <% if @closed_orders.any? %>
-    <div class="box mt-5">
-      <p class="title is-4">Pedidos fechados</p>
-      <div class="columns is-multiline">
-        <% @closed_orders.each do |order| %>
-          <div class="column is-one-third">
-            <%= render order %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+</section>

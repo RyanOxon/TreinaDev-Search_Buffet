@@ -20,6 +20,7 @@ class BuffetsController < ApplicationController
 
   def show
     @events = @buffet.events
+    @images = @buffet.holder_images
   end
 
   def edit; end
@@ -28,10 +29,7 @@ class BuffetsController < ApplicationController
     payment_methods_ids = params[:buffet][:payment_method_ids].reject(&:blank?)
     if payment_methods_ids.any? && @buffet.update(buffet_params)
       @buffet.buffet_payment_methods.destroy_all
-      payment_methods_ids.each do |id|
-        method = PaymentMethod.find(id)
-        BuffetPaymentMethod.create!(buffet: @buffet, payment_method: method)
-      end
+      set_payments_methods(payment_methods_ids)
     redirect_to @buffet, notice: 'Buffet atualizado com sucesso'
     else
       @buffet.errors.add(:payment_method_ids, "não pode ficar em branco") unless payment_methods_ids.any?
@@ -53,10 +51,7 @@ class BuffetsController < ApplicationController
     payment_methods_ids = params[:buffet][:payment_method_ids].reject(&:blank?)
     
     if payment_methods_ids.any? && @buffet.save
-      payment_methods_ids.each do |id|
-        method = PaymentMethod.find(id)
-        BuffetPaymentMethod.create!(buffet: @buffet, payment_method: method)
-      end
+      set_payments_methods(payment_methods_ids)
       redirect_to @buffet, notice: "Buffet cadastrado com sucesso"
     else
       @buffet.errors.add(:payment_method_ids, "não pode ficar em branco") unless payment_methods_ids.any?
@@ -90,5 +85,12 @@ class BuffetsController < ApplicationController
     categories_i18n = EventCategory.categories.keys.map {|key| [
                       I18n.t("activerecord.attributes.event_category.category.#{key}"), key]}.to_h
     EventCategory.categories[categories_i18n[translated_category]]
+  end
+
+  def set_payments_methods(ids)
+    ids.each do |id|
+      method = PaymentMethod.find(id)
+      BuffetPaymentMethod.create!(buffet: @buffet, payment_method: method)
+    end
   end
 end

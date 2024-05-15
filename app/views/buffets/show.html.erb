@@ -1,6 +1,13 @@
 <section class="section">
   <div class="container">
-    <h1 class="title"><%= @buffet.brand_name %></h1>
+    <div class="buttons is-grouped">
+      <% if @buffet.buffet_owner == current_buffet_owner %>
+        <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link is-outlined" %>
+      <% else %>
+        <%= link_to 'Voltar', buffets_path, class: "button is-warning is-outlined" %>
+      <% end %>
+    </div>
+      <h1 class="title"><%= @buffet.brand_name %></h1>
     <div class="box">
       <div class='columns' >
         <div class="column is-two-fifths">
@@ -73,12 +80,30 @@
           </div>
         </div>
       </div>
+    
     </div>
-
-    <% if @buffet.buffet_owner == current_buffet_owner %>
-    <div>
-      <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link" %>
+  </div>
+  <div class="container mt-5" >
+    <div class="box">
+      <h2 class='subtitle'> Imagens dos eventos </h2>
+      <div class="columns is-multiline" style="max-height: 310px; overflow-y: auto">
+        <% @images.each do |image| %>
+          <div class="column is-one-quarter">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <%= image_tag image.image, alt: "Image" %>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <p><%= image.holder.name %></p> <!-- Supondo que haja um título ou descrição -->
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <% end %>
   </div>
 </section>

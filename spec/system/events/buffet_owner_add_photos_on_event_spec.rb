@@ -47,12 +47,12 @@ describe "buffet owner add photos on a event" do
     visit root_path
     click_on 'Eventinho'
 
-    attach_file 'file-input', Rails.root.join('spec', 'support', 'casamento.jpg')
+    attach_file 'file-input', Rails.root.join('spec', 'support', 'image.jpg')
     click_on 'Salvar Imagem'
 
     expect(current_path).to eq event_path(event.id)
     expect(page).to have_content 'Imagem anexada ao evento'
-    expect(page).to have_css('img[src*="casamento.jpg"]')
+    expect(page).to have_css('img[src*="image.jpg"]')
     
   end
 
@@ -69,7 +69,7 @@ describe "buffet owner add photos on a event" do
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "debutante_ball"),
                           exclusive_address: true, buffet: buffet)
-    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'casamento.jpg')), user: user, holder: event)
+    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'image.jpg')), user: user, holder: event)
 
     login_as user, scope: :buffet_owner
     visit root_path
@@ -99,14 +99,14 @@ describe "buffet owner add photos on a event" do
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "debutante_ball"),
                           exclusive_address: true, buffet: buffet)
-    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'casamento.jpg')), user: user, holder: event)
+    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'image.jpg')), user: user, holder: event)
 
     visit root_path
     click_on 'Galaxy Buffet'
     click_on 'Eventinho'
 
     expect(page).to have_content 'Galeria de Imagens'
-    expect(page).to have_css('img[src*="casamento.jpg"]')
+    expect(page).to have_css('img[src*="image.jpg"]')
     expect(page).not_to have_content 'Escolha um arquivo…'
     expect(page).not_to have_content 'Nenhum arquivo selecionado'
     expect(page).not_to have_field 'file-input'

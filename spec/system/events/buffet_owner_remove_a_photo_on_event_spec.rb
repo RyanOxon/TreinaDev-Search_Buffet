@@ -14,7 +14,7 @@ describe "buffet owner removes a photo on event" do
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "debutante_ball"),
                           exclusive_address: true, buffet: buffet)
-    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'casamento.jpg')), user: user, holder: event)
+    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'image.jpg')), user: user, holder: event)
 
     login_as user, scope: :buffet_owner
     visit root_path
@@ -39,7 +39,7 @@ describe "buffet owner removes a photo on event" do
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "debutante_ball"),
                           exclusive_address: true, buffet: buffet)
-    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'casamento.jpg')), user: user, holder: event)
+    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'image.jpg')), user: user, holder: event)
 
     login_as user, scope: :buffet_owner
     visit root_path
@@ -50,7 +50,7 @@ describe "buffet owner removes a photo on event" do
     end
 
     expect(page).to have_content "Imagem removida com sucesso"
-    expect(page).not_to have_css('img[src*="casamento.jpg"]')
+    expect(page).not_to have_css('img[src*="image.jpg"]')
     
   end
 
@@ -67,14 +67,14 @@ describe "buffet owner removes a photo on event" do
                           min_capacity: 20, max_capacity: 40, default_duration: 240,
                           menu: 'um monte de comida', event_category: EventCategory.find_by(category: "debutante_ball"),
                           exclusive_address: true, buffet: buffet)
-    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'casamento.jpg')), user: user, holder: event)
+    HolderImage.create!(image: fixture_file_upload(Rails.root.join('spec', 'support', 'image.jpg')), user: user, holder: event)
 
     visit root_path
     click_on 'Galaxy Buffet'
     click_on 'Eventinho'
 
     expect(page).to have_content 'Galeria de Imagens'
-    expect(page).to have_css('img[src*="casamento.jpg"]')
+    expect(page).to have_css('img[src*="image.jpg"]')
     expect(page).not_to have_button 'Remover'
   end
 end
