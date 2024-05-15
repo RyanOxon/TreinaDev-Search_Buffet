@@ -56,6 +56,9 @@ pt-BR:
         menu: Cardápio
         event_category_id: Tipo de evento
         features: Caracteristicas inclusas
+        edit: Editar Evento
+        disable: Desativar Evento
+        activate: Reativar Evento
         exclusive_address: 
           one: Endereço exclusivo
           true: Sim
@@ -75,7 +78,9 @@ pt-BR:
         buffet_owner_id: Dono do Buffet
         payment_method_ids: Metodos de Pagamento
         payment_methods: Metodos de Pagamento
-        edit: "Editar"
+        edit: Editar
+        disable: Desativar Buffet
+        activate: Reativar Buffet
       payment_method:
         method:
           cash: Dinheiro

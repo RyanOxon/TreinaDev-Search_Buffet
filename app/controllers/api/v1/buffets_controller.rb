@@ -1,9 +1,9 @@
 class Api::V1::BuffetsController < ActionController::API
   def index
     if params[:search]
-      @buffets = Buffet.where('brand_name LIKE ?', "%#{params[:search]}%")
+      @buffets = Buffet.where('brand_name LIKE ?', "%#{params[:search]}%").where(active: true)
     else
-      @buffets = Buffet.all
+      @buffets = Buffet.where(active: true)
     end
 
     render json: @buffets.as_json(
@@ -14,7 +14,7 @@ class Api::V1::BuffetsController < ActionController::API
   def show
     @buffet = Buffet.find_by(id: params[:id])
 
-    return render status: 404 if @buffet.nil?
+    return render status: 404 if @buffet.nil? || !@buffet.active?
 
     render json: @buffet.as_json(
                         only: [ :id, :brand_name, :phone_number, :email, :address,

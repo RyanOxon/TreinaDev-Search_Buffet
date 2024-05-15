@@ -25,7 +25,7 @@ describe "buffet owner edit one of his events" do
       click_on 'Lista de Eventos'
     end
     click_on 'Eventinho'
-    click_on 'Editar evento'
+    click_on 'Editar Evento'
     expect(page).to have_content "Editar evento"
     expect(page).to have_field "Titulo do anuncio"
     expect(page).to have_field "Descrição"
@@ -68,7 +68,7 @@ describe "buffet owner edit one of his events" do
       click_on 'Lista de Eventos'
     end
     click_on 'Eventinho'
-    click_on 'Editar evento'
+    click_on 'Editar Evento'
     select "Aniversario", from: "Tipo de evento"
     fill_in "Titulo do anuncio",	with: "Aniversario para 40 pessoas no precin"
     fill_in "Capacidade minima",	with: "40" 
@@ -110,7 +110,7 @@ describe "buffet owner edit one of his events" do
       click_on 'Lista de Eventos'
     end
     click_on 'Eventinho'
-    click_on 'Editar evento'
+    click_on 'Editar Evento'
     select "Aniversario", from: "Tipo de evento"
     fill_in "Titulo do anuncio",	with: "Aniversario para 40 pessoas no precin"
     fill_in "Capacidade minima",	with: "" 

@@ -1,25 +1,35 @@
 class BuffetsController < ApplicationController
-  before_action :set_buffet, only: [:show, :edit, :update]
+  before_action :set_buffet, only: [:show, :edit, :update, :disable, :activate]
   before_action :payment_methods, only: [:edit, :update, :new, :create]
-  before_action :authenticate_buffet_owner!,  only: [:edit, :update, :new, :create]
+  before_action :authenticate_buffet_owner!,  only: [:edit, :update, :new, :create, :disable]
 
   def index
     redirect_to current_buffet_owner.buffet if buffet_owner_signed_in?
-    @buffets = Buffet.all
+    @buffets = Buffet.where(active: true)
+  end
+
+  def activate
+    @buffet.update(active: true)
+    redirect_to @buffet, notice: 'Buffet reativado com sucesso'
+  end
+
+  def disable
+    @buffet.update(active: false)
+    redirect_to @buffet, notice: 'Buffet desativado com sucesso'
   end
 
   def search
     @search = params[:query]
     category_value = revert_i18n(@search)
-    @buffet = Buffet.find_by(brand_name: @search)
+    @buffet = Buffet.find_by(brand_name: @search, active: true)
     return redirect_to @buffet if @buffet.present?
     @buffets = Buffet.left_outer_joins(events: :event_category )
               .where("buffets.brand_name LIKE ? OR buffets.city = ? OR event_categories.category = ?", 
-              "%#{@search}%", @search, category_value).distinct.order('buffets.brand_name ASC')
+              "%#{@search}%", @search, category_value).where(active: true).distinct.order('buffets.brand_name ASC')
   end
 
   def show
-    @events = @buffet.events
+    @events = @buffet.events.where(active: true)
     @images = @buffet.holder_images
   end
 

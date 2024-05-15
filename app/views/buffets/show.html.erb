@@ -1,13 +1,20 @@
-<section class="section">
   <div class="container">
     <div class="buttons is-grouped">
       <% if @buffet.buffet_owner == current_buffet_owner %>
         <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link is-outlined" %>
+        
+        <% if @buffet.active? %>
+          <%= button_to Buffet.human_attribute_name(:disable), disable_buffet_path(@buffet.id), method: :post, data: { confirm: 'Are you sure?' }, class: "button is-danger is-outlined" %>
+        <% else %>
+          <%= button_to Buffet.human_attribute_name(:activate), activate_buffet_path(@buffet.id), method: :post, class: "button is-success is-outlined" %>
+
+        <% end %>
+        
       <% else %>
         <%= link_to 'Voltar', buffets_path, class: "button is-warning is-outlined" %>
       <% end %>
     </div>
-      <h1 class="title"><%= @buffet.brand_name %></h1>
+      <h1 class="title"><%= @buffet.brand_name %> <%= "(Desativado)" unless @buffet.active? %></h1>
     <div class="box">
       <div class='columns' >
         <div class="column is-two-fifths">
@@ -44,7 +51,7 @@
             <h4>Eventos disponiveis</h4>
             <% if @events.empty? %>
               Sem eventos cadastrados ainda <br>
-              <%= link_to 'Criar novo evento', new_event_path if @buffet.buffet_owner == current_buffet_owner %>
+              <%= link_to 'Criar novo evento', new_event_path, class: "button is-sucess is-outlined" if @buffet.buffet_owner == current_buffet_owner %>
             <% else %>
               <div class="grid" >
                 <% @events.each do |event| %>
@@ -86,7 +93,7 @@
   <div class="container mt-5" >
     <div class="box">
       <h2 class='subtitle'> Imagens dos eventos </h2>
-      <div class="columns is-multiline" style="max-height: 310px; overflow-y: auto">
+      <div class="columns is-multiline" style="max-height: 315px; overflow-y: auto">
         <% @images.each do |image| %>
           <div class="column is-one-quarter">
             <div class="card">
@@ -106,4 +113,3 @@
       </div>
     </div>
   </div>
-</section>

@@ -57,8 +57,8 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <p class="mr-2">
-          <%= "Usuario: #{current_buffet_owner.email}" if buffet_owner_signed_in? %>
-          <%= "Usuario: #{current_customer.email}" if customer_signed_in? %>
+          <%= "Dono de Buffet: #{current_buffet_owner.email}" if buffet_owner_signed_in? %>
+          <%= "Cliente: #{current_customer.email}" if customer_signed_in? %>
         </p>
         <div class="buttons">
           <% if buffet_owner_signed_in? %>
@@ -98,8 +98,8 @@
       <%= alert %>
     </div>
   <% end %>
-
-  <%= yield %>
-  
+  <section class="section">
+    <%= yield %>
+  </section>
   </body>
 </html>

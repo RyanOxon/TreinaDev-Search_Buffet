@@ -8,13 +8,19 @@ Rails.application.routes.draw do
   devise_for :buffet_owners
 
   resources :buffets, only: [:edit, :update, :show, :create, :new, :index] do
-    get 'search', on: :collection
+    member do
+      post :disable
+      post :activate
+    end
+    get :search, on: :collection
   end
 
   resources :events, only: [:edit, :update, :show, :create, :new, :index] do
     resources :orders, only: [:new, :create]
     resources :holder_images, only: [:create, :destroy]
     member do
+      post :disable
+      post :activate
       post :cover
     end
   end
@@ -37,7 +43,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :buffets, only: [:show, :index] do
         resources :events, only: [:index] do
-          get 'availability', on: :member
+          get :availability, on: :member
         end
       end
     end

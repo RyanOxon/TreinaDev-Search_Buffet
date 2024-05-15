@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   has_many :messages
 
   validates :code, :date, :people_count, presence: true
-  validate :date_is_future
+  validate :date_is_future, on: :create
   validate :people_count_within_limit
 
   enum status: { waiting: 0, negotiating: 1, confirmed: 2, canceled: 3 }

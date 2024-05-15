@@ -1,4 +1,3 @@
-<section class="section">
   <div class="container">
     <h1 class="title">Eventos Disponíveis</h1>
     <% if @events.empty? %>
@@ -21,6 +20,7 @@
               <div class="card-content">
                 <p class="title is-4">
                   <%= link_to event.name, event_path(event), class: 'has-text-primary' %>
+                  <%= "(Desativado)" unless event.active? %>
                 </p>
                 <p class="subtitle is-6"><%= event.event_category.humanized_category_name %></p>
                 <div class="content">
@@ -37,4 +37,3 @@
       </div>
     <% end %>
   </div>
-</section>

@@ -1,7 +1,17 @@
 class EventsController < ApplicationController
   before_action :authenticate_buffet_owner!, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :show, :cover]
+  before_action :set_event, only: [:edit, :update, :show, :cover, :disable, :activate]
   before_action :set_lists, only: [:edit, :update, :new, :create]
+
+  def disable
+    @event.update(active: false)
+    redirect_to @event, notice: 'Evento desativado com sucesso'
+  end
+
+  def activate
+    @event.update(active: true)
+    redirect_to @event, notice: 'Evento reativado com sucesso'
+  end
 
   def cover
     unless params[:cover] && @event.holder_images.exists?(params[:cover])

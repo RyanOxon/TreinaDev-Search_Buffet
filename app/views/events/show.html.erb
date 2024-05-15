@@ -6,7 +6,7 @@
   <div class='columns'>
     
     <div class='column is-one-third'>
-      <h1 class="title"><%= @event.name %></h1>
+      <h1 class="title"><%= @event.name %> <%= "(Desativado)" unless @event.active? %></h1>
       <p class="subtitle"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
       <address>
         <p><strong>Capacidade:</strong> mínimo <%= @event.min_capacity %> e máximo <%= @event.max_capacity %></p>
@@ -24,34 +24,27 @@
         </ul>
       </div>
       <hr>
-
-      <div class='buttons'>
-        <% if buffet_owner_signed_in? && @event.buffet.buffet_owner == current_buffet_owner %>
-          <%= link_to 'Editar evento', edit_event_path(@event.id), class:"button is-rounded is-warning is-outlined" %>
-
-          <div class="field is-horizontal">
-            <div class="field-body">
-              <div class="field is-grouped">
-                <div class="control">
-                  <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
-                                class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
-                </div>
-                <div class="control">
-                  <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
-                                class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% elsif customer_signed_in? %>
-          <div class='control'>
-            <%= link_to 'Criar um pedido', new_event_order_path(@event.id), class: "button is-rounded is-link is-outlined" %>
-          </div>
-        <% end %>
-      </div>
+      <% if buffet_owner_signed_in? && @event.buffet.buffet_owner == current_buffet_owner %>
+        <div class='buttons is-grouped'>
+          <%= link_to Event.human_attribute_name(:edit), edit_event_path(@event.id), class:"button is-rounded is-warning is-outlined" %>
+          <% if @event.active? %>
+            <%= button_to Event.human_attribute_name(:disable), disable_event_path(@event.id), method: :post, class:"button is-rounded is-danger is-outlined" %>
+          <% else %>
+            <%= button_to Event.human_attribute_name(:activate), activate_event_path(@event.id), method: :post, class:"button is-rounded is-success is-outlined" %>
+          <% end %>
+        </div>
+        <div class="buttons is-grouped">
+          <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
+                        class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
+          <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
+                        class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
+        </div>
+      <% elsif customer_signed_in? %>
+        <div class='control'>
+          <%= link_to 'Criar um pedido', new_event_order_path(@event.id), class: "button is-rounded is-link is-outlined" %>
+        </div>
+      <% end %>
     </div>
-
-    
     <% if @event.event_prices.any? %>
       <% @event.event_prices.each do |price| %>
         <div class='column is-one-third'>

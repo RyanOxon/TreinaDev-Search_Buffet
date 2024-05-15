@@ -38,6 +38,12 @@ class OrdersController < ApplicationController
   def show; end
   
   def new
+    unless @event.buffet.active?
+      return redirect_to root_path, alert: 'Não é possivel abrir novos pedidos para este buffet'
+    end
+    unless @event.active?
+      return redirect_to root_path, alert: 'Não é possivel abrir novos pedidos para este evento'
+    end
     @order = Order.new
   end
 
