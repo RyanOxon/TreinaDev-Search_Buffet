@@ -1,6 +1,7 @@
 pt-BR:
   activerecord:
     models:
+      message: Mensagem
       holder_image: Imagem
       service_proposal: Proposta de serviço
       order: Pedido
@@ -13,6 +14,8 @@ pt-BR:
       event: Evento
       event_category: Tipo de evento
     attributes:
+      message:
+        content: Texto da Mensagem
       holder_image:
         image: Imagem
       service_proposal:

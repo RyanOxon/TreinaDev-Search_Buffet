@@ -16,7 +16,7 @@ RSpec.describe ServiceProposal, type: :model do
   end
 
   it "false when expiration_date is expired" do
-    proposal = ServiceProposal.new(expiration_date: Date.yesterday)
+    proposal = ServiceProposal.new(expiration_date: 2.days.ago)
     proposal.valid?
 
     expect(proposal.errors.include?(:expiration_date)).to be true

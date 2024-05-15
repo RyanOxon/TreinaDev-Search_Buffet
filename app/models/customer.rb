@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
   has_many :orders
   has_many :holder_images, as: :user
+  has_many :messages, as: :user
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

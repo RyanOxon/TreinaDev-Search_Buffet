@@ -18,8 +18,10 @@ Rails.application.routes.draw do
       post :cover
     end
   end
+  resources :event_prices, only: [:edit, :update, :new, :create]
 
   resources :orders, only: [:show, :index] do
+    resources :messages, only: [:create]
     resources :service_proposals, only: [:create, :update]
     member do
       post :accept_proposal
@@ -28,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :event_prices, only: [:edit, :update, :new, :create]
+
 
 
   namespace :api do

@@ -62,14 +62,17 @@ class OrdersController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
+
+  private
   def set_order
     @order = Order.find(params[:id])
-    if buffet_owner_signed_in? && current_buffet_owner.buffet != @order.event.buffet
-      return redirect_to current_buffet_owner.buffet, alert: 'Acesso não autorizado'
+    unless user_signed_in_and_has_access?
+      return redirect_to root_path, alert: 'Acesso não autorizado' 
     end
-    if customer_signed_in? && current_customer != @order.customer
-      return redirect_to root_path, alert: 'Acesso não autorizado'
-    end
-
+  end
+  
+  def user_signed_in_and_has_access?
+    (customer_signed_in? && @order.customer == current_customer) || 
+    (buffet_owner_signed_in? && @order.event.buffet == current_buffet_owner.buffet)
   end
 end

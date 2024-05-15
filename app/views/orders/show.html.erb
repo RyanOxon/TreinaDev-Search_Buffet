@@ -10,8 +10,8 @@
     <div class="columns">
 
       <div class="column is-one-third" >
+        <h2 class='subtitle'>Pedido: <%= @order.code %></h2>
         <p>
-          Pedido: <%= @order.code %><br>
           Status do pedido: <%= @order.humanized_status_name %><br>
           Evento para <%= @order.people_count %> pessoas<br>
           Na data: <%= I18n.localize(@order.date) %> <br>
@@ -57,3 +57,47 @@
     <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light is-small' %>
   </div>
 </div>
+
+<div class="container">
+    <h2 class="subtitle">Chat do pedido <%= @order.code %></h2>
+
+    <div id="chat-container" class="box" style="height: 400px; overflow-y: auto;" >
+      <% @order.messages.each do |message| %>
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+
+              <% if message.user_type == 'Buffet' %>
+                <div class='box' style="border: 1px solid royalblue; border-radius: 10px ">
+                  <p>
+                    <strong><%= message.user.brand_name %>: </strong> <%= message.content %>
+                    <br>
+                    <small> <%= I18n.localize(message.posted_at, format: :short ) %></small>
+                  </p>
+                </div>
+
+              <% elsif message.user_type == 'Customer' %> 
+              <div class='box' style="border: 1px solid lightgreen; border-radius: 10px ">
+                  <p>
+                    <strong><%= message.user.email %>: </strong> <%= message.content %>
+                    <br>
+                    <small> <%= I18n.localize(message.posted_at, format: :short ) %></small>
+                  </p>
+                </div>
+              <% end %>
+
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+
+    <%= form_with(model: [@order, Message.new ], class: 'field') do |form| %>
+      <div class="control">
+        <%= form.text_area :content, class: 'textarea' %>
+      </div>
+      <div class="control">
+        <%= form.submit class: 'button is-primary' %>
+      </div>
+    <% end %>
+  </div>

@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_one :service_proposal
 
+  has_many :messages
+
   validates :code, :date, :people_count, presence: true
   validate :date_is_future
   validate :people_count_within_limit

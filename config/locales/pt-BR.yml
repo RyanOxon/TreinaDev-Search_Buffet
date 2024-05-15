@@ -154,6 +154,8 @@ pt-BR:
       update: Atualizar %{model}
       holder_image:
         create: Salvar %{model}
+      message:
+        create: Enviar %{model}
   number:
     currency:
       format:
