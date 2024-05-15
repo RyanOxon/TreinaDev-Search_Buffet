@@ -1,16 +1,15 @@
 <% if buffet_owner_signed_in? && current_buffet_owner.buffet.check_same_date_orders(@order) %>
   <div class="notification is-warning">
-  <button class="delete"></button>
+    <button class="delete"></button>
     Existem outros pedidos na mesma data! Verifique
   </div>
 <% end %>
 
-<div class="box" >
-  <div class="content" >
+<div class="box">
+  <div class="content">
     <div class="columns">
-
-      <div class="column is-one-third" >
-        <h2 class='subtitle'>Pedido: <%= @order.code %></h2>
+      <div class="column is-one-third">
+        <h2 class="subtitle">Pedido: <%= @order.code %></h2>
         <p>
           Status do pedido: <%= @order.humanized_status_name %><br>
           Evento para <%= @order.people_count %> pessoas<br>
@@ -20,84 +19,80 @@
         </p>
         
         <% if @order.service_proposal.present? %>
-          <div class="box" >
+          <div class="box">
             <p>
               <strong>Proposta atual</strong> <br>
-              <strong>Valor da proposta:</strong> <%= @order.service_proposal.get_real_value %> <br>
-              Taxa extra: <%= @order.service_proposal.extra_fee %> <br>
-              Desconto: <%= @order.service_proposal.discount %> <br>
+              <strong>Valor da proposta:</strong> <%= number_to_currency(@order.service_proposal.get_real_value) %> <br>
+              Taxa extra: <%= number_to_currency(@order.service_proposal.extra_fee) %> <br>
+              Desconto: <%= number_to_currency(@order.service_proposal.discount) %> <br>
               Motivo: <%= @order.service_proposal.description %> <br>
-              Proposta valida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
+              Proposta válida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
               Status: <%= @order.service_proposal.humanized_status_name %>
-
             </p>
 
             <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating?) %>
               <% if @order.service_proposal.waiting? %>
                 <div class="buttons is-grouped">
-                  <%= button_to "Aceitar proposta", accept_proposal_order_path(@order), method: :post, class: 'button is-sucess is-light is-small' %>
-                  <%= button_to "Recusar proposta", reject_proposal_order_path(@order), method: :post, class: 'button is-warning is-light is-small'%>
+                  <%= button_to "Aceitar proposta", accept_proposal_order_path(@order), method: :post, class: 'button is-success is-light is-small is-outlined' %>
+                  <%= button_to "Recusar proposta", reject_proposal_order_path(@order), method: :post, class: 'button is-warning is-light is-small is-outlined' %>
                 </div>
               <% end %>
             <% end %>
           </div>
-          
-        <% end %>
-        <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating? ) %>
-            <%= button_to "Cancelar pedido", cancel_order_path(@order), method: :post, class: 'button is-danger is-small' , data: { confirm: 'Você tem certeza?' } %> 
         <% end %>
 
+        <% if customer_signed_in? && current_customer == @order.customer && (@order.waiting? || @order.negotiating?) %>
+          <%= button_to "Cancelar pedido", cancel_order_path(@order), method: :post, class: 'button is-danger is-small is-outlined', data: { confirm: 'Você tem certeza?' } %>
+        <% end %>
       </div>
-      
-      <% if (@order.waiting? || @order.negotiating? ) && buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
-        <%= render 'proposal_form' %>
+
+      <% if (@order.waiting? || @order.negotiating?) && buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
+        <div class="column">
+          <%= render 'proposal_form' %>
+        </div>
       <% end %>
     </div>
-    <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-link is-light is-small' %>
-    <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-link is-light is-small' %>
+    <%= link_to "Voltar para #{@order.event.name}", @order.event, class: 'button is-light is-small is-outlined' %>
+    <%= link_to "Voltar para #{@order.event.buffet.brand_name}", @order.event.buffet, class: 'button is-light is-small is-outlined' %>
   </div>
 </div>
 
 <div class="container">
-    <h2 class="subtitle">Chat do pedido <%= @order.code %></h2>
-
-    <div id="chat-container" class="box" style="height: 400px; overflow-y: auto;" >
-      <% @order.messages.each do |message| %>
-        <article class="media">
-          <div class="media-content">
-            <div class="content">
-
-              <% if message.user_type == 'Buffet' %>
-                <div class='box' style="border: 1px solid royalblue; border-radius: 10px ">
-                  <p>
-                    <strong><%= message.user.brand_name %>: </strong> <%= message.content %>
-                    <br>
-                    <small> <%= I18n.localize(message.posted_at, format: :short ) %></small>
-                  </p>
-                </div>
-
-              <% elsif message.user_type == 'Customer' %> 
-              <div class='box' style="border: 1px solid lightgreen; border-radius: 10px ">
-                  <p>
-                    <strong><%= message.user.email %>: </strong> <%= message.content %>
-                    <br>
-                    <small> <%= I18n.localize(message.posted_at, format: :short ) %></small>
-                  </p>
-                </div>
-              <% end %>
-
-            </div>
+  <h2 class="subtitle">Chat do pedido <%= @order.code %></h2>
+  <div id="chat-container" class="box" style="height: 400px; overflow-y: auto;">
+    <% @order.messages.each do |message| %>
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <% if message.user_type == 'Buffet' %>
+              <div class="box" style="border: 1px solid royalblue; border-radius: 10px;">
+                <p>
+                  <strong><%= message.user.brand_name %>:</strong> <%= message.content %>
+                  <br>
+                  <small><%= I18n.localize(message.posted_at, format: :short) %></small>
+                </p>
+              </div>
+            <% elsif message.user_type == 'Customer' %>
+              <div class="box" style="border: 1px solid lightgreen; border-radius: 10px;">
+                <p>
+                  <strong><%= message.user.email %>:</strong> <%= message.content %>
+                  <br>
+                  <small><%= I18n.localize(message.posted_at, format: :short) %></small>
+                </p>
+              </div>
+            <% end %>
           </div>
-        </article>
-      <% end %>
-    </div>
-
-    <%= form_with(model: [@order, Message.new ], class: 'field') do |form| %>
-      <div class="control">
-        <%= form.text_area :content, class: 'textarea' %>
-      </div>
-      <div class="control">
-        <%= form.submit class: 'button is-primary' %>
-      </div>
+        </div>
+      </article>
     <% end %>
   </div>
+
+  <%= form_with(model: [@order, Message.new], class: 'field') do |form| %>
+    <div class="control">
+      <%= form.text_area :content, class: 'textarea' %>
+    </div>
+    <div class="control">
+      <%= form.submit class: 'button is-primary is-outlined' %>
+    </div>
+  <% end %>
+</div>

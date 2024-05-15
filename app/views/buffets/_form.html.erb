@@ -1,5 +1,5 @@
 <% if @buffet.errors.any? %>
-  <article class="message">
+  <article class="message is-danger">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
@@ -13,175 +13,180 @@
   </article>
 <% end %>
 
-<%= form_with(model: @buffet) do |f| %>
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :brand_name, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">      
-        <%= f.text_field :brand_name, class:"input"  %>
+<%= form_with(model: @buffet, local: true) do |f| %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :brand_name, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :brand_name, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :corporate_name, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :corporate_name, class:"input"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :corporate_name, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :corporate_name, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :registration, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :registration, class:"input"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :registration, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :registration, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :phone_number, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :phone_number, class:"input"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :phone_number, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :phone_number, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :email, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.email_field :email, class:"input"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :email, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.email_field :email, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :address, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control" >
-        <%= f.text_field :address, class:"input"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :address, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :address, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :district, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :district, class:"input"  %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :city, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :city, class:"input"  %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :state_code, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">      
-        <%= f.text_field :state_code, class:"input"  %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :zip_code, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_field :zip_code, class:"input"  %>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :description, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <%= f.text_area :description, class:"textarea"  %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :district, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :district, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="field is-horizontal">
-  <div class="field-label is-normal">
-    <%= f.label :payment_methods, class:"label" %>
-  </div>
-  <div class="field-body">
-    <div class="field mt-1">
-      <div class="control">
-        <%= f.collection_check_boxes :payment_method_ids, @payment_methods, :id, :humanized_method_name, class:"label" do |box| %>
-          <label class="checkbox ml-2">
-            <%= box.check_box %>
-            <%= box.text %>
-          </label>        
-        <% end %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :city, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :city, class: "input" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="field is-horizontal" >
-  <div class= "field-label"></div>
-  <div class="field-body">
-    <div class="field is-grouped">
-      <div class="control">
-        <%= f.submit class:"button is-link" %>
-      </div>
-      <div class="control">
-        <%= link_to 'Cancelar', root_path, class:"button is-link is-light" %>
-      </div>
-    </div>
-  </div>
-</div>
 
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :state_code, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :state_code, class: "input" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :zip_code, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_field :zip_code, class: "input" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :description, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.text_area :description, class: "textarea" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= f.label :payment_methods, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field mt-1">
+        <div class="control">
+          <%= f.collection_check_boxes :payment_method_ids, @payment_methods, :id, :humanized_method_name do |box| %>
+            <label class="checkbox ml-2">
+              <%= box.check_box %>
+              <%= box.text %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label">
+    </div>
+    <div class="field-body">
+      <div class="field is-grouped">
+        <div class="control">
+          <%= f.submit class: "button is-link is-outlined" %>
+        </div>
+        <div class="control">
+          <%= link_to 'Cancelar', root_path, class: "button is-light is-outlined" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

@@ -31,7 +31,7 @@ describe "User approves order" do
       click_on "#{order.code}"
 
       expect(page).to have_content "Valor estimado"
-      expect(page).to have_field "Valor padrão: 2600"
+      expect(page).to have_field "Valor padrão: R$ 2.600,00"
       expect(page).to have_field "Valor especial: não registrado", disabled: true
       expect(page).to have_field "Metodo de pagamento"
       expect(page).to have_field "Taxa extra"
@@ -73,7 +73,7 @@ describe "User approves order" do
       end
       click_on "#{order.code}"
 
-      choose "Valor especial: 2500"
+      choose "Valor especial: R$ 2.500,00"
       select "Dinheiro", from: "Metodo de pagamento"
       fill_in "Taxa extra",	with: "0"
       fill_in "Desconto",	with: "250"
@@ -86,11 +86,11 @@ describe "User approves order" do
       expect(page).to have_content "Status do pedido: Proposta em negociação"
       expect(page).not_to have_content "Status do pedido: Aguardando avaliação do buffet"
       expect(page).to have_content "Proposta atual"
-      expect(page).to have_content "Valor da proposta: #{ServiceProposal.last.get_real_value}"
-      expect(page).to have_content "Taxa extra: 0"
-      expect(page).to have_content "Desconto: 250"
+      expect(page).to have_content "Valor da proposta: R$ 2.250,00"
+      expect(page).to have_content "Taxa extra: R$ 0,00"
+      expect(page).to have_content "Desconto: R$ 250,00"
       expect(page).to have_content "Motivo: 10% de desconto a vista"
-      expect(page).to have_content "Proposta valida até: #{I18n.localize(ServiceProposal.last.expiration_date)}"
+      expect(page).to have_content "Proposta válida até: #{I18n.localize(ServiceProposal.last.expiration_date)}"
       expect(page).to have_content "Status: Aguardando confirmação do cliente"
       
     end

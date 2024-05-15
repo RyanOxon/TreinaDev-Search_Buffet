@@ -1,54 +1,60 @@
 <div class="column">
-          <%= form_with(model: [@order, service_proposal = @order.service_proposal.present? ? @order.service_proposal : ServiceProposal.new ], html: { class: 'box' }) do |form| %>
-            <div class="field">
-              <%= form.label :value, class: 'label' %>
-              <div class="control">
-                <%= form.label :value, "Valor padrão:  #{@order.calculate_value("standard").zero? ? 'não registrado' : @order.calculate_value("standard")}", 
-                                value: @order.calculate_value("standard"), class: 'radio' %>
-                <%= form.radio_button :value, @order.calculate_value("standard"), class: 'radio', 
-                                      disabled: @order.calculate_value("standard").zero? %>
-                <%= form.label :value, "Valor especial: #{@order.calculate_value("special").zero? ? 'não registrado' : @order.calculate_value("special")}", 
-                                value: @order.calculate_value("special"), class: 'radio' %>
-                <%= form.radio_button :value,  @order.calculate_value("special"), class: 'radio', 
-                                      disabled: @order.calculate_value("special").zero? %>
-                
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :payment_method_id, class: 'label' %>
-              <div class="control">
-                <%= form.select :payment_method_id, @order.event.buffet.payment_methods.map { |pm| [pm.humanized_method_name, pm.id] }, 
-                              { prompt: 'Selecione um metodo de pagamento' }, class: 'select' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :extra_fee, class: 'label' %>
-              <div class="control">
-                <%= form.number_field :extra_fee, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :discount, class: 'label' %>
-              <div class="control">
-                <%= form.number_field :discount, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :description, class: 'label' %>
-              <div class="control">
-                <%= form.text_area :description, class: 'textarea' %>
-              </div>
-            </div>
-            <div class="field">
-              <%= form.label :expiration_date, class: 'label' %>
-              <div class="control">
-                <%= form.date_field :expiration_date, class: 'input' %>
-              </div>
-            </div>
-            <div class="field">
-              <div class="control">
-                <%= form.submit class: 'button is-primary' %>
-              </div>
-            </div>
-          <% end %>
+  <%= form_with(model: [@order, @order.service_proposal.present? ? @order.service_proposal : ServiceProposal.new], html: { class: 'box' }) do |form| %>
+    <div class="field">
+      <%= form.label :value, class: 'label' %>
+      <div class="control">
+        <label class="radio">
+          <%= form.radio_button :value, @order.calculate_value("standard"), disabled: @order.calculate_value("standard").zero? %>
+          Valor padrão: <%= @order.calculate_value("standard").zero? ? 'não registrado' : number_to_currency(@order.calculate_value("standard")) %>
+        </label>
+        <label class="radio">
+          <%= form.radio_button :value, @order.calculate_value("special"), disabled: @order.calculate_value("special").zero? %>
+          Valor especial: <%= @order.calculate_value("special").zero? ? 'não registrado' : number_to_currency(@order.calculate_value("special")) %>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :payment_method_id, class: 'label' %>
+      <div class="control">
+        <div class="select">
+          <%= form.select :payment_method_id, @order.event.buffet.payment_methods.map { |pm| [pm.humanized_method_name, pm.id] }, { prompt: 'Selecione um método de pagamento' } %>
         </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :extra_fee, class: 'label' %>
+      <div class="control">
+        <%= form.number_field :extra_fee, class: 'input' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :discount, class: 'label' %>
+      <div class="control">
+        <%= form.number_field :discount, class: 'input' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, class: 'label' %>
+      <div class="control">
+        <%= form.text_area :description, class: 'textarea' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :expiration_date, class: 'label' %>
+      <div class="control">
+        <%= form.date_field :expiration_date, class: 'input' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <%= form.submit class: 'button is-primary is-outlined' %>
+      </div>
+    </div>
+  <% end %>
+</div>

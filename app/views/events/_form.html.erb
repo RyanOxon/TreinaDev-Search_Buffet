@@ -1,5 +1,5 @@
 <% if @event.errors.any? %>
-  <article class="message">
+  <article class="message is-danger">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
@@ -53,7 +53,7 @@
 
       <div class="field">
         <div class="field is-horizontal ">
-          <div class="field-label ">
+          <div class="field-label is-normal">
             <%= f.label :max_capacity, class: "label" %>
           </div>
           <div class="field-body">
@@ -65,9 +65,10 @@
           </div>
         </div>
       </div>
+      
       <div class="field">
         <div class="field is-horizontal">
-          <div class="field-label">
+          <div class="field-label is-normal">
             <%= f.label :default_duration, class: "label" %>
           </div>
           <div class="field-body">
@@ -109,16 +110,18 @@
   </div>
 
   <div class="field is-horizontal">
-    <div class="field-label">
+    <div class="field-label is-normal">
       <%= f.label :exclusive_address, class: "label" %>
     </div>
     <div class="field-body">
       <div class="field">
         <div class="control">
-          <%= f.label :exclusive_address, "Sim", value: "true", class:"radio" %>
-          <%= f.radio_button :exclusive_address, true %>
-          <%= f.label :exclusive_address, "Não", value: "false", class:"radio" %>
-          <%= f.radio_button :exclusive_address, false, checked: true %>
+          <label class="radio">
+            <%= f.radio_button :exclusive_address, true %> Sim
+          </label>
+          <label class="radio">
+            <%= f.radio_button :exclusive_address, false, checked: true %> Não
+          </label>
         </div>
       </div>
     </div>

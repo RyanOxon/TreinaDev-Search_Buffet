@@ -15,7 +15,7 @@ class BuffetsController < ApplicationController
     return redirect_to @buffet if @buffet.present?
     @buffets = Buffet.left_outer_joins(events: :event_category )
               .where("buffets.brand_name LIKE ? OR buffets.city = ? OR event_categories.category = ?", 
-              "%#{@search}%", @search, category_value).order('buffets.brand_name ASC')
+              "%#{@search}%", @search, category_value).distinct.order('buffets.brand_name ASC')
   end
 
   def show
@@ -41,8 +41,7 @@ class BuffetsController < ApplicationController
   end
 
   def new
-    if current_buffet_owner.buffet
-      
+    if current_buffet_owner.buffet.present?
       redirect_to current_buffet_owner.buffet, notice: 'Voce ja possui um buffet'
     end
     @buffet = Buffet.new

@@ -4,17 +4,19 @@
 
 <div class="box">
   <div class='columns'>
-    <div class='column is-two-thirds'>
+    
+    <div class='column is-one-third'>
       <h1 class="title"><%= @event.name %></h1>
       <p class="subtitle"><%= "Tipo de evento: " + @event.event_category.humanized_category_name %></p>
       <address>
-        <p>Capacidade: mínimo <%= @event.min_capacity %> e máximo <%= @event.max_capacity %></p>
-        <p>Duração: <%= @event.default_duration / 60 %> horas</p>
-        <p><%= @event.description %></p>
-        <p><%= @event.menu %></p>
-        <p>Endereço Exclusivo: <%= @event.exclusive_address ? "Sim" : "Não" %></p>
+        <p><strong>Capacidade:</strong> mínimo <%= @event.min_capacity %> e máximo <%= @event.max_capacity %></p>
+        <p><strong>Duração:</strong> <%= @event.default_duration / 60 %> horas</p>
+        <p><strong>Descrição:</strong> <%= @event.description %></p>
+        <p><strong>Menu:</strong> <%= @event.menu %></p>
+        <p><strong>Endereço Exclusivo:</strong> <%= @event.exclusive_address ? "Sim" : "Não" %></p>
       </address>
       <div class="content">
+        <p><strong>Características:</strong></p>
         <ul>
           <% @event.features.each do |f| %>
             <li class="subtitle is-6"><%= f.humanized_feature_name %></li>
@@ -25,8 +27,7 @@
 
       <div class='buttons'>
         <% if buffet_owner_signed_in? && @event.buffet.buffet_owner == current_buffet_owner %>
-          <%= link_to 'Editar evento', edit_event_path(@event.id), class:"button is-rounded" %>
-      
+          <%= link_to 'Editar evento', edit_event_path(@event.id), class:"button is-rounded is-warning is-outlined" %>
 
           <div class="field is-horizontal">
             <div class="field-body">
@@ -44,24 +45,32 @@
           </div>
         <% elsif customer_signed_in? %>
           <div class='control'>
-            <%= link_to 'Criar um pedido', new_event_order_path(@event.id), class: "button is-rounded is-link" %>
+            <%= link_to 'Criar um pedido', new_event_order_path(@event.id), class: "button is-rounded is-link is-outlined" %>
           </div>
         <% end %>
       </div>
     </div>
-    <div class='column is-one-third'>
-      <% if @event.event_prices.any? %>
-        <% @event.event_prices.each do |price| %>
-          <p>
-            <%= price.humanized_price_name %>: <br>
-            <span>Valor base: <%= number_to_currency(price.base_value) %></span> | 
-            <span>Adicional por pessoa: <%= number_to_currency(price.extra_per_person) %></span> | 
-            <span>Adicional por hora: <%= number_to_currency(price.extra_per_hour) %></span> <br><br>
-            <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class:"button is-rounded is-info" %> 
-          </p>
-        <% end %>
+
+    
+    <% if @event.event_prices.any? %>
+      <% @event.event_prices.each do |price| %>
+        <div class='column is-one-third'>
+          <div class="card my-3">
+            <div class="card-content">
+              <p class="title is-5"><%= price.humanized_price_name %></p>
+              <div class="content">
+                <p><span>Valor base: <%= number_to_currency(price.base_value) %></span></p>
+                <p><span>Adicional por pessoa: <%= number_to_currency(price.extra_per_person) %></span></p>
+                <p><span>Adicional por hora: <%= number_to_currency(price.extra_per_hour) %></span></p>
+                <% if buffet_owner_signed_in? && current_buffet_owner.buffet == @event.buffet %>
+                  <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class: "button is-rounded is-info is-outlined mt-3" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 
@@ -100,7 +109,7 @@
       </div>
     <% end %>
   <% end %>
-  <div class="columns is-multiline">
+  <div class="columns is-multiline mt-5">
     <% @event.holder_images.each do |image| %>
       <div class="column is-one-quarter" style="<%= "border: 1px solid white; border-radius: 10px " if @event.cover_photo == image %>">
         <div class="box-<%=image.id%>">

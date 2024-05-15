@@ -3,25 +3,25 @@
     <h1 class="title"><%= @buffet.brand_name %></h1>
     <div class="box">
       <div class='columns' >
-        <div class='column is-two-fifths' >
+        <div class="column is-two-fifths">
           <div class="ml-5 content">
-            <h4>Detalhes do buffet</h4>
+            <h4 class="title is-4">Detalhes do Buffet</h4>
             <div class="block ml-5 mt-5">
               <p>
                 <% if @buffet.buffet_owner == current_buffet_owner %>
-                  <strong><%= Buffet.human_attribute_name(:corporate_name) %> :</strong> <%= @buffet.corporate_name %> <br>
+                  <strong><%= Buffet.human_attribute_name(:corporate_name) %>:</strong> <%= @buffet.corporate_name %> <br>
                 <% end %>
-                <strong><%= Buffet.human_attribute_name(:registration) %> :</strong> <%= @buffet.registration %><br>
-                <strong><%= Buffet.human_attribute_name(:phone_number) %> :</strong> <%= @buffet.phone_number  %><br>
-                <strong><%= Buffet.human_attribute_name(:email) %> :</strong> <%= @buffet.email %><br>
+                <strong><%= Buffet.human_attribute_name(:registration) %>:</strong> <%= @buffet.registration %><br>
+                <strong><%= Buffet.human_attribute_name(:phone_number) %>:</strong> <%= @buffet.phone_number %><br>
+                <strong><%= Buffet.human_attribute_name(:email) %>:</strong> <%= @buffet.email %><br>
                 <address>
-                  <strong><%= Buffet.human_attribute_name(:address) %> :</strong> <%= @buffet.address %><br>
-                  <strong><%= Buffet.human_attribute_name(:district) %> :</strong> <%= @buffet.district  %><br>
-                  <strong><%= Buffet.human_attribute_name(:city) %> :</strong> <%= @buffet.city %><br>
-                  <strong><%= Buffet.human_attribute_name(:state_code) %> :</strong> <%= @buffet.state_code %><br>
-                  <strong><%= Buffet.human_attribute_name(:zip_code) %> :</strong> <%= @buffet.zip_code %><br>
+                  <strong><%= Buffet.human_attribute_name(:address) %>:</strong> <%= @buffet.address %><br>
+                  <strong><%= Buffet.human_attribute_name(:district) %>:</strong> <%= @buffet.district %><br>
+                  <strong><%= Buffet.human_attribute_name(:city) %>:</strong> <%= @buffet.city %><br>
+                  <strong><%= Buffet.human_attribute_name(:state_code) %>:</strong> <%= @buffet.state_code %><br>
+                  <strong><%= Buffet.human_attribute_name(:zip_code) %>:</strong> <%= @buffet.zip_code %><br>
                 </address> <br>
-                <strong><%= Buffet.human_attribute_name(:description) %> :</strong> <%= @buffet.description %><br>
+                <strong><%= Buffet.human_attribute_name(:description) %>:</strong> <%= @buffet.description %><br>
                 <strong>Métodos de Pagamento:</strong>
               </p>
               <ul>

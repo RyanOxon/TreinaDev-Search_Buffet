@@ -32,7 +32,7 @@ describe "User edit order proposal" do
       end
       click_on "#{order.code}"
 
-      expect(page).to have_checked_field "Valor especial: 2000"
+      expect(page).to have_checked_field "Valor especial: R$ 2.000,00"
       expect(page).to have_select 'Metodo de pagamento', selected: 'Dinheiro'
       expect(page).to have_field 'Taxa extra', with: '100'
       expect(page).to have_field 'Desconto', with: '200'
@@ -165,7 +165,7 @@ describe "User edit order proposal" do
 
       expect(page).to have_content 'Proposta atualizada, aguardando confirmação do cliente'
       expect(page).to have_content "Status do pedido: Proposta em negociação"
-      expect(page).to have_content "Taxa extra: 10"
+      expect(page).to have_content "Taxa extra: R$ 10,00"
 
     end
     

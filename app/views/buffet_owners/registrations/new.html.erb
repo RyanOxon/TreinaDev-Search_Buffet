@@ -1,28 +1,33 @@
-<h2>Sign up</h2>
+<h2 class="title is-2">Criar nova conta Empresa</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "buffet_owners/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <label class="label"><%= f.label :email %></label>
+    <div class="control">
+      <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <label class="label"><%= f.label :password %> <% if @minimum_password_length %><em>(<%= @minimum_password_length %> characters minimum)</em><% end %></label>
+    <div class="control">
+      <%= f.password_field :password, class: "input", autocomplete: "new-password" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <label class="label"><%= f.label :password_confirmation %></label>
+    <div class="control">
+      <%= f.password_field :password_confirmation, class: "input", autocomplete: "new-password" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Criar conta" %>
+  <div class="field">
+    <div class="control">
+      <%= f.submit "Criar conta", class: "button is-primary is-outlined" %>
+    </div>
   </div>
 <% end %>
 

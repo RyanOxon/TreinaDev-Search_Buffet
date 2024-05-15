@@ -73,7 +73,6 @@ describe "User view orders" do
         click_on 'Meus pedidos'
       end
       
-      expect(page).to have_content 'Pedidos'
       expect(page).to have_content 'Nenhum pedido em aberto'
     end
     

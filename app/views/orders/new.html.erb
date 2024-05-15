@@ -1,5 +1,5 @@
 <% if @order.errors.any? %>
-  <article class="message">
+  <article class="message is-danger">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
@@ -13,11 +13,9 @@
   </article>
 <% end %>
 
-<h1>Fazer um pedido para o evento: <%= @event.name %></h1>
-
+<h1 class="title is-4">Fazer um pedido para o evento: <%= @event.name %></h1>
 
 <%= form_with(model: [@event, @order]) do |f| %>
-
   <div class='field is-horizontal'>
     <div class='field-label is-normal'>
       <%= f.label :people_count, class: 'label' %>
@@ -25,7 +23,7 @@
     <div class='field-body'>
       <div class='field'>
         <div class='control'>
-          <%= f.text_field :people_count, class: 'input' %>
+          <%= f.number_field :people_count, class: 'input' %>
         </div>
       </div>
     </div>
@@ -51,35 +49,36 @@
     <div class='field-body'>
       <div class='field'>
         <div class='control'>
-          <%= f.text_area :details, class: 'input' %>
+          <%= f.text_area :details, class: 'textarea' %>
         </div>
       </div>
     </div>
   </div>
-<% unless @event.exclusive_address %>
-  <div class='field is-horizontal'>
-    <div class='field-label is-normal'>
-      <%= f.label :address, class: 'label' %>
-    </div>
-    <div class='field-body'>
-      <div class='field'>
-        <div class='control'>
-          <%= f.text_field :address, class: 'input' %>
+
+  <% unless @event.exclusive_address %>
+    <div class='field is-horizontal'>
+      <div class='field-label is-normal'>
+        <%= f.label :address, class: 'label' %>
+      </div>
+      <div class='field-body'>
+        <div class='field'>
+          <div class='control'>
+            <%= f.text_field :address, class: 'input' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
   <div class='field is-grouped'>
-    <div class='field-label' >
+    <div class='field-label'>
     </div>
-    <div class='field-body' >
-      <div class='control mr-2'>
-        <%= f.submit 'Enviar Pedido', class: 'button is-link' %>
+    <div class='field-body'>
+      <div class='control mr-3'>
+        <%= f.submit 'Enviar Pedido', class: 'button is-link is-outlined' %>
       </div>
       <div class='control'>
-        <%= link_to 'Cancelar', root_path, class: 'button is-link is-light' %>
+        <%= link_to 'Cancelar', root_path, class: 'button is-danger is-light is-outlined' %>
       </div>
     </div>
   </div>

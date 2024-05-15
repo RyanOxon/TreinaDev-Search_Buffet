@@ -125,7 +125,7 @@ describe 'user view event details' do
       expect(page).to have_content 'Endereço Exclusivo: Sim'
       expect(page).to have_content 'Preço dias de semana'
       expect(page).to have_content 'Valor base: R$ 10.000'
-      expect(page).to have_content 'Adicional por pessoa: R$ 100,00 '
+      expect(page).to have_content 'Adicional por pessoa: R$ 100,00'
       expect(page).to have_content 'Adicional por hora: R$ 2.000,00'
   
     end

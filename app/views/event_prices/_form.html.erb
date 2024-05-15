@@ -1,5 +1,5 @@
 <% if @event_price.errors.any? %>
-  <article class="message">
+  <article class="message is-danger">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
@@ -13,25 +13,34 @@
   </article>
 <% end %>
 
-<%= form_with(model: @event_price) do |form| %>
+<%= form_with(model: @event_price, local: true) do |form| %>
   <div class="field">
-    <%= form.label :base_value %>
-    <%= form.number_field :base_value, step: 0.01 %>
+    <label class="label"><%= form.label :base_value %></label>
+    <div class="control">
+      <%= form.number_field :base_value, step: 1, class: "input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :extra_per_person %>
-    <%= form.number_field :extra_per_person, step: 0.01 %>
+    <label class="label"><%= form.label :extra_per_person %></label>
+    <div class="control">
+      <%= form.number_field :extra_per_person, step: 1, class: "input" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :extra_per_hour %>
-    <%= form.number_field :extra_per_hour, step: 0.01 %>
+    <label class="label"><%= form.label :extra_per_hour %></label>
+    <div class="control">
+      <%= form.number_field :extra_per_hour, step: 1, class: "input" %>
+    </div>
   </div>
+
   <%= form.hidden_field :price_type %>
   <%= form.hidden_field :event_id %>
 
-  <div class="actions">
-    <%= form.submit  "Definir Valor" %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit "Definir Valor", class: "button is-info is-outlined" %>
+    </div>
   </div>
 <% end %>

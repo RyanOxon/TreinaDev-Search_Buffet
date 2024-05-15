@@ -1,13 +1,40 @@
-
-<% if @events.empty? %>
-  <p>Sem eventos cadastrados ainda</p>
-  <%= link_to 'Criar novo evento', new_event_path %>
-
-<% else %>
-  <% @events.each do |event| %>
-    <div class='content'>
-      <%= link_to event.name, event_path(event), class:'title is-4' %>
-      <p class="subtitle is-6"><%= event.event_category.humanized_category_name %></p>
-    </div>
-  <% end %>
-<% end %>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Eventos Disponíveis</h1>
+    <% if @events.empty? %>
+      <p>Sem eventos cadastrados ainda</p>
+      <%= link_to 'Criar novo evento', new_event_path, class: 'button is-link' %>
+    <% else %>
+      <div class="columns is-multiline">
+        <% @events.each do |event| %>
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <% if event.cover_photo %>
+                    <%= image_tag event.cover_photo.image, class: 'image' %>
+                  <% else %>
+                    <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                  <% end %>
+                </figure>
+              </div>
+              <div class="card-content">
+                <p class="title is-4">
+                  <%= link_to event.name, event_path(event), class: 'has-text-primary' %>
+                </p>
+                <p class="subtitle is-6"><%= event.event_category.humanized_category_name %></p>
+                <div class="content">
+                  <p>Para <%= event.min_capacity %> pessoas</p>
+                  <p>Duração: <%= event.default_duration / 60 %> horas</p>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <%= link_to 'Ver detalhes', event_path(event), class: 'card-footer-item' %>
+              </footer>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

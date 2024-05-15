@@ -1,12 +1,13 @@
-<div class="content" >
-  <h1>Buffets registrados</h1>
-  <ul>
+<div class="content">
+  <h1 class="title is-3">Buffets Registrados</h1>
+  <div class="columns is-multiline">
     <% @buffets.each do |buffet| %>
-      <li>
-        <dt><%= link_to buffet.brand_name, buffet %></dt>
-        <dd><%= buffet.city %> | <%= buffet.state_code %> </dd>
-      </li>
-
+      <div class="column is-one-third">
+        <%= link_to buffet_path(buffet), class: 'box' do %>
+          <dt class="title is-4"><%= buffet.brand_name %></dt>
+          <dd class="subtitle is-6"><%= buffet.city %> | <%= buffet.state_code %></dd>
+        <% end %>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>

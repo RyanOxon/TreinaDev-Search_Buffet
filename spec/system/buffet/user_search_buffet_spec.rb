@@ -43,7 +43,7 @@ describe 'User search buffet' do
       click_on 'Buscar'
 
       expect(page).to have_content 'Resultados da Busca por: Buffet'
-      expect(page).to have_content '2 buffet encontrados'
+      expect(page).to have_content '2 buffet(s) encontrado(s)'
       expect(page).to have_content 'Galaxy Buffet'
       expect(page).to have_content 'Volcano Buffets'
       expect(page).not_to have_content  'Comida a kilo'  
@@ -98,7 +98,7 @@ describe 'User search buffet' do
       click_on 'Buscar'
 
       expect(page).to have_content 'Resultados da Busca por: Casamento'
-      expect(page).to have_content '2 buffet encontrados'
+      expect(page).to have_content '2 buffet(s) encontrado(s)'
       expect(page).to have_content 'Galaxy Buffet'
       expect(page).to have_content 'Volcano Buffets'
       expect(page).not_to have_content  'Comida a kilo'  
@@ -138,7 +138,7 @@ describe 'User search buffet' do
       click_on 'Buscar'
 
       expect(page).to have_content 'Resultados da Busca por: Tectonic rift'
-      expect(page).to have_content '2 buffet encontrados'
+      expect(page).to have_content '2 buffet(s) encontrado(s)'
       expect(page).to have_content 'Volcano Buffets'
       expect(page).to have_content 'Comida a kilo'
       expect(page).not_to have_content 'Galaxy Buffet'  

@@ -1,11 +1,14 @@
-<div>
+<div class="box">
   <%= link_to order_path(order.id) do %>
-    <p>
-      <%= "Pedido #{order.code}" %> <br>
-      <%= "Evento: #{order.event.name}" %> <br>
-      <%= "Status: #{order.humanized_status_name}" %> <br>
-      <%= "Data: #{I18n.localize(order.date)}" %>
+    <p class="title is-5">
+      Pedido <%= order.code %>
     </p>
-    <hr>
+    <p class="subtitle is-6">
+      Evento: <%= order.event.name %>
+    </p>
+    <p>
+      <strong>Status:</strong> <%= order.humanized_status_name %> <br>
+      <strong>Data:</strong> <%= I18n.localize(order.date) %>
+    </p>
   <% end %>
 </div>
