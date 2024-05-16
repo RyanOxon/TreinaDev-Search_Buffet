@@ -25,7 +25,6 @@
     <div class="navbar-start">
       <% if buffet_owner_signed_in? %>
         <div class="navbar-item">
-          
           <% if current_buffet_owner.buffet.nil? %>
             <%= link_to 'Meu Buffet', new_buffet_path, class:"button is-ghost has-text-light" %>
           <% else %>

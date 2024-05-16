@@ -2,7 +2,7 @@ class ServiceProposal < ApplicationRecord
   belongs_to :order
 
   validates :value, :expiration_date, presence: true
-  validate :exp_date_is_future
+  validate :exp_date_is_future, on: :create
 
   enum status: { waiting: 0, rejected: 1, confirmed: 2, canceled: 3 }
 
@@ -18,7 +18,5 @@ class ServiceProposal < ApplicationRecord
     if self.expiration_date.present? && self.expiration_date < Date.today
       self.errors.add(:expiration_date, "deve ser futura.")
     end
-
   end
-
 end

@@ -20,8 +20,6 @@ class EventsController < ApplicationController
     cover_photo = @event.holder_images.find(params[:cover])
     if @event.update(cover_photo: cover_photo)
       redirect_to @event, notice: 'Capa atualizada com sucesso'
-    else
-      render @event, alert: 'Erro ao atualizar capa'
     end
   end
 
@@ -29,7 +27,7 @@ class EventsController < ApplicationController
     if buffet_owner_signed_in?
       @events = current_buffet_owner.buffet.events
     else
-      @events = Event.all
+      redirect_to root_path
     end
   end
 

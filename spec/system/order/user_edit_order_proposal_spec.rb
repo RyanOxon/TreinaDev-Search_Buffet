@@ -130,7 +130,6 @@ describe "User edit order proposal" do
 
     end
     
-
     it "sucessfully" do
       load_categories
       load_payments
@@ -169,6 +168,42 @@ describe "User edit order proposal" do
 
     end
     
+    it "with missing params" do
+      load_categories
+      load_payments
+      user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
+      buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
+                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
+                              district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
+                              zip_code: '99999-999', description: 'Um buffet de outro mundo', 
+                              buffet_owner: user)
+      BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
+      event = Event.create!(name: 'Eventinho', description: 'um evento muito louco',
+                            min_capacity: 20, max_capacity: 50, default_duration: 240,
+                            menu: 'um monte de comida', event_category: EventCategory.find_by(category: "wedding"),
+                            exclusive_address: true, buffet: buffet)
+      EventPrice.create!(price_type: 1, base_value: 2000, extra_per_person: 120, extra_per_hour: 500, event: event)
+      customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
+      order = Order.create!(date: 1.year.from_now , people_count: 20, details: "Insira detalhes aqui...", event: event, customer: customer, status: "negotiating")
+      ServiceProposal.create!(value: 2000, extra_fee: 100, discount: 200, 
+                              description: "100 reais de frete e 10% de desconto no dinheiro", 
+                              payment_method_id: PaymentMethod.find_by(method: "cash").id,
+                              order: order, expiration_date: 1.month.from_now)
+      login_as user, scope: :buffet_owner
+
+      visit root_path
+      within 'nav' do
+        click_on 'Pedidos'
+      end
+      click_on "#{order.code}"
+      fill_in "Valido até",	with: "" 
+      click_on 'Atualizar Proposta de serviço'
+
+      expect(page).to have_content "Erro ao atualizar"
+      expect(page).to have_content "Valido até não pode ficar em branco"
+
+    end
   end
   
   

@@ -2,15 +2,17 @@ class ServiceProposalsController < ApplicationController
   before_action :set_proposal, only: :update
   before_action :authenticate_buffet_owner!,  only: [:update, :create]
 
-
   def create
     @order = Order.find(params[:order_id])
-    @service_proposal = ServiceProposal.new(proposal_params)
-    @service_proposal.order = @order
-    if @service_proposal.save
+    service_proposal = ServiceProposal.new(proposal_params)
+    service_proposal.order = @order
+    if service_proposal.save
       @order.negotiating!
-      redirect_to @service_proposal.order, notice: "Proposta enviada, aguardando confirmação do cliente"
+      redirect_to service_proposal.order, notice: "Proposta enviada, aguardando confirmação do cliente"
     else
+      @order.reload
+      flash.now[:alert] = "Erro ao enviar proposta: Verifique \n #{service_proposal.errors.full_messages.join(', ')}"
+
       render "orders/show"
     end
   end
@@ -22,7 +24,7 @@ class ServiceProposalsController < ApplicationController
       @service_proposal.waiting!
       redirect_to @service_proposal.order, notice: "Proposta atualizada, aguardando confirmação do cliente"
     else
-      flash.now[:alert] = 'Erro ao atualizar'
+      flash.now[:alert] = "Erro ao atualizar: Verifique \n #{@service_proposal.errors.full_messages.join(', ')}"
       render "orders/show"
     end
   end

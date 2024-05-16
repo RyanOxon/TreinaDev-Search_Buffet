@@ -91,5 +91,6 @@ describe 'user view events' do
       expect(page).to have_content 'Corporativo Galaxy Buffet'
       expect(page).to have_content 'Corporativo'
     end
+    
   end
 end

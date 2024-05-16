@@ -76,6 +76,39 @@ describe "buffet owner register event" do
     expect(page).to have_content "Decoração"
     expect(page).to have_content "Endereço Exclusivo: Sim"
   end
+
+  it "with missing params" do
+    load_payments
+    load_features
+    load_categories
+    user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", 
+                            registration: "321.543.12/0001-33", phone_number: "99123456789", 
+                            email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
+                            district: "Sistema Solar", city: "Via lactea", state_code: "AA", 
+                            zip_code: "99999-999", description: "Um buffet de outro mundo", 
+                            buffet_owner: user)
+    BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
+    login_as user, scope: :buffet_owner
+    visit root_path
+
+    within 'nav' do
+      click_on "Anunciar Evento"
+    end
+    select "Aniversario", from: "Tipo de evento"
+    fill_in "Titulo do anuncio",	with: ""
+    fill_in "Capacidade minima",	with: "40" 
+    fill_in "Capacidade maxima",	with: "80"
+    fill_in "Duração padrão", with: "240"
+    fill_in "Descrição",	with: "Melhor pacote para evento de aniversarios..."
+    fill_in "Cardápio",	with: "Comida, comida, comida, comida, bebida, bebida"
+    check "Decoração"
+    choose "Sim"
+    click_on "Criar Evento"
+
+    expect(page).to have_content "Erro ao cadastrar evento"
+    expect(page).to have_content "Titulo do anuncio não pode ficar em branco"
+  end
   
   it "and is not sign in" do
     load_payments

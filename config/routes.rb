@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :rates, only: [] do
-    resources :holder_images, only: [:create, :destroy]
+    resources :holder_images, only: [:create]
   end
 
   resources :events, only: [:edit, :update, :show, :create, :new, :index] do

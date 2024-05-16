@@ -77,7 +77,8 @@
             <div class="control">
               <div class="file has-name">
                 <label class="file-label">
-                  <%= form.file_field :image, class: 'file-input', id: 'file-input' %>
+                  <%= form.file_field :image, accept: 'image/png, image/jpeg, image/jpg',
+                                              class: 'file-input', id: 'file-input' %>
                   <span class="file-cta">
                     <span class="file-icon">
                       <i class="fas fa-upload"></i>

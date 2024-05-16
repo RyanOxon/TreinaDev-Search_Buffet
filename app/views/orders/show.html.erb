@@ -18,7 +18,7 @@
           <%= @order.details %>
         </p>
         
-        <% if @order.service_proposal.present? %>
+        <% unless @order.service_proposal.nil? %>
           <div class="box">
             <p>
               <strong>Proposta atual</strong> <br>
@@ -26,7 +26,7 @@
               Taxa extra: <%= number_to_currency(@order.service_proposal.extra_fee) %> <br>
               Desconto: <%= number_to_currency(@order.service_proposal.discount) %> <br>
               Motivo: <%= @order.service_proposal.description %> <br>
-              Proposta válida até: <%= I18n.localize(@order.service_proposal.expiration_date) %> <br>
+              Proposta válida até: <%= I18n.localize(@order.service_proposal.expiration_date)  %> <br>
               Status: <%= @order.service_proposal.humanized_status_name %>
             </p>
 
@@ -48,7 +48,7 @@
 
       <% if (@order.waiting? || @order.negotiating?) && buffet_owner_signed_in? && current_buffet_owner == @order.event.buffet.buffet_owner %>
         <div class="column">
-          <%= render 'proposal_form' %>
+          <%= render 'orders/proposal_form' %>
         </div>
       <% end %>
     </div>
