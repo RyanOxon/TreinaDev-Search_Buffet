@@ -4,7 +4,7 @@ class Buffet < ApplicationRecord
   has_many :holder_images, through: :events
   has_many :orders, through: :events
   has_many :messages, as: :user
-  
+  has_many :rates
   has_many :buffet_payment_methods
   has_many :payment_methods, through: :buffet_payment_methods
 
@@ -18,6 +18,11 @@ class Buffet < ApplicationRecord
   def check_same_date_orders(order)
     self.orders.where(date: order.date).where(status: ["waiting", "negotiating"])
                                       .where.not(id: order.id).exists?
+  end
+
+  def average
+    return '' if rates.empty?
+    self.rates.average(:score).round(1)
   end
   
 end

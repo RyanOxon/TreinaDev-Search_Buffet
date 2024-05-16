@@ -1,0 +1,21 @@
+<div class="content">
+  <h2 class="subtitle is-5">Avaliações <%= @buffet.brand_name %></h2>
+  <div class="columns is-multiline">
+    <% @buffet.rates.each do |rate| %>
+      <div class="column is-full">
+        <%= link_to  buffet_rate_path(@buffet, rate) do %>
+          <div class="box">
+            <p><%= rate.customer.email %></p>
+            <p><%= rate.comment %></p>
+              <div style="display: flex; align-items: center">
+                <progress class="progress is-warning is-small mb-0 mr-2" value="<%= rate.score * 10 %>" max="50" style="max-width: 100px"></progress>
+                <small>Nota: <%= rate.score %></small> <br>
+              </div>
+            
+            <small>Data: <%= I18n.localize(rate.rated_at, format: :short) %> </small>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

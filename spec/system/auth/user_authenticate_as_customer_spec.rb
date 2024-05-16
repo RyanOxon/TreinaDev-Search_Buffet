@@ -28,7 +28,7 @@ describe 'user authenticate as customer' do
 
       expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
       expect(Customer.last.cpf).to eq '33216336557' 
-      expect(page).to have_content 'Usuario: rafa@el.com'
+      expect(page).to have_content 'Cliente: rafa@el.com'
       expect(page).to have_content 'Sair'
     end
 
@@ -74,7 +74,7 @@ describe 'user authenticate as customer' do
       fill_in "Senha", with: "password"
       click_on 'Log in'
 
-      expect(page).to have_content "Usuario: r@fael.com"
+      expect(page).to have_content "Cliente: r@fael.com"
       expect(page).to have_content "Sair"
       
      end

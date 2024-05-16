@@ -1,5 +1,5 @@
 <% if @event.errors.any? %>
-  <article class="message is-danger">
+  <article class="message">
     <div class="message-header">
       <p>Verifique os erros abaixo</p>
     </div>
@@ -150,10 +150,10 @@
     </div>
     <div class="field-body" >
       <div class="control mr-2">
-        <%= f.submit class: "button is-link" %>
+        <%= f.submit class: "button is-link is-outlined" %>
       </div>
       <div class="control">
-        <%= link_to 'Cancelar', root_path, class: "button is-link is-light" %>
+        <%= link_to 'Cancelar', root_path, class: "button is-warning is-outlined" %>
       </div>
     </div>
   </div>

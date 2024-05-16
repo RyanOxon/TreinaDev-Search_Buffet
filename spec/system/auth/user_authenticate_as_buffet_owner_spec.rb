@@ -25,7 +25,7 @@ describe "user authenticate as buffet owner" do
       click_on "Criar conta"
 
       expect(page).to have_content "Bem vindo! Você realizou seu registro com sucesso."
-      expect(page).to have_content "Usuario: rafa@el.com"
+      expect(page).to have_content "Dono de Buffet: rafa@el.com"
       expect(page).to have_content "Sair"
     end
 
@@ -101,7 +101,7 @@ describe "user authenticate as buffet owner" do
       fill_in "Senha",	with: "password"
       click_on "Log in"
 
-      expect(page).to have_content "Usuario: rafa@el.com"
+      expect(page).to have_content "Dono de Buffet: rafa@el.com"
       expect(page).to have_content "Sair"
       expect(page).not_to have_content "Para empresas" 
     end

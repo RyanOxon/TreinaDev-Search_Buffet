@@ -2,12 +2,19 @@ class Customer < ApplicationRecord
   has_many :orders
   has_many :holder_images, as: :user
   has_many :messages, as: :user
+
+  has_many :rates
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
   validates :cpf, uniqueness: true
   validate :check_cpf
+
+
+  def can_rate?
+    self.orders.confirmed.where("date <= ? AND date >= ?", Date.today, 1.month.ago).any?
+  end
 
   private
   def check_cpf

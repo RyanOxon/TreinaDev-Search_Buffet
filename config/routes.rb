@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   devise_for :buffet_owners
 
   resources :buffets, only: [:edit, :update, :show, :create, :new, :index] do
+    resources :rates, only: [:show, :new, :create, :index]
     member do
       post :disable
       post :activate
     end
     get :search, on: :collection
+  end
+
+  resources :rates, only: [] do
+    resources :holder_images, only: [:create, :destroy]
   end
 
   resources :events, only: [:edit, :update, :show, :create, :new, :index] do
@@ -35,9 +40,6 @@ Rails.application.routes.draw do
       post :cancel
     end
   end
-
-
-
 
   namespace :api do
     namespace :v1 do

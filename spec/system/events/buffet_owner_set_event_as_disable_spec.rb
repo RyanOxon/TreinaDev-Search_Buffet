@@ -156,7 +156,8 @@ describe 'Buffet owner set event as disable' do
     EventFeature.create!(event: event, feature: Feature.find_by(feature: "decoration"))
     EventPrice.create!(price_type: 0, base_value: 2000, extra_per_person: 120, extra_per_hour: 500, event: event)
     customer = Customer.create!(cpf: 33216336557, email: 'r@fael.com', password: 'password' )
-    order = Order.create!(date: 1.year.from_now , people_count: 25, details: "Insira detalhes aqui...", event: event, customer: customer, status: 'negotiating')
+    order = Order.create!(date: 1.year.from_now , people_count: 25, details: "Insira detalhes aqui...", 
+                          event: event, customer: customer, status: 'negotiating')
     ServiceProposal.create!(value: 2000, extra_fee: 100, discount: 200, 
                                       description: "100 reais de frete e 10% de desconto no dinheiro", 
                                       payment_method_id: PaymentMethod.find_by(method: "cash").id,

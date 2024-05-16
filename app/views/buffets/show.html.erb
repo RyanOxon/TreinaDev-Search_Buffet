@@ -1,115 +1,154 @@
-  <div class="container">
-    <div class="buttons is-grouped">
-      <% if @buffet.buffet_owner == current_buffet_owner %>
-        <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link is-outlined" %>
-        
-        <% if @buffet.active? %>
-          <%= button_to Buffet.human_attribute_name(:disable), disable_buffet_path(@buffet.id), method: :post, data: { confirm: 'Are you sure?' }, class: "button is-danger is-outlined" %>
-        <% else %>
-          <%= button_to Buffet.human_attribute_name(:activate), activate_buffet_path(@buffet.id), method: :post, class: "button is-success is-outlined" %>
-
-        <% end %>
-        
+<div class="container">
+  <div class="buttons is-grouped">
+    <% if @buffet.buffet_owner == current_buffet_owner %>
+      <%= link_to Buffet.human_attribute_name(:edit), edit_buffet_path(@buffet.id), class: "button is-link is-outlined" %>
+      
+      <% if @buffet.active? %>
+        <%= button_to Buffet.human_attribute_name(:disable), disable_buffet_path(@buffet.id), method: :post, data: { confirm: 'Are you sure?' }, class: "button is-danger is-outlined" %>
       <% else %>
-        <%= link_to 'Voltar', buffets_path, class: "button is-warning is-outlined" %>
+        <%= button_to Buffet.human_attribute_name(:activate), activate_buffet_path(@buffet.id), method: :post, class: "button is-success is-outlined" %>
+
       <% end %>
-    </div>
-      <h1 class="title"><%= @buffet.brand_name %> <%= "(Desativado)" unless @buffet.active? %></h1>
-    <div class="box">
-      <div class='columns' >
-        <div class="column is-two-fifths">
-          <div class="ml-5 content">
-            <h4 class="title is-4">Detalhes do Buffet</h4>
-            <div class="block ml-5 mt-5">
-              <p>
-                <% if @buffet.buffet_owner == current_buffet_owner %>
-                  <strong><%= Buffet.human_attribute_name(:corporate_name) %>:</strong> <%= @buffet.corporate_name %> <br>
-                <% end %>
-                <strong><%= Buffet.human_attribute_name(:registration) %>:</strong> <%= @buffet.registration %><br>
-                <strong><%= Buffet.human_attribute_name(:phone_number) %>:</strong> <%= @buffet.phone_number %><br>
-                <strong><%= Buffet.human_attribute_name(:email) %>:</strong> <%= @buffet.email %><br>
-                <address>
-                  <strong><%= Buffet.human_attribute_name(:address) %>:</strong> <%= @buffet.address %><br>
-                  <strong><%= Buffet.human_attribute_name(:district) %>:</strong> <%= @buffet.district %><br>
-                  <strong><%= Buffet.human_attribute_name(:city) %>:</strong> <%= @buffet.city %><br>
-                  <strong><%= Buffet.human_attribute_name(:state_code) %>:</strong> <%= @buffet.state_code %><br>
-                  <strong><%= Buffet.human_attribute_name(:zip_code) %>:</strong> <%= @buffet.zip_code %><br>
-                </address> <br>
-                <strong><%= Buffet.human_attribute_name(:description) %>:</strong> <%= @buffet.description %><br>
-                <strong>Métodos de Pagamento:</strong>
-              </p>
-              <ul>
-                <% @buffet.payment_methods.each do |payment_method| %>
-                  <li><%= payment_method.humanized_method_name %></li>
-                <% end %>
-              </ul>
-            </div>
+      
+    <% else %>
+      <%= link_to 'Voltar', buffets_path, class: "button is-warning is-outlined" %>
+    <% end %>
+  </div>
+  <h1 class="title"><%= @buffet.brand_name %> <%= "(Desativado)" unless @buffet.active? %></h1>
+  <div style="display: flex; align-items: center; margin-bottom: 5px">
+    <progress class="progress is-warning is-small mb-0 mr-2" value="<%= @buffet.average * 10 %>" max="50" style="max-width: 100px"></progress>
+    <small>Avaliação média: <%= @buffet.average  %></small>
+  </div>
+  <div class="box">
+    <div class='columns' >
+      <div class="column is-two-fifths">
+        <div class="ml-5 content">
+          <h4 class="title is-4">Detalhes do Buffet</h4>
+          <div class="block ml-5 mt-5">
+            <p>
+              <% if @buffet.buffet_owner == current_buffet_owner %>
+                <strong><%= Buffet.human_attribute_name(:corporate_name) %>:</strong> <%= @buffet.corporate_name %> <br>
+              <% end %>
+              <strong><%= Buffet.human_attribute_name(:registration) %>:</strong> <%= @buffet.registration %><br>
+              <strong><%= Buffet.human_attribute_name(:phone_number) %>:</strong> <%= @buffet.phone_number %><br>
+              <strong><%= Buffet.human_attribute_name(:email) %>:</strong> <%= @buffet.email %><br>
+              <address>
+                <strong><%= Buffet.human_attribute_name(:address) %>:</strong> <%= @buffet.address %><br>
+                <strong><%= Buffet.human_attribute_name(:district) %>:</strong> <%= @buffet.district %><br>
+                <strong><%= Buffet.human_attribute_name(:city) %>:</strong> <%= @buffet.city %><br>
+                <strong><%= Buffet.human_attribute_name(:state_code) %>:</strong> <%= @buffet.state_code %><br>
+                <strong><%= Buffet.human_attribute_name(:zip_code) %>:</strong> <%= @buffet.zip_code %><br>
+              </address> <br>
+              <strong><%= Buffet.human_attribute_name(:description) %>:</strong> <%= @buffet.description %><br>
+              <strong>Métodos de Pagamento:</strong>
+            </p>
+            <ul>
+              <% @buffet.payment_methods.each do |payment_method| %>
+                <li><%= payment_method.humanized_method_name %></li>
+              <% end %>
+            </ul>
           </div>
         </div>
-        <div class='column'>
-          <div class="content">
-            <h4>Eventos disponiveis</h4>
-            <% if @events.empty? %>
-              Sem eventos cadastrados ainda <br>
-              <%= link_to 'Criar novo evento', new_event_path, class: "button is-sucess is-outlined" if @buffet.buffet_owner == current_buffet_owner %>
-            <% else %>
-              <div class="grid" >
-                <% @events.each do |event| %>
-                  <div class="cell">
-                    <%= link_to event_path(event) do %>
-                      <article class="media is-centered">  
-                        <figure class="media-left">
-                          <p class="image is-128x128">
-                            
-                            <% if event.cover_photo %>
-                              <%= image_tag event.cover_photo.image, class: 'image' %>
-                            <% else %>
-                            <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
-                            <% end %>
+      </div>
+      <div class='column'>
+        <div class="content">
+          <h4>Eventos disponiveis</h4>
+          <% if @events.empty? %>
+            Sem eventos cadastrados ainda <br>
+            <%= link_to 'Criar novo evento', new_event_path, class: "button is-sucess is-outlined" if @buffet.buffet_owner == current_buffet_owner %>
+          <% else %>
+            <div class="grid" >
+              <% @events.each do |event| %>
+                <div class="cell">
+                  <%= link_to event_path(event) do %>
+                    <article class="media is-centered">  
+                      <figure class="media-left">
+                        <p class="image is-128x128">
+                          
+                          <% if event.cover_photo %>
+                            <%= image_tag event.cover_photo.image, class: 'image' %>
+                          <% else %>
+                          <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                          <% end %>
+                        </p>
+                      </figure>  
+                      <div class="media-content">                  
+                        <div class='content'>
+                          <span class="has-text-white"><%= event.name %></span> <br>
+                          <p class='ml-3 has-text-grey is-italic is-size-7'>
+                            <%= event.event_category.humanized_category_name %>
+                            para <%= event.min_capacity %> pessoas <br>
+                            Duração: <%= event.default_duration/60 %> horas <br>
                           </p>
-                        </figure>  
-                        <div class="media-content">                  
-                          <div class='content'>
-                            <span class="has-text-white"><%= event.name %></span> <br>
-                            <p class='ml-3 has-text-grey is-italic is-size-7'>
-                              <%= event.event_category.humanized_category_name %>
-                              para <%= event.min_capacity %> pessoas <br>
-                              Duração: <%= event.default_duration/60 %> horas <br>
-                            </p>
-                          </div>
                         </div>
-                      </article>
-                    <% end %>
+                      </div>
+                    </article>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+<div class="container mt-5" > 
+  <div class="box">
+    <div class="columns" >
+      <div class="column" >
+        <div class='content' >
+          <h2 class='subtitle is-5'> 
+            Ultimas Avaliações
+            <% if customer_signed_in? && current_customer.can_rate? %>
+              <%= link_to Buffet.human_attribute_name(:rate), new_buffet_rate_path(@buffet), class: 'button is-light is-small is-outlined mb-2 ml-5' %> 
+            <% end %>
+            <%= link_to 'Ver mais', buffet_rates_path(@buffet),class: 'button is-light is-small is-outlined' %>
+          </h2>
+        </div>
+        <div class="columns is-multiline" style="max-height: 315px; overflow-y: auto">
+          <% @buffet.rates.last(3).each do |rate| %>
+            <div class="column is-full">
+              <%= link_to  buffet_rate_path(@buffet, rate) do %>
+                <div class="box">
+                  <p><%= rate.customer.email %></p>
+                  <p><%= rate.comment %></p>
+                    <div style="display: flex; align-items: center">
+                      <progress class="progress is-warning is-small mb-0 mr-2" value="<%= rate.score * 10 %>" max="50" style="max-width: 100px"></progress>
+                      <small>Nota: <%= rate.score %></small> <br>
+                    </div>
+                  
+                  <small>Data: <%= I18n.localize(rate.rated_at, format: :short) %> </small>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="column is-7" >
+        <div class='content' >
+          <h2 class='subtitle is-5'> Imagens dos eventos </h2>
+          <div class="columns is-multiline" style="max-height: 315px; overflow-y: auto">
+            <% @images.each do |image| %>
+              <div class="column is-one-quarter">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <%= image_tag image.image, alt: "Image" %>
+                    </figure>
                   </div>
-                <% end %>
+                  <div class="card-content">
+                    <div class="content">
+                      <p><%= image.holder.name %></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             <% end %>
           </div>
         </div>
       </div>
-    
     </div>
   </div>
-  <div class="container mt-5" >
-    <div class="box">
-      <h2 class='subtitle'> Imagens dos eventos </h2>
-      <div class="columns is-multiline" style="max-height: 315px; overflow-y: auto">
-        <% @images.each do |image| %>
-          <div class="column is-one-quarter">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag image.image, alt: "Image" %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <p><%= image.holder.name %></p> <!-- Supondo que haja um título ou descrição -->
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+</div>

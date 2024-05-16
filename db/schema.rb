@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_15_162525) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_234732) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -187,6 +187,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_162525) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rates", force: :cascade do |t|
+    t.integer "score"
+    t.text "comment"
+    t.integer "buffet_id", null: false
+    t.integer "customer_id", null: false
+    t.date "rated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buffet_id"], name: "index_rates_on_buffet_id"
+    t.index ["customer_id"], name: "index_rates_on_customer_id"
+  end
+
   create_table "service_proposals", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "payment_method_id", null: false
@@ -215,6 +227,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_162525) do
   add_foreign_key "messages", "orders"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "events"
+  add_foreign_key "rates", "buffets"
+  add_foreign_key "rates", "customers"
   add_foreign_key "service_proposals", "orders"
   add_foreign_key "service_proposals", "payment_methods"
 end

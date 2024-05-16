@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="box">
+    <h1 class="title">Detalhes da Avaliação</h1>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Nota:</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="is-size-5"><%= @rate.score %> / 5</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Comentário:</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="is-size-5"><%= @rate.comment %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Buffet Avaliado:</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="is-size-5"><%= link_to @rate.buffet.brand_name, buffet_path(@rate.buffet) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Cliente:</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="is-size-5"><%= @rate.customer.email %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Data:</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+         <%= l(@rate.created_at, format: :short) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <%= link_to 'Voltar', buffet_path(@rate.buffet), class: "button is-warning is-outlined" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2 class="title is-3">Galeria de Imagens</h2>
+    <% if customer_signed_in? && current_customer.rates.include?(@rate) %>
+      <%= form_with(model: [@rate, HolderImage.new], html: { class: 'field is-horizontal' }) do |form| %>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <div class="file has-name">
+                  <label class="file-label">
+                    <%= form.file_field :image, class: 'file-input', id: 'file-input' %>
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                        Escolha um arquivo…
+                      </span>
+                    </span>
+                    <span class="file-name" id="file-name">
+                      Nenhum arquivo selecionado
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= form.submit class: 'button is-primary' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="columns is-multiline mt-5">
+      <% @rate.holder_images.each do |image| %>
+        <div class="column is-one-quarter">
+          <div class="box-<%=image.id%>">
+            <figure class="image is-4by4">
+              <%= image_tag image.image, class: 'image' %>
+            </figure>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('file-input');
+    const fileName = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) {
+        fileName.textContent = file.name;
+      } else {
+        fileName.textContent = 'Nenhum arquivo selecionado';
+      }
+    });
+  });
+</script>
+
