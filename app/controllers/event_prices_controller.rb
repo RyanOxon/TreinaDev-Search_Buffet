@@ -8,11 +8,7 @@ class EventPricesController < ApplicationController
 
   def update 
     if @event_price.update(event_price_params)
-      if @event_price.price_type == 'standard'
-        flash[:notice] = 'Preço padrão ajustado'
-      else
-        flash[:notice] = 'Preço especial ajustado'
-      end
+      flash[:notice] = @event_price.price_type == 'standard' ? 'Preço padrão ajustado' : 'Preço especial ajustado'
       redirect_to @event_price.event
     else
       flash.now[:alert] = "Erro ao ajustar valor"

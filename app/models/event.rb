@@ -26,4 +26,11 @@ class Event < ApplicationRecord
     return num_people.to_i <= max_capacity
   end
 
+  def set_features(ids)
+    self.features.destroy_all
+    ids.each do |id|
+      feature = Feature.find(id)
+      EventFeature.create!(event: self, feature: feature) unless feature.nil?
+    end
+  end
 end

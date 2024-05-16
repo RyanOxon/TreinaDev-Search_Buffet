@@ -15,7 +15,5 @@ class MessagesController < ApplicationController
       redirect_to @order, alert: 'Erro ao enviar mensagem'
     end
 
-  end
-
-  
+  end 
 end

@@ -11,5 +11,11 @@ class EventCategory < ApplicationRecord
   def humanized_category_name
     I18n.t("activerecord.attributes.event_category.category.#{self.category}")
   end
+
+  def self.revert_i18n(translated_category)
+    categories_i18n = EventCategory.categories.keys.map {|key| [
+                      I18n.t("activerecord.attributes.event_category.category.#{key}"), key]}.to_h
+    EventCategory.categories[categories_i18n[translated_category]]
+  end
   
 end

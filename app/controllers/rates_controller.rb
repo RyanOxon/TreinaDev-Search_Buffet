@@ -2,9 +2,7 @@ class RatesController < ApplicationController
   before_action :authenticate_customer!, only: [:new]
   before_action :set_buffet, only: [:new, :create, :show, :index]
 
-  def index
-    
-  end
+  def index; end
 
   def show
     @rate = Rate.find(params[:id])

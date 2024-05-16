@@ -20,7 +20,7 @@ class BuffetsController < ApplicationController
 
   def search
     @search = params[:query]
-    category_value = revert_i18n(@search)
+    category_value = EventCategory.revert_i18n(@search)
     @buffet = Buffet.find_by(brand_name: @search, active: true)
     return redirect_to @buffet if @buffet.present?
     @buffets = Buffet.left_outer_joins(events: :event_category )
@@ -70,16 +70,7 @@ class BuffetsController < ApplicationController
     end
   end
 
-
   private
-  def buffet_params
-    params.require(:buffet).permit(:brand_name, :corporate_name,
-                                                  :registration, :phone_number,
-                                                  :email, :address, :district, 
-                                                  :city, :state_code, :zip_code,
-                                                  :description)
-  end
-
   def set_buffet
     @buffet = Buffet.find(params[:id])
     if buffet_owner_signed_in? && current_buffet_owner != @buffet.buffet_owner
@@ -91,16 +82,16 @@ class BuffetsController < ApplicationController
     @payment_methods = PaymentMethod.all
   end
 
-  def revert_i18n(translated_category)
-    categories_i18n = EventCategory.categories.keys.map {|key| [
-                      I18n.t("activerecord.attributes.event_category.category.#{key}"), key]}.to_h
-    EventCategory.categories[categories_i18n[translated_category]]
-  end
-
   def set_payments_methods(ids)
     ids.each do |id|
       method = PaymentMethod.find(id)
       BuffetPaymentMethod.create!(buffet: @buffet, payment_method: method)
     end
+  end
+
+  def buffet_params
+    params.require(:buffet).permit(:brand_name, :corporate_name, :registration, 
+                                  :phone_number,:email, :address, :district,
+                                  :city, :state_code, :zip_code,:description)
   end
 end

@@ -100,8 +100,9 @@ describe "buffet Owner register buffet" do
   end
 
   it "with incomplete informations" do
-    user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
     load_payments()
+    user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
+    
     login_as user, scope: :buffet_owner
 
     visit root_path
