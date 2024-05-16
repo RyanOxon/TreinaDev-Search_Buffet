@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create, :accept_proposal]
   before_action :set_event, only: [:new, :create]
   before_action :set_order, only:[:accept_proposal, :reject_proposal, :cancel, :show]
+  before_action :check_order_inactivity, only: [:show]
+  before_action :check_proposal_exp_date, only: [:show]
 
   def accept_proposal
     @order.confirmed!
@@ -68,8 +70,6 @@ class OrdersController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
-
-  private
   def set_order
     @order = Order.find(params[:id])
     unless user_signed_in_and_has_access?
@@ -80,5 +80,20 @@ class OrdersController < ApplicationController
   def user_signed_in_and_has_access?
     (customer_signed_in? && @order.customer == current_customer) || 
     (buffet_owner_signed_in? && @order.event.buffet == current_buffet_owner.buffet)
+  end
+
+  def check_order_inactivity
+    if @order.inactivity?
+      @order.canceled!
+      flash[:alert] = "Pedido cancelado por inatividade do buffet"
+    end
+  end
+
+  def check_proposal_exp_date
+    if @order.service_proposal.present? && @order.service_proposal.expiration_date < Date.today
+      @order.service_proposal.canceled!
+      @order.canceled!
+      flash[:alert] = "Proposta cancelada devido a data de validade"
+    end
   end
 end

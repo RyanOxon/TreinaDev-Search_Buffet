@@ -26,6 +26,10 @@ class Order < ApplicationRecord
     value
   end
 
+  def inactivity?
+    self.status == 'waiting' && self.created_at < 20.days.ago
+  end
+
   private 
 
   def people_count_within_limit
