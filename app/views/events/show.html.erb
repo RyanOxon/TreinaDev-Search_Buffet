@@ -34,9 +34,9 @@
           <% end %>
         </div>
         <div class="buttons is-grouped">
-          <%= link_to 'Definir preço padrão', new_event_price_path(price_type: 'standard', event_id: @event.id),
+          <%= link_to 'Definir preço padrão', new_event_event_price_path(@event, price_type: 'standard'),
                         class:"button is-rounded is-info is-outlined" unless @event.event_prices.exists?(price_type: 'standard') %>
-          <%= link_to 'Definir preço especial', new_event_price_path(price_type: 'special', event_id: @event.id), 
+          <%= link_to 'Definir preço especial',new_event_event_price_path(@event, price_type: 'special'), 
                         class:"button is-rounded is-primary is-outlined" unless @event.event_prices.exists?(price_type: 'special') %>
         </div>
       <% elsif customer_signed_in? %>
@@ -56,7 +56,7 @@
                 <p><span>Adicional por pessoa: <%= number_to_currency(price.extra_per_person) %></span></p>
                 <p><span>Adicional por hora: <%= number_to_currency(price.extra_per_hour) %></span></p>
                 <% if buffet_owner_signed_in? && current_buffet_owner.buffet == @event.buffet %>
-                  <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_price_path(price), class: "button is-rounded is-info is-outlined mt-3" %>
+                  <%= link_to "Atualizar #{price.humanized_price_name}", edit_event_event_price_path(@event, price), class: "button is-rounded is-info is-outlined mt-3" %>
                 <% end %>
               </div>
             </div>

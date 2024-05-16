@@ -13,7 +13,7 @@
   </article>
 <% end %>
 
-<%= form_with(model: @event_price, local: true) do |form| %>
+<%= form_with(model:[@event, @event_price]) do |form| %>
   <div class="field">
     <label class="label"><%= form.label :base_value %></label>
     <div class="control">
@@ -36,7 +36,6 @@
   </div>
 
   <%= form.hidden_field :price_type %>
-  <%= form.hidden_field :event_id %>
 
   <div class="field is-grouped">
     <div class="control">

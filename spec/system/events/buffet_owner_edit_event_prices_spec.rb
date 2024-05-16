@@ -143,9 +143,9 @@ describe "Buffet owner edit event prices" do
       EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_price = EventPrice.create!(price_type: 0, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
 
-      visit "/event_prices/#{event_price.id}/edit"
+      visit "events/#{event.id}/event_prices/#{event_price.id}/edit"
 
-      expect(current_path).not_to eq "/event_prices/#{event_price.id}/edit"
+      expect(current_path).not_to eq "events/#{event.id}/event_prices/#{event_price.id}/edit"
       expect(page).to have_content "Para continuar, faça login ou registre-se."
       
     end
@@ -178,9 +178,9 @@ describe "Buffet owner edit event prices" do
 
       login_as user_2, scope: :buffet_owner
 
-      visit "/event_prices/#{event_price.id}/edit"
+      visit "events/#{event.id}/event_prices/#{event_price.id}/edit"
 
-      expect(current_path).not_to eq "/event_prices/#{event_price.id}/edit"
+      expect(current_path).not_to eq "events/#{event.id}/event_prices/#{event_price.id}/edit"
       expect(page).to have_content "Acesso não autorizado"
 
     end
@@ -336,9 +336,9 @@ describe "Buffet owner edit event prices" do
       EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
       event_price = EventPrice.create!(price_type: 1, base_value: 10000, extra_per_person: 100, extra_per_hour: 2000, event: event)
 
-      visit "/event_prices/#{event_price.id}/edit"
+      visit "events/#{event.id}/event_prices/#{event_price.id}/edit"
 
-      expect(current_path).not_to eq "/event_prices/#{event_price.id}/edit"
+      expect(current_path).not_to eq "events/#{event.id}/event_prices/#{event_price.id}/edit"
       expect(page).to have_content "Para continuar, faça login ou registre-se."
       
     end
@@ -371,9 +371,9 @@ describe "Buffet owner edit event prices" do
 
       login_as user_2, scope: :buffet_owner
 
-      visit "/event_prices/#{event_price.id}/edit"
+      visit "events/#{event.id}/event_prices/#{event_price.id}/edit"
 
-      expect(current_path).not_to eq "/event_prices/#{event_price.id}/edit"
+      expect(current_path).not_to eq "events/#{event.id}/event_prices/#{event_price.id}/edit"
       expect(page).to have_content "Acesso não autorizado"
 
     end

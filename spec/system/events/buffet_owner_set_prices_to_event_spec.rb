@@ -19,7 +19,7 @@ describe 'buffet owner set prices to his event' do
                           exclusive_address: true, buffet: buffet)
     EventFeature.create!(event: event, feature: Feature.find_by(feature: "alcohol"))
 
-    visit new_event_price_path
+    visit new_event_event_price_path(event)
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
@@ -87,8 +87,8 @@ describe 'buffet owner set prices to his event' do
       fill_in 'Adicional por hora', with: '1000'
       click_on 'Definir Valor'
 
-      expect(current_path).to eq  event_path(event.id)
       expect(page).to have_content 'Preço padrão ajustado'
+      expect(current_path).to eq  event_path(event.id)
       expect(page).to have_content 'Preço dias de semana'
       expect(page).to have_content 'Valor base: R$ 3.000,00'
       expect(page).to have_content 'Adicional por pessoa: R$ 100,00'
@@ -194,7 +194,7 @@ describe 'buffet owner set prices to his event' do
       fill_in 'Adicional por hora', with: '1500'
       click_on 'Definir Valor'
 
-      expect(current_path).to eq  event_path(event.id)
+      expect(current_path).to eq event_path(event.id)
       expect(page).to have_content 'Preço especial ajustado'
       expect(page).to have_content 'Preço final de semana e feriados'
       expect(page).to have_content 'Valor base: R$ 5.000,00'

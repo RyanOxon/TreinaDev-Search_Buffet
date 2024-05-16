@@ -30,7 +30,7 @@ describe "requests for event_price" do
 
       login_as user_2, scope: :buffet_owner
 
-      patch event_price_path(event_price.id), params: {event_price: {base_value: 5000}}
+      patch event_event_price_path(event, event_price.id), params: {event_price: {base_value: 5000}}
 
       expect(response).to redirect_to user_2.buffet 
     end

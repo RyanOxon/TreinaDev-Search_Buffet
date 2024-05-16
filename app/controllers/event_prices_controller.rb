@@ -1,6 +1,8 @@
 class EventPricesController < ApplicationController
   before_action :authenticate_buffet_owner!, only: [:new, :create, :edit, :update]
   before_action :set_price, only: [:edit, :update]
+  before_action :set_event, only: [:new, :create, :edit, :update]
+
   
   def edit; end
 
@@ -26,6 +28,7 @@ class EventPricesController < ApplicationController
 
   def create
     @event_price = EventPrice.new(event_price_params)
+    @event_price.event = @event
     if @event_price.save
       if @event_price.price_type == 'standard'
         flash[:notice] = 'Preço padrão ajustado'
@@ -34,7 +37,7 @@ class EventPricesController < ApplicationController
       end
       redirect_to @event_price.event
     else
-      flash.now[:alert] = "Erro ao ajustar valor"
+      flash.now[:alert] = 'Erro ao ajustar valor'
       render 'new'
     end
   end
@@ -42,7 +45,7 @@ class EventPricesController < ApplicationController
   private
   def event_price_params 
     params.require(:event_price).permit(:base_value, :extra_per_hour,
-                                        :extra_per_person, :price_type, :event_id)
+                                        :extra_per_person, :price_type)
   end
 
   def set_price
@@ -51,5 +54,7 @@ class EventPricesController < ApplicationController
       redirect_to current_buffet_owner.buffet, alert: 'Acesso não autorizado'
     end
   end
-
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
 end

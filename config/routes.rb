@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :events, only: [:edit, :update, :show, :create, :new, :index] do
+    resources :event_prices, only: [:edit, :update, :new, :create]
     resources :orders, only: [:new, :create]
     resources :holder_images, only: [:create, :destroy]
     member do
@@ -29,7 +30,6 @@ Rails.application.routes.draw do
       post :cover
     end
   end
-  resources :event_prices, only: [:edit, :update, :new, :create]
 
   resources :orders, only: [:show, :index] do
     resources :messages, only: [:create]
