@@ -6,7 +6,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -43,7 +43,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -76,7 +76,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -109,7 +109,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -151,7 +151,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -188,7 +188,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -224,7 +224,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -260,7 +260,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -295,7 +295,7 @@ describe "customer rates a buffet" do
     load_payments
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '82760673000104', phone_number: '99123456789', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 

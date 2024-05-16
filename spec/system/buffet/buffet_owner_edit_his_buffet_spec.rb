@@ -4,7 +4,7 @@ describe "Buffet owner edit his buffet" do
   it "from show page" do
     load_payments()
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "20757307000149",
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
@@ -34,7 +34,7 @@ describe "Buffet owner edit his buffet" do
   it "sucessfully" do
     load_payments()
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "56673136000117",
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
@@ -46,7 +46,7 @@ describe "Buffet owner edit his buffet" do
     click_on "Editar"
     fill_in "Nome fantasia",	with: "Buffet da Praça"
     fill_in "Razão social",	with: "Buffets LTDA"
-    fill_in "CNPJ",	with: "21.543.312/0001-33" 
+    fill_in "CNPJ",	with: "35918380000122" 
     fill_in "Telefone de contato",	with: "00123456789"
     fill_in "E-mail de contato",	with: "atendimento@buffets.com"
     fill_in "Endereço",	with: "Rua Estrelas, 312"
@@ -62,7 +62,7 @@ describe "Buffet owner edit his buffet" do
     expect(page).to have_content "Buffet atualizado com sucesso" 
     expect(page).to have_content "Buffet da Praça"
     expect(page).to have_content "Buffets LTDA"
-    expect(page).to have_content "21.543.312/0001-33"
+    expect(page).to have_content "35918380000122"
     expect(page).to have_content "00123456789"
     expect(page).to have_content "atendimento@buffets.com"
     expect(page).to have_content "Rua Estrelas, 312"
@@ -78,7 +78,7 @@ describe "Buffet owner edit his buffet" do
   it "with incomplete data" do
     load_payments()
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "20757307000149",
     phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
     district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
     description: "Um buffet de outro mundo", buffet_owner: user)
@@ -112,7 +112,7 @@ describe "Buffet owner edit his buffet" do
   it "with no payment method" do
     load_payments()
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "20757307000149",
                             phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
                             description: "Um buffet de outro mundo", buffet_owner: user)
@@ -144,7 +144,7 @@ describe "Buffet owner edit his buffet" do
 
   it "only if authenticated" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "20757307000149",
                             phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
                             description: "Um buffet de outro mundo", buffet_owner: user)
@@ -160,12 +160,12 @@ describe "Buffet owner edit his buffet" do
     load_payments()
     user = BuffetOwner.create!(email: 'r@fael.com', password: "password")
     user_2 = BuffetOwner.create!(email: 'raf@el.com', password: "password")
-    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    buffet = Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "20757307000149",
                             phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
                             description: "Um buffet de outro mundo", buffet_owner: user)
     Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                  registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                  registration: '35918380000122', phone_number: '99123456789', 
                   email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                   district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                   zip_code: '99999-999', description: 'A blast of buffet', 

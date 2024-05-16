@@ -6,7 +6,7 @@ describe 'user view events' do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '66693953000190', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -32,13 +32,13 @@ describe 'user view events' do
       user_2 = BuffetOwner.create!(email: 'r@e.com', password: 'password')
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '66693953000190', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                              registration: '35208345000110', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Vtectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
@@ -69,7 +69,7 @@ describe 'user view events' do
       load_categories
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '66693953000190', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 

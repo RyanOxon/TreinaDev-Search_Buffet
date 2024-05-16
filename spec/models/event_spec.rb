@@ -5,7 +5,7 @@ RSpec.describe Event, type: :model do
     it "false when name is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -21,7 +21,7 @@ RSpec.describe Event, type: :model do
     it "false when description is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -38,7 +38,7 @@ RSpec.describe Event, type: :model do
     it "false when min_capacity is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -55,7 +55,7 @@ RSpec.describe Event, type: :model do
     it "false when max_capacity is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -72,7 +72,7 @@ RSpec.describe Event, type: :model do
     it "false when default_duration is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -89,7 +89,7 @@ RSpec.describe Event, type: :model do
     it "false when menu is empty" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -107,7 +107,7 @@ RSpec.describe Event, type: :model do
     it "false when name is not unique" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '07267705000119', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 

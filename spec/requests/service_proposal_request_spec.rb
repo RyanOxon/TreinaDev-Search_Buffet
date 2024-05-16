@@ -8,14 +8,14 @@ describe "requests for service_proposal" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       user_2 = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '20757307000149', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
       BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "cash"))
       Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                              registration: '12742045000110', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 

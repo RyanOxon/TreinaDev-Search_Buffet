@@ -4,7 +4,7 @@ describe "buffet owner disable his buffet" do
   it "from buffet details" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 
@@ -19,7 +19,7 @@ describe "buffet owner disable his buffet" do
   it "sucessfully" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 
@@ -39,13 +39,13 @@ describe "buffet owner disable his buffet" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     user_2 = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
     Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 
                             buffet_owner: user, active: false)
     Buffet.create!(brand_name: 'Rafael 2 Buffet', corporate_name: 'Rafael2 Buffet LTDA', 
-                            registration: '12345678911', phone_number: '11999999999', 
+                            registration: '35918380000122', phone_number: '11999999999', 
                             email: 'rafael2@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O segundo melhor buffet da região', 
@@ -61,13 +61,13 @@ describe "buffet owner disable his buffet" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     user_2 = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
     Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '35918380000122', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 
                             buffet_owner: user, active: false)
     Buffet.create!(brand_name: 'Rafael 2 Buffet', corporate_name: 'Rafael2 Buffet LTDA', 
-                            registration: '12345678911', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael2@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O segundo melhor buffet da região', 
@@ -88,13 +88,13 @@ describe "buffet owner disable his buffet" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     user_2 = BuffetOwner.create!(email: 'raf@el.com', password: 'password')
     Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '35918380000122', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 
                             buffet_owner: user, active: false)
     Buffet.create!(brand_name: 'Rafael 2 Buffet', corporate_name: 'Rafael2 Buffet LTDA', 
-                            registration: '12345678911', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael2@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O segundo melhor buffet da região', 
@@ -112,7 +112,7 @@ describe "buffet owner disable his buffet" do
     load_categories
     user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                            registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                            registration: '56673136000117', phone_number: '9956673136000117', 
                             email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                             district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                             zip_code: '99999-999', description: 'Um buffet de outro mundo', 
@@ -138,7 +138,7 @@ describe "buffet owner disable his buffet" do
   it "and can enable it again" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: 'password')
     buffet = Buffet.create!(brand_name: 'Rafael Buffet', corporate_name: 'Rafael Buffet LTDA', 
-                            registration: '123456789', phone_number: '11999999999', 
+                            registration: '56673136000117', phone_number: '11999999999', 
                             email: 'rafael@buffet.com', address: 'Rua das Flores', 
                             district: 'Jardim das Flores', city: 'São Paulo', 
                             state_code: 'SP', zip_code: '09999999', description: 'O melhor buffet da região', 

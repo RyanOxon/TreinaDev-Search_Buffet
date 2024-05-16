@@ -9,14 +9,14 @@ describe "User view buffets" do
       user_2 = BuffetOwner.create!(email: 'r@e.com', password: 'password')
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '55092293000176', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
       BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-21', phone_number: '99123456789', 
+                              registration: '28845848000130', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 
@@ -40,14 +40,14 @@ describe "User view buffets" do
       user = BuffetOwner.create!(email: 'rafa@el.com', password: 'password')
       user_2 = BuffetOwner.create!(email: 'r@e.com', password: 'password')
       buffet = Buffet.create!(brand_name: 'Galaxy Buffet', corporate_name: 'Buffetys LTDA', 
-                              registration: '321.543.12/0001-33', phone_number: '99123456789', 
+                              registration: '55092293000176', phone_number: '99123456789', 
                               email: 'atendimento@buffyts.com', address: 'Rua Estrelas, 123',
                               district: 'Sistema Solar', city: 'Via lactea', state_code: 'AA', 
                               zip_code: '99999-999', description: 'Um buffet de outro mundo', 
                               buffet_owner: user)
       BuffetPaymentMethod.create!(buffet: buffet, payment_method: PaymentMethod.find_by(method: "credit_card"))
       buffet_2 = Buffet.create!(brand_name: 'Volcano Buffets', corporate_name: 'Geological fissure LTDA', 
-                              registration: '321.543.12/0001-32', phone_number: '99123456789', 
+                              registration: '82760673000104', phone_number: '99123456789', 
                               email: 'atendimento@lava.com', address: 'Rua explosion, 123',
                               district: 'underground', city: 'Tectonic rift', state_code: 'TT', 
                               zip_code: '99999-999', description: 'A blast of buffet', 

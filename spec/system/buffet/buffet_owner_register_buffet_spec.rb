@@ -61,7 +61,7 @@ describe "buffet Owner register buffet" do
 
     fill_in "Nome fantasia",	with: "Buffet da Praça"
     fill_in "Razão social",	with: "Buffetys LTDA"
-    fill_in "CNPJ",	with: "321.543.12/0001-33" 
+    fill_in "CNPJ",	with: "35918380000122" 
     fill_in "Telefone de contato",	with: "99123456789"
     fill_in "E-mail de contato",	with: "atendimento@buffyts.com"
     fill_in "Endereço",	with: "Rua Estrelas, 123"
@@ -76,7 +76,7 @@ describe "buffet Owner register buffet" do
     expect(page).to have_content "Buffet cadastrado com sucesso" 
     expect(page).to have_content "Buffet da Praça"
     expect(page).to have_content "Buffetys LTDA"
-    expect(page).to have_content "321.543.12/0001-33"
+    expect(page).to have_content "35918380000122"
     expect(page).to have_content "99123456789"
     expect(page).to have_content "atendimento@buffyts.com"
     expect(page).to have_content "Rua Estrelas, 123"
@@ -102,7 +102,6 @@ describe "buffet Owner register buffet" do
   it "with incomplete informations" do
     load_payments()
     user = BuffetOwner.create!(email: 'rafa@el.com', password: "password")
-    
     login_as user, scope: :buffet_owner
 
     visit root_path
@@ -195,7 +194,7 @@ describe "buffet Owner register buffet" do
 
   it "and already have a buffet registered" do
     user = BuffetOwner.create!(email: 'r@fael.com', password: "password")
-    Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "321.543.12/0001-33",
+    Buffet.create!(brand_name: "Galaxy Buffet", corporate_name: "Buffetys LTDA", registration: "35918380000122",
                             phone_number: "99123456789", email: "atendimento@buffyts.com", address: "Rua Estrelas, 123",
                             district: "Sistema Solar", city: "Via lactea", state_code: "AA", zip_code: "99999-999",
                             description: "Um buffet de outro mundo", buffet_owner: user)
