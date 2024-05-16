@@ -19,6 +19,7 @@ class Api::V1::BuffetsController < ActionController::API
     render json: @buffet.as_json(
                         only: [ :id, :brand_name, :phone_number, :email, :address,
                          :district, :city, :state_code, :zip_code, :description],
+                         methods: :average,
                          include: {payment_methods: {only: [:id], methods: :humanized_method_name }})
   end
 end
