@@ -55,7 +55,7 @@ Apos a configuraçao das gems pelo rails é necessario rodar, para garantir que 
 ```
 $ rails db:setup
 ```
-> Caso deseje que o banco de dados ja esteja populado com exemplos gerais de funcionalidade do codigo, é necessario ir no arquivo `/db/seeds.rb` e descomentar o bloco de codigo apartir da `linha 16`, após isso execute `rails db:setup`. ⚠️ **Atenção:** isso irá limpa o banco de dados atual 
+> Caso deseje que o banco de dados ja esteja populado com exemplos gerais de funcionalidade do codigo, é necessario ir no arquivo `/db/seeds.rb` e descomentar o bloco de codigo apartir da `linha 16`, após isso execute `rails db:setup`. ⚠️ **Atenção:** isso irá limpar o banco de dados atual 
 > - as duas crendeciais geradas pelos exemplos são: 
 >   - Empresa
 >     - Login: empresa@empresa.com
@@ -185,7 +185,7 @@ Existem dois tipos de conta: **Dono de Buffet** e **Cliente**. Aqui estão as fu
   "state_code": "SP",
   "zip_code": "01000-000",
   "description": "Um buffet de alta qualidade com diversas opções de eventos.",
-  "average": 4.5,
+  "average_rate": 4.5,
   "payment_methods": [
     {
       "id": 1,

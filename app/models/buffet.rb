@@ -21,7 +21,7 @@ class Buffet < ApplicationRecord
                                       .where.not(id: order.id).exists?
   end
 
-  def average
+  def average_rate
     return '' if rates.empty?
     self.rates.average(:score).round(1)
   end

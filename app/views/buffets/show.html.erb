@@ -16,8 +16,8 @@
   </div>
   <h1 class="title"><%= @buffet.brand_name %> <%= "(Desativado)" unless @buffet.active? %></h1>
   <div style="display: flex; align-items: center; margin-bottom: 5px">
-    <progress class="progress is-warning is-small mb-0 mr-2" value="<%= @buffet.average * 10 %>" max="50" style="max-width: 100px"></progress>
-    <small>Avaliação média: <%= @buffet.average  %></small>
+    <progress class="progress is-warning is-small mb-0 mr-2" value="<%= @buffet.average_rate * 10 %>" max="50" style="max-width: 100px"></progress>
+    <small>Avaliação média: <%= @buffet.average_rate  %></small>
   </div>
   <div class="box">
     <div class='columns' >
