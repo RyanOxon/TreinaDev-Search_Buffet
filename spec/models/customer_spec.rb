@@ -22,6 +22,12 @@ RSpec.describe Customer, type: :model do
       expect(customer_1.valid?).to be_falsey 
 
     end
+
+    it "cannot be empty" do
+      customer_1 = Customer.new(email: 'aa@a.com', password: 'password' )
+
+      expect(customer_1.valid?).to be_falsey 
+    end
     
 
   end
